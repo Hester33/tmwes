@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'TMWES',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.xTheme,
-      home: WelcomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

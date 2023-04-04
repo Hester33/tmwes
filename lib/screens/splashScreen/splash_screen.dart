@@ -2,54 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tmwes/constants/image.dart';
-import 'package:tmwes/screens/login/login.dart';
-import '../../controllers/splash_screen_controller.dart';
+import 'package:tmwes/widgets/animation/fade_in_animation.dart';
+import 'package:tmwes/widgets/animation/model_fade_in_animation.dart';
+import '../../widgets/animation/controller_fade_in_aniamtion.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
 
-  final splashController = Get.put(SplashScreenController());
-
   @override
   Widget build(BuildContext context) {
-    splashController.startAnimation();
+    final controller = Get.put(FadeInAnimationController());
+    controller.startSplashAnimation();
     return Scaffold(
       body: Stack(children: [
-        Obx(
-          () => AnimatedPositioned(
-            duration: const Duration(milliseconds: 1600),
-            left: 60,
-            top: splashController.animate.value ? 150 : 50,
-            child: Image(image: AssetImage(logo)),
+        FadeInAnimation(
+          durationInMs: 1600,
+          animate: AnimationPosition(
+            topAfter: 150,
+            topBefore: 50,
+            leftAfter: 60,
+            leftBefore: 60,
           ),
+          child: Image(image: AssetImage(logo)),
+          //!child: Image(image: AssetImage(logo),height: MediaQuery.of(context).size.height * 0.5,),
         ),
-        Obx(
-          () => AnimatedPositioned(
-            duration: const Duration(milliseconds: 1600),
-            bottom: splashController.animate.value ? 280 : 100,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 1600),
-              opacity: splashController.animate.value ? 1 : 0,
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Text(
-                  'Treat Migraine \nWeather Experience System',
-                  style: GoogleFonts.inter(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+        FadeInAnimation(
+          durationInMs: 1600,
+          animate: AnimationPosition(
+            bottomAfter: 180,
+            bottomBefore: 80,
+            leftAfter: 30,
+            leftBefore: 30,
+          ),
+          child: Text(
+            'Treat Migraine \nWeather Experience System',
+            style: GoogleFonts.inter(
+              fontSize: 25,
+              fontWeight: FontWeight.w800,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
-        // ElevatedButton(
-        //   onPressed: () {
-        //     Get.to(const Login());
-        //   },
-        //   child: const Text('Login'),
-        // ),
       ]),
     );
   }
