@@ -7,9 +7,10 @@ class TOutlinedButtonTheme {
 
   static final xOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-        shape: RoundedRectangleBorder(),
+        shape: const RoundedRectangleBorder(),
         foregroundColor: Colors.black,
-        side: BorderSide(color: Colors.black54),
-        padding: EdgeInsets.symmetric(vertical: 15.0)),
+        side: const BorderSide(color: Colors.black54),
+        padding: const EdgeInsets.symmetric(vertical: 13.0),
+        textStyle: const TextStyle(fontSize: 16.0)),
   );
 }

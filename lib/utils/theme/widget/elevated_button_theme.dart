@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmwes/constants/colors.dart';
 
 class TElevatedButtonTheme {
   TElevatedButtonTheme._(); //*To avoid creating instances
@@ -7,9 +8,10 @@ class TElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
         elevation: 0,
         shape: RoundedRectangleBorder(),
-        foregroundColor: Colors.white70,
-        backgroundColor: Colors.black54,
-        side: BorderSide(color: Colors.black54),
-        padding: EdgeInsets.symmetric(vertical: 15.0)),
+        foregroundColor: Colors.white,
+        backgroundColor: primaryColor,
+        side: const BorderSide(color: Colors.black54),
+        padding: const EdgeInsets.symmetric(vertical: 13.0),
+        textStyle: const TextStyle(fontSize: 16.0)),
   );
 }

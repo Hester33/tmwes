@@ -7,7 +7,7 @@ import 'package:tmwes/widgets/animation/model_fade_in_animation.dart';
 import '../../widgets/animation/controller_fade_in_aniamtion.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,19 @@ class SplashScreen extends StatelessWidget {
         FadeInAnimation(
           durationInMs: 1600,
           animate: AnimationPosition(
-            topAfter: 150,
+            topAfter: 100,
             topBefore: 50,
-            leftAfter: 60,
-            leftBefore: 60,
+            leftAfter: 0,
+            leftBefore: 0,
           ),
-          child: Image(image: AssetImage(logo)),
-          //!child: Image(image: AssetImage(logo),height: MediaQuery.of(context).size.height * 0.5,),
+          //child: Image(image: AssetImage(logo)),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30.0),
+            child: Image(
+              image: AssetImage(logo),
+              height: MediaQuery.of(context).size.height * 0.5,
+            ),
+          ),
         ),
         FadeInAnimation(
           durationInMs: 1600,

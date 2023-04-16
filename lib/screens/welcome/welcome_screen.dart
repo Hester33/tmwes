@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/screens/authentication/login/login_screen.dart';
+import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
 import 'package:tmwes/widgets/animation/controller_fade_in_aniamtion.dart';
 import 'package:tmwes/widgets/animation/fade_in_animation.dart';
 import 'package:tmwes/widgets/animation/model_fade_in_animation.dart';
@@ -30,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                 bottomBefore: -100,
                 leftBefore: 0,
                 leftAfter: 0,
-                topBefore: 0,
+                topBefore: -50,
                 topAfter: 0,
                 rightBefore: 0,
                 rightAfter: 0,
@@ -50,9 +51,10 @@ class WelcomeScreen extends StatelessWidget {
                           Text(
                             'Treat Migraine \nWeather Experience System',
                             style: GoogleFonts.inter(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800,
-                            ),
+                                textStyle: const TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xffe0e0e0))),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -63,23 +65,28 @@ class WelcomeScreen extends StatelessWidget {
                         Expanded(
                             child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => LoginScreen());
-                            //! testing
-                            controller.fadeOut();
+                            //! testing (seems like not working)
+                            //controller.fadeOut();
+                            Get.off(() => const LoginScreen());
                           },
-                          child: Text(
-                            'Login'.toUpperCase(),
-                            //style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black54),
+                          child: Text('Login'.toUpperCase(),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         )),
                         const SizedBox(width: 10.0),
                         Expanded(
                             child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Sign Up'.toUpperCase(),
-                                  //style: const TextStyle(fontWeight: FontWeight.bold),
-                                ))),
+                                onPressed: () {
+                                  Get.off(() => const SignUpScreen());
+                                },
+                                child: Text('Sign Up'.toUpperCase(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)
+                                    //style: const TextStyle(fontWeight: FontWeight.bold),
+                                    ))),
                       ],
                     )
                   ],

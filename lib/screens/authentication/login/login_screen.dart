@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tmwes/constants/image.dart';
+import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
 
-import 'login_form.dart';
+import 'widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -11,6 +13,18 @@ class LoginScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Text(
+              'Login',
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+          ),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
         body: SingleChildScrollView(
             child: Container(
           padding: const EdgeInsets.all(30.0),
@@ -25,16 +39,18 @@ class LoginScreen extends StatelessWidget {
               const LoginForm(),
               /* --- End --- */
 
-              const SizedBox(height: 10.0),
+              //const SizedBox(height: 10.0),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.off(() => const SignUpScreen());
+                },
                 child: Text.rich(
                   TextSpan(
-                      text: 'Already have an account?',
+                      text: "Don't have an account? ",
                       style: Theme.of(context).textTheme.bodyLarge,
                       children: const [
                         TextSpan(
-                            text: 'Sign up',
+                            text: 'SIGN UP',
                             style: TextStyle(color: Colors.blue)),
                       ]),
                 ),
