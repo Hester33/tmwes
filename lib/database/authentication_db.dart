@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/constants/firebase_const.dart';
-import 'package:tmwes/exceptions/signup_failure.dart';
+import 'package:tmwes/exceptions/exceptions.dart';
 import 'package:tmwes/screens/home/home.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
@@ -61,7 +60,7 @@ class AuthenticationDb extends GetxController {
           : Get.offAll(() => const Home());
     } on FirebaseAuthException catch (e) {
       //! Create exception
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      final ex = LoginWithEmailAndPasswordFailure.code(e.code);
       Get.snackbar("Error", ex.msg,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -69,7 +68,7 @@ class AuthenticationDb extends GetxController {
       print('FIREBASE AUTH EXPECTION - ${ex.msg}, ${e.code}');
       //throw ex;
     } catch (_) {
-      const ex = SignUpWithEmailAndPasswordFailure();
+      const ex = LoginWithEmailAndPasswordFailure();
       print('EXCEPTION - ${ex.msg}');
       throw ex;
     }

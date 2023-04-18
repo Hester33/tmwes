@@ -1,5 +1,8 @@
+import 'package:bcrypt/bcrypt.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tmwes/constants/colors.dart';
+import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/database/authentication_db.dart';
 
 class Home extends StatelessWidget {
@@ -7,6 +10,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = auth.currentUser;
+
     return SafeArea(
       child: Scaffold(
         // appBar: AppBar(
@@ -54,7 +59,10 @@ class Home extends StatelessWidget {
                         },
                         icon: const Icon(Icons.calendar_month_outlined)),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // final bool checkPassword =
+                          //     BCrypt.checkpw(password, encrypt);
+                        },
                         icon: const Icon(Icons.location_on_sharp)),
                   ],
                 )

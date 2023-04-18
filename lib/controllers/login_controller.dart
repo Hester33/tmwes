@@ -7,6 +7,7 @@ class LoginController extends GetxController {
 
   final email = TextEditingController();
   final password = TextEditingController();
+  var isPwdHidden = true.obs;
 
   void login(String email, String password) {
     AuthenticationDb.instance.loginUserWithEmailAndPwd(email, password);

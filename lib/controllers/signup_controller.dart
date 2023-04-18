@@ -11,6 +11,8 @@ class SignUpController extends GetxController {
   final fullName = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
+  var isPwdHidden = true.obs;
+  var isCPwdHidden = true.obs;
 
   final userDb = Get.put(UserDb());
 
@@ -24,9 +26,8 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> storeUser(UserModel user) async {
-    await AuthenticationDb.instance
-        .createUserWithEmailAndPwd(user.email, user.password);
+  Future<void> storeUser(UserModel user, String pwd) async {
+    await AuthenticationDb.instance.createUserWithEmailAndPwd(user.email, pwd);
 
     userDb.storeUser(user);
   }

@@ -36,7 +36,7 @@ class UserDb extends GetxController {
       //.add(...) and .doc().set(...) are completely equivalent
       await firestore
           .collection(usersCollection)
-          .doc(currentUser!.uid)
+          .doc(currentUser.uid)
           .set(user.toJson())
           .whenComplete(
             () => Get.snackbar("Success", "Your account has been created!",

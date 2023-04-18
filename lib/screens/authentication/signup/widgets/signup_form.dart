@@ -1,3 +1,4 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
@@ -12,8 +13,6 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
     final _formKey = GlobalKey<FormState>();
-    final email = controller.email.text.trim();
-    final password = controller.password.text.trim();
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -67,41 +66,63 @@ class SignUpForm extends StatelessWidget {
                 }),
             const SizedBox(height: 20),
             //*Password
-            TextFormField(
-                controller: controller.password,
-                decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    label: Text('Password'),
+            Obx(
+              () => TextFormField(
+                  obscureText: controller.isPwdHidden.value,
+                  controller: controller.password,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.person_outline_outlined),
+                    label: const Text('Password'),
                     suffixIcon: IconButton(
-                        onPressed: null,
-                        icon: Icon(Icons.remove_red_eye_sharp))),
-                validator: (value) {
-                  if (value.toString().length < 6) {
-                    return 'Password should be longer or equal to 6 characters.';
-                  }
-                  return null;
-                }),
+                        onPressed: () {
+                          controller.isPwdHidden.value =
+                              !controller.isPwdHidden.value;
+                        },
+                        icon: controller.isPwdHidden.value
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
+                  ),
+                  validator: (value) {
+                    if (value.toString().length < 6) {
+                      return 'Password should be longer or equal to 6 characters.';
+                    }
+                    return null;
+                  }),
+            ),
             const SizedBox(height: 20),
             //*Confirm Password
-            TextFormField(
-                decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person_outline_outlined),
-                    label: Text('Confirm Password'),
+            Obx(
+              () => TextFormField(
+                  obscureText: controller.isCPwdHidden.value,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.person_outline_outlined),
+                    label: const Text('Confirm Password'),
                     suffixIcon: IconButton(
-                        onPressed: null,
-                        icon: Icon(Icons.remove_red_eye_sharp))),
-                validator: (value) {
-                  if (value?.trim() != controller.password.text.trim()) {
-                    return 'Passwords does not match!';
-                  }
-                  return null;
-                }),
+                        onPressed: () {
+                          controller.isCPwdHidden.value =
+                              !controller.isCPwdHidden.value;
+                        },
+                        icon: controller.isCPwdHidden.value
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
+                  ),
+                  validator: (value) {
+                    if (value?.trim() != controller.password.text.trim()) {
+                      return 'Passwords does not match!';
+                    }
+                    return null;
+                  }),
+            ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    final String encryptedPwd = BCrypt.hashpw(
+                      controller.password.text,
+                      BCrypt.gensalt(),
+                    );
                     //*Email & Pwd Authentication
                     /*SignUpController.instance.signUp(
                         controller.email.text.trim(),
@@ -110,9 +131,10 @@ class SignUpForm extends StatelessWidget {
                       username: controller.username.text.trim(),
                       fullName: controller.fullName.text.trim(),
                       email: controller.email.text.trim(),
-                      password: controller.password.text.trim(),
+                      password: encryptedPwd,
                     );
-                    SignUpController.instance.storeUser(user);
+                    SignUpController.instance
+                        .storeUser(user, controller.password.text.trim());
                   }
                 },
                 child: Text(

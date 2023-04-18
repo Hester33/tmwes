@@ -27,15 +27,25 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-            TextFormField(
-              controller: controller.password,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock_outline),
+            Obx(
+              () => TextFormField(
+                obscureText: controller.isPwdHidden.value,
+                controller: controller.password,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock_outline),
                   labelText: 'Password',
                   hintText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                      onPressed: null, icon: Icon(Icons.remove_red_eye_sharp))),
+                      onPressed: () {
+                        controller.isPwdHidden.value =
+                            !controller.isPwdHidden.value;
+                      },
+                      icon: controller.isPwdHidden.value
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off)),
+                ),
+              ),
             ),
             const SizedBox(height: 20.0),
             SizedBox(
