@@ -37,7 +37,7 @@ class AuthenticationDb extends GetxController {
         : Get.offAll(() => const Home());
   }
 
-  Future<void> createUserWithEmailAndPwd(
+  Future<String> createUserWithEmailAndPwd(
       String email, String password, String username) async {
     try {
       await _auth
@@ -49,6 +49,7 @@ class AuthenticationDb extends GetxController {
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
           : Get.offAll(() => const Home());
+      return firebaseUser.value!.uid;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       Get.snackbar("Error", ex.msg,

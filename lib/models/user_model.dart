@@ -34,6 +34,7 @@ class UserModel {
 
   toJson() {
     return {
+      "id": id,
       "username": username,
       "fullname": fullName,
       "email": email,

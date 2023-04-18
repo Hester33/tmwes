@@ -26,10 +26,16 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> storeUser(UserModel user, String pwd, String username) async {
-    await AuthenticationDb.instance
-        .createUserWithEmailAndPwd(user.email, pwd, username);
+  Future<void> storeUser(
+    String username,
+    String fullName,
+    String email,
+    String password,
+    String encryptedPwd,
+  ) async {
+    String uid = await AuthenticationDb.instance
+        .createUserWithEmailAndPwd(email, password, username);
 
-    userDb.storeUser(user);
+    userDb.storeUser(uid, username, fullName, email, encryptedPwd);
   }
 }

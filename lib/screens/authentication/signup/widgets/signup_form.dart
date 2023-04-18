@@ -127,16 +127,24 @@ class SignUpForm extends StatelessWidget {
                     /*SignUpController.instance.signUp(
                         controller.email.text.trim(),
                         controller.password.text.trim());*/
-                    final user = UserModel(
-                      username: controller.username.text.trim(),
-                      fullName: controller.fullName.text.trim(),
-                      email: controller.email.text.trim(),
-                      password: encryptedPwd,
-                    );
+                    //-----------------------------------------------------------------------//
+                    // final user = UserModel(
+                    //   username: controller.username.text.trim(),
+                    //   fullName: controller.fullName.text.trim(),
+                    //   email: controller.email.text.trim(),
+                    //   password: encryptedPwd,
+                    // );
+                    // SignUpController.instance.storeUser(
+                    //     user,
+                    //     controller.password.text.trim(),
+                    //     controller.username.text.trim());
                     SignUpController.instance.storeUser(
-                        user,
-                        controller.password.text.trim(),
-                        controller.username.text.trim());
+                      controller.username.text.trim(),
+                      controller.fullName.text.trim(),
+                      controller.email.text.trim(),
+                      controller.password.text.trim(),
+                      encryptedPwd,
+                    );
                   }
                 },
                 child: Text(
