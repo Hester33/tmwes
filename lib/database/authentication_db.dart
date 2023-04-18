@@ -13,6 +13,14 @@ class AuthenticationDb extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
 
+  var userName = ''.obs;
+
+  //@override
+  // void onInit() {
+  //   userName = RxString(userProfile != null ? userProfile!.displayName! : '');
+  //   super.onInit();
+  // }
+
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
@@ -29,10 +37,14 @@ class AuthenticationDb extends GetxController {
         : Get.offAll(() => const Home());
   }
 
-  Future<void> createUserWithEmailAndPwd(String email, String password) async {
+  Future<void> createUserWithEmailAndPwd(
+      String email, String password, String username) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => userName.value = username);
+      firebaseUser.value!.updateDisplayName(userName.value);
+
       //!=null
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
@@ -54,7 +66,9 @@ class AuthenticationDb extends GetxController {
 
   Future<void> loginUserWithEmailAndPwd(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => userName.value = firebaseUser.value!.displayName!);
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
           : Get.offAll(() => const Home());

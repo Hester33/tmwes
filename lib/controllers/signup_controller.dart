@@ -16,9 +16,9 @@ class SignUpController extends GetxController {
 
   final userDb = Get.put(UserDb());
 
-  void signUp(String email, String password) {
+  void signUp(String email, String password, String username) {
     String? error = AuthenticationDb.instance
-        .createUserWithEmailAndPwd(email, password) as String?;
+        .createUserWithEmailAndPwd(email, password, username) as String?;
     if (error != null) {
       Get.showSnackbar(GetSnackBar(
         message: error.toString(),
@@ -26,8 +26,9 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> storeUser(UserModel user, String pwd) async {
-    await AuthenticationDb.instance.createUserWithEmailAndPwd(user.email, pwd);
+  Future<void> storeUser(UserModel user, String pwd, String username) async {
+    await AuthenticationDb.instance
+        .createUserWithEmailAndPwd(user.email, pwd, username);
 
     userDb.storeUser(user);
   }

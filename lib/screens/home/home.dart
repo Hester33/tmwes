@@ -1,6 +1,7 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/database/authentication_db.dart';
@@ -45,11 +46,14 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text('Welcome'),
-                    Text('Halo'),
-                  ],
+                Obx(
+                  () => Column(
+                    children: [
+                      Text('Welcome'),
+                      Text(
+                          'Halo ${AuthenticationDb.instance.userName.value.toString()}'),
+                    ],
+                  ),
                 ),
                 Row(
                   children: [

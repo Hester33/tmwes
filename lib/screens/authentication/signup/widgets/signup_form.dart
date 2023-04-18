@@ -133,8 +133,10 @@ class SignUpForm extends StatelessWidget {
                       email: controller.email.text.trim(),
                       password: encryptedPwd,
                     );
-                    SignUpController.instance
-                        .storeUser(user, controller.password.text.trim());
+                    SignUpController.instance.storeUser(
+                        user,
+                        controller.password.text.trim(),
+                        controller.username.text.trim());
                   }
                 },
                 child: Text(
