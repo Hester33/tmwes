@@ -7,7 +7,7 @@ class TElevatedButtonTheme {
   static final xElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
         elevation: 0,
-        shape: RoundedRectangleBorder(),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         foregroundColor: Colors.white,
         backgroundColor: primaryColor,
         side: const BorderSide(color: Colors.black54),

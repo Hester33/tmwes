@@ -1,4 +1,5 @@
 import 'package:bcrypt/bcrypt.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String? id;
@@ -40,5 +41,16 @@ class UserModel {
       "email": email,
       "password": password,
     };
+  }
+
+  //Map user from Firebase to UserModel
+  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data();
+    return UserModel(
+        id: data!["id"],
+        username: data["username"],
+        fullName: data["fullname"],
+        email: data["email"],
+        password: data["password"]);
   }
 }

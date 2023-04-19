@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/database/authentication_db.dart';
+import 'package:tmwes/screens/profile/edit_profile_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -66,6 +67,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           // final bool checkPassword =
                           //     BCrypt.checkpw(password, encrypt);
+                          Get.to(() => const EditProfileScreen());
                         },
                         icon: const Icon(Icons.location_on_sharp)),
                   ],

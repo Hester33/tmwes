@@ -6,10 +6,9 @@ class TTextFormFieldTheme {
 
   static InputDecorationTheme xInputDecorationTheme = InputDecorationTheme(
       prefixIconColor: primaryColor,
-      floatingLabelStyle: TextStyle(color: primaryColor),
-      border: OutlineInputBorder(),
-      //border: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+      floatingLabelStyle: const TextStyle(color: primaryColor),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       focusedBorder: OutlineInputBorder(
-          //borderRadius: BorderRadius.circular(100),
-          borderSide: BorderSide(width: 2, color: primaryColor)));
+          borderRadius: BorderRadius.circular(5),
+          borderSide: const BorderSide(width: 2, color: primaryColor)));
 }

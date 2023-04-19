@@ -42,4 +42,24 @@ class UserDb extends GetxController {
       });
     }
   }
+
+  //Fetch User from FireStore
+  Future<UserModel> getUserDetails(String id) async {
+    final snapshot = await firestore
+        .collection(usersCollection)
+        .where("id", isEqualTo: id)
+        .get();
+    final userData =
+        snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).single;
+    //final userData = snapshot.docs.map((doc) => UserModel.fromSnapshot(doc));
+    return userData;
+  }
+
+  //Fetch ALl Users
+  Future<List<UserModel>> allUser() async {
+    final snapshot = await firestore.collection(usersCollection).get();
+    final usersData =
+        snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
+    return usersData;
+  }
 }

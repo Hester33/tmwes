@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'TMWES',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.xTheme,
-      home: const CircularProgressIndicator(),
+      home: const Center(child: CircularProgressIndicator()),
     );
   }
 }
