@@ -8,13 +8,13 @@ class SignUpWithEmailAndPasswordFailure {
     switch (code) {
       case 'weak-password':
         return const SignUpWithEmailAndPasswordFailure(
-            'Please enter a stronger password.');
+            'Weak Password. Your password should be at least 6 characters.');
       case 'invalid-email':
         return const SignUpWithEmailAndPasswordFailure(
             'Email is not valid or badly formatted.');
       case 'email-already-in-use':
         return const SignUpWithEmailAndPasswordFailure(
-            'An account already exists for that email.');
+            'The email address is already in use by another account.');
       case 'operation-not-allowed':
         return const SignUpWithEmailAndPasswordFailure(
             'Operation is not allowed. Please contact support.');
