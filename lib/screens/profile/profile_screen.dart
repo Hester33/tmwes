@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.black))),
               ),
               //! 1. Create change pwd button
-              //! 2. Once user click on it, snow snack bar & wait for 1s then LOGOUT
+              //! 2. Once user click on it, snow snackbar/dialog box & wait for 1s then LOGOUT
               const SizedBox(height: 30),
               const Divider(),
               const SizedBox(height: 10),
