@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/exceptions/exceptions.dart';
+import 'package:tmwes/helpers/loading.dart';
 import 'package:tmwes/screens/home/home.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
@@ -42,6 +43,7 @@ class AuthenticationDb extends GetxController {
   Future<String> createUserWithEmailAndPwd(
       String email, String password, String username) async {
     try {
+      showLoading();
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = username);
@@ -69,6 +71,7 @@ class AuthenticationDb extends GetxController {
 
   Future<void> loginUserWithEmailAndPwd(String email, String password) async {
     try {
+      showLoading();
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = firebaseUser.value!.displayName!);
