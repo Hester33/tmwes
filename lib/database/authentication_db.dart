@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -91,5 +93,26 @@ class AuthenticationDb extends GetxController {
 
   Future<void> logout() async {
     await _auth.signOut();
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    }
+    //.catchError((e) => print('FIREBASE AUTH EXPECTION -  ${e.code}'));
+    on FirebaseAuthException catch (e) {
+      //! Create exception
+      final ex = LoginWithEmailAndPasswordFailure.code(e.code);
+      Get.snackbar("Error", ex.msg,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+      print('FIREBASE AUTH EXPECTION - ${ex.msg}, ${e.code}');
+      //throw ex;
+    } catch (_) {
+      const ex = LoginWithEmailAndPasswordFailure();
+      print('EXCEPTION - ${ex.msg}');
+      throw ex;
+    }
   }
 }

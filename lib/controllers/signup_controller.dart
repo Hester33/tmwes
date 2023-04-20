@@ -14,7 +14,8 @@ class SignUpController extends GetxController {
   var isPwdHidden = true.obs;
   var isCPwdHidden = true.obs;
 
-  final userDb = Get.put(UserDb());
+  //*final userDb = Get.put(UserDb());
+  UserDb userDb = Get.find();
 
   void signUp(String email, String password, String username) {
     String? error = AuthenticationDb.instance
@@ -37,5 +38,6 @@ class SignUpController extends GetxController {
         .createUserWithEmailAndPwd(email, password, username);
 
     userDb.storeUser(uid, username, fullName, email, encryptedPwd);
+    //UserDb.instance.storeUser(uid, username, fullName, email, encryptedPwd);
   }
 }

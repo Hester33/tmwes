@@ -12,4 +12,6 @@ class LoginController extends GetxController {
   void login(String email, String password) {
     AuthenticationDb.instance.loginUserWithEmailAndPwd(email, password);
   }
+
+  void resetPwd() {}
 }

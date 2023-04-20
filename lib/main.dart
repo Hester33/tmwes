@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/database/authentication_db.dart';
+import 'package:tmwes/database/user_db.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -13,7 +14,10 @@ import 'package:tmwes/utils/theme/theme.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationDb()));
+      .then((value) {
+    Get.put(AuthenticationDb());
+    Get.put(UserDb());
+  });
   runApp(const MyApp());
 }
 

@@ -81,12 +81,18 @@ class WelcomeScreen extends StatelessWidget {
                                 onPressed: () {
                                   Get.off(() => const SignUpScreen());
                                 },
-                                child: Text('Sign Up'.toUpperCase(),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16)
-                                    //style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ))),
+                                //!testing the style
+                                style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(width: 1.5)),
+                                child: Text(
+                                  'Sign Up'.toUpperCase(),
+
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+
+                                  //style: const TextStyle(fontWeight: FontWeight.bold),
+                                ))),
                       ],
                     )
                   ],

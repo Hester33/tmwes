@@ -14,6 +14,7 @@ class UserDb extends GetxController {
   storeUser(String uid, String username, String fullName, String email,
       String encryptedPwd) async {
     User? currentUser = auth.currentUser;
+
     final user = UserModel(
       id: uid,
       username: username,

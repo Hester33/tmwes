@@ -18,4 +18,9 @@ class ProfileController extends GetxController {
       Get.snackbar("Error", "Login to continue");
     }
   }
+
+  resetPwd() {
+    final email = _authDb.firebaseUser.value?.email;
+    _authDb.resetPassword(email!);
+  }
 }
