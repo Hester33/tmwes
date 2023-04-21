@@ -6,8 +6,12 @@ class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
   // final AuthenticationDb _authDb = Get.find();
-  final _authDb = Get.put(AuthenticationDb());
-  final _userDb = Get.put(UserDb());
+  // final UserDb _userDb = Get.find();
+  final _authDb = AuthenticationDb.instance;
+  final _userDb = UserDb.instance;
+
+  // final _authDb = Get.put(AuthenticationDb());
+  //final _userDb = Get.put(UserDb());
 
   //Get user's id and pass to userDb for fetch user data
   getUserData() {

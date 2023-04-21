@@ -9,6 +9,8 @@ import 'package:tmwes/screens/home/home.dart';
 import 'package:tmwes/screens/splashScreen/splash_screen.dart';
 import 'package:tmwes/utils/theme/theme.dart';
 
+import 'helpers/init_controller.dart';
+
 //!flutter pub upgrade --major-version
 
 void main() {
@@ -16,7 +18,8 @@ void main() {
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
     Get.put(AuthenticationDb());
-    Get.put(UserDb());
+    //   // Get.put(UserDb());
+    //   //init();
   });
   runApp(const MyApp());
 }
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: ControllerBindings(),
       title: 'TMWES',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.xTheme,

@@ -50,9 +50,9 @@ class Home extends StatelessWidget {
                 Obx(
                   () => Column(
                     children: [
-                      Text('Welcome'),
                       Text(
-                          'Halo ${AuthenticationDb.instance.userName.value.toString()}'),
+                          'Hi ${AuthenticationDb.instance.userName.value.toString()}'),
+                      Text('How are you feeling today?'),
                     ],
                   ),
                 ),

@@ -12,7 +12,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _authDb = Get.put(AuthenticationDb());
+    //! final _authDb = Get.put(AuthenticationDb());
+    AuthenticationDb _authDb = Get.find();
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

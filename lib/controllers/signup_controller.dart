@@ -15,7 +15,9 @@ class SignUpController extends GetxController {
   var isCPwdHidden = true.obs;
 
   //*final userDb = Get.put(UserDb());
-  UserDb userDb = Get.find();
+  //UserDb userDb = Get.find();
+  //! Controller change to this style
+  final userDb = UserDb.instance;
 
   void signUp(String email, String password, String username) {
     String? error = AuthenticationDb.instance

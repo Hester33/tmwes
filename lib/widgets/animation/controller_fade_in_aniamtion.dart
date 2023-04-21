@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
 class FadeInAnimationController extends GetxController {
-  static FadeInAnimationController get find => Get.find();
+  static FadeInAnimationController get instance => Get.find();
 
   RxBool animate = false.obs;
 

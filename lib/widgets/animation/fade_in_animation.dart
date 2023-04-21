@@ -11,7 +11,8 @@ class FadeInAnimation extends StatelessWidget {
       this.animate,
       required this.child});
 
-  final controller = Get.put(FadeInAnimationController());
+  //final controller = Get.put(FadeInAnimationController());
+  final controller = FadeInAnimationController.instance;
   final int durationInMs;
   final AnimationPosition? animate;
   final Widget child;
