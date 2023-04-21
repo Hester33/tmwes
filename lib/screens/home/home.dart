@@ -6,6 +6,7 @@ import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
+import 'package:tmwes/screens/profile/profile_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -51,8 +52,10 @@ class Home extends StatelessWidget {
                   () => Column(
                     children: [
                       Text(
-                          'Hi ${AuthenticationDb.instance.userName.value.toString()}'),
-                      Text('How are you feeling today?'),
+                        'Hi ${AuthenticationDb.instance.userName.value.toString()},\nHow are you feeling today?',
+                        textAlign: TextAlign.left,
+                      ),
+                      //Text('How are you feeling today?'),
                     ],
                   ),
                 ),
@@ -67,7 +70,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           // final bool checkPassword =
                           //     BCrypt.checkpw(password, encrypt);
-                          Get.to(() => const EditProfileScreen());
+                          Get.to(() => const ProfileScreen());
                         },
                         icon: const Icon(Icons.location_on_sharp)),
                   ],

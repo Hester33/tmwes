@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
+import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
+import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
 import '../../constants/image.dart';
 import 'widgets/menu.dart';
@@ -26,8 +28,8 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                width: 120,
-                height: 120,
+                width: 100,
+                height: 100,
                 //child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image(image: AssetImage(profile))),
                 child: Image(image: AssetImage(profile)),
               ),
@@ -36,26 +38,66 @@ class ProfileScreen extends StatelessWidget {
               Text('email@gmail.com',
                   style: Theme.of(context).textTheme.bodyLarge),
               const SizedBox(height: 20),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                    onPressed: () => Get.to(() => const EditProfileScreen()),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        side: BorderSide.none,
-                        shape: const StadiumBorder()),
-                    child: const Text('Edit Profile',
-                        style: TextStyle(color: Colors.black))),
+              Row(
+                children: [
+                  Expanded(
+                    //width: 200,
+                    child: ElevatedButton(
+                        onPressed: () =>
+                            Get.to(() => const EditProfileScreen()),
+                        // style: ElevatedButton.styleFrom(
+                        //     backgroundColor: primaryColor,
+                        //     side: BorderSide.none,
+                        //     shape: const StadiumBorder(),),
+                        child: const Text('Edit Profile')),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    //width: 200,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          ProfileController.instance.resetPwd();
+                          Get.defaultDialog(
+                            title: "Email sent!",
+                            middleText:
+                                "Please check your email to change the password.",
+                            //backgroundColor: Colors.green,
+                            titleStyle: TextStyle(color: Colors.green),
+                            middleTextStyle: TextStyle(color: Colors.blueGrey),
+                            textConfirm: "Ok",
+                            confirmTextColor: Colors.white,
+                            onConfirm: () =>
+                                Get.to(() => const WelcomeScreen()),
+                            //buttonColor: Colors.red,
+                            barrierDismissible: false,
+                            //radius: 50,
+                            // content: Column(
+                            //   children: [
+                            //     Container(child: Text("Hello 1")),
+                            //     Container(child: Text("Hello 2")),
+                            //     Container(child: Text("Hello 3")),
+                            //   ],
+                            //)
+                          );
+                        },
+                        // style: ElevatedButton.styleFrom(
+                        //     backgroundColor: primaryColor,
+                        //     side: BorderSide.none,
+                        //     shape: const StadiumBorder()),
+                        child: const Text('Change password')),
+                  ),
+                ],
               ),
+
               //! 1. Create change pwd button
               //! 2. Once user click on it, snow snackbar/dialog box & wait for 1s then LOGOUT
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 10),
 
               //MENU
               MenuWidget(
-                  title: "FAQ",
+                  title: "Personal Details",
                   icon: Icons.chat_bubble_outline_outlined,
                   onPress: () {}),
               MenuWidget(

@@ -34,6 +34,10 @@ class SignUpScreen extends StatelessWidget {
                 /* ---- End --- */
                 TextButton(
                   onPressed: () {
+                    //!disable user to click the btn if the field is empty
+                    //          ElevatedButton(
+                    // onPressed: agree ? _doSomething : null,
+                    // child: const Text('Continue'))
                     Get.off(() => const LoginScreen());
                   },
                   child: Text.rich(

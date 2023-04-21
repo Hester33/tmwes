@@ -43,7 +43,7 @@ class AuthenticationDb extends GetxController {
   Future<String> createUserWithEmailAndPwd(
       String email, String password, String username) async {
     try {
-      showLoading();
+      //showLoading();
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = username);
@@ -71,7 +71,7 @@ class AuthenticationDb extends GetxController {
 
   Future<void> loginUserWithEmailAndPwd(String email, String password) async {
     try {
-      showLoading();
+      //showLoading();
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = firebaseUser.value!.displayName!);
