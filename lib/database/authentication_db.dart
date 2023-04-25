@@ -40,7 +40,7 @@ class AuthenticationDb extends GetxController {
         : Get.offAll(() => const Home());
   }
 
-  Future<String> createUserWithEmailAndPwd(
+  Future<String?> createUserWithEmailAndPwd(
       String email, String password, String username) async {
     try {
       //showLoading();
@@ -61,12 +61,13 @@ class AuthenticationDb extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
       print('FIREBASE AUTH EXPECTION - ${ex.msg}, ${e.code}');
-      throw ex;
+      //throw ex;
     } catch (_) {
       const ex = SignUpWithEmailAndPasswordFailure();
       print('EXCEPTION - ${ex.msg}');
       throw ex;
     }
+    return null;
   }
 
   Future<void> loginUserWithEmailAndPwd(String email, String password) async {

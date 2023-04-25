@@ -8,19 +8,20 @@ import 'package:tmwes/models/user_model.dart';
 class UserDb extends GetxController {
   static UserDb get instance => Get.find();
 
-  final _db = FirebaseFirestore.instance;
-
   //store user in FireStore
-  storeUser(String uid, String username, String fullName, String email,
-      String encryptedPwd) async {
+  Future<void> storeUser(String? uid, String username, String fullName,
+      DateTime dateOfBirth, String email, String phoneNo) async {
     User? currentUser = auth.currentUser;
 
     final user = UserModel(
       id: uid,
       username: username,
       fullName: fullName,
+      dateOfBirth: dateOfBirth,
       email: email,
-      password: encryptedPwd,
+      phoneNumber: phoneNo,
+      //auto added
+      dateJoined: DateTime.now(),
     );
     if (currentUser != null) {
       //.add(...) and .doc().set(...) are completely equivalent
@@ -63,4 +64,6 @@ class UserDb extends GetxController {
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
     return usersData;
   }
+
+  //  currentUser.updateEmail(newEmail);
 }

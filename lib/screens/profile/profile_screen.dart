@@ -40,6 +40,8 @@ class ProfileScreen extends StatelessWidget {
               Text('Name', style: Theme.of(context).textTheme.headlineMedium),
               Text('email@gmail.com',
                   style: Theme.of(context).textTheme.bodyLarge),
+              Text('Date Joined: ',
+                  style: Theme.of(context).textTheme.bodyLarge),
               const SizedBox(height: 20),
               Row(
                 children: [

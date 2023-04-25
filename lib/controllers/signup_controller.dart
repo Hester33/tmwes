@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/database/user_db.dart';
 import 'package:tmwes/models/user_model.dart';
@@ -9,10 +10,14 @@ class SignUpController extends GetxController {
 
   final username = TextEditingController();
   final fullName = TextEditingController();
+  var dob = TextEditingController().obs;
   final email = TextEditingController();
+  final phoneNo = TextEditingController(text: '+6');
   final password = TextEditingController();
   var isPwdHidden = true.obs;
   var isCPwdHidden = true.obs;
+  var selectedDate = DateTime.now();
+  static DateTime? pickedDate;
 
   //*final userDb = Get.put(UserDb());
   //UserDb userDb = Get.find();
@@ -29,17 +34,35 @@ class SignUpController extends GetxController {
     }
   }
 
+//Future<void> chooseDate(), and change pickedDate to obs
+  Future<void> chooseDate() async {
+    pickedDate = await showDatePicker(
+        context: Get.context!,
+        initialDate: selectedDate,
+        firstDate: DateTime(1930),
+        lastDate: DateTime(2024),
+        initialDatePickerMode: DatePickerMode.year,
+        helpText: 'Select D.O.B',
+        confirmText: 'Confirm');
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
+      dob.value.text = formattedDate;
+      selectedDate = pickedDate!;
+      //return pickedDate;
+    }
+  }
+
   Future<void> storeUser(
     String username,
     String fullName,
     String email,
     String password,
-    String encryptedPwd,
+    String phoneNo,
   ) async {
-    String uid = await AuthenticationDb.instance
+    String? uid = await AuthenticationDb.instance
         .createUserWithEmailAndPwd(email, password, username);
 
-    userDb.storeUser(uid, username, fullName, email, encryptedPwd);
+    userDb.storeUser(uid, username, fullName, pickedDate!, email, phoneNo);
     //UserDb.instance.storeUser(uid, username, fullName, email, encryptedPwd);
   }
 }

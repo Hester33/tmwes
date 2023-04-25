@@ -16,7 +16,6 @@ class SignUpForm extends StatelessWidget {
     final controller = SignUpController.instance;
     final _formKey = GlobalKey<FormState>();
 
-    //! Name, DOB, Gender, Email, Phone no, Pwd, CPwd
     //! check box for term n cond
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -33,7 +32,7 @@ class SignUpForm extends StatelessWidget {
                 ),
                 validator: (value) {
                   if (value.toString().length < 5) {
-                    return 'Enter a valid name';
+                    return 'Please enter you username name';
                   }
                   return null;
                 }),
@@ -47,24 +46,71 @@ class SignUpForm extends StatelessWidget {
                 ),
                 validator: (value) {
                   if (value.toString().length < 5) {
-                    return 'Enter a valid name';
+                    return 'Please enter your full name';
                   }
                   return null;
                 }),
+            const SizedBox(height: 20),
+            //*D.O.B
+            Obx(
+              () => TextFormField(
+                  controller: controller.dob.value,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.date_range_outlined),
+                    label: Text('D.O.B'),
+                  ),
+                  readOnly: true,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return 'Please enter your date of birth';
+                    }
+                    return null;
+                  },
+                  //!not sure
+                  //keyboardType: TextInputType.number,
+                  onTap: () {
+                    //final DateTime date = controller.chooseDate() as DateTime;
+                    controller.chooseDate();
+                  }),
+            ),
             const SizedBox(height: 20),
             //*EmailAddress
             TextFormField(
                 controller: controller.email,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  prefixIcon: Icon(Icons.email_outlined),
                   label: Text('Email'),
                 ),
                 validator: (value) {
                   bool isEmailValid = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(value!);
-                  if (!isEmailValid) {
+                  if (value.toString().isEmpty) {
+                    return 'Please enter your email.';
+                  } else if (!isEmailValid) {
                     return 'Invalid email.';
+                  }
+                  return null;
+                }),
+            const SizedBox(height: 20),
+            //* Phone Number
+            TextFormField(
+                controller: controller.phoneNo,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.phone_android_outlined),
+                  label: Text('Phone Number'),
+                  //! test
+                  //hintText: '+6012345678',
+                ),
+                validator: (value) {
+                  bool isPhoneNoValid =
+                      RegExp(r'(^(?:[+])?[0-9]{10,12}$)').hasMatch(value!);
+                  if (value.toString().isEmpty) {
+                    return 'Please enter your phone number.';
+                  } else if (value.toString().length < 12) {
+                    return 'Invalid phone number.';
+                  } else if (!isPhoneNoValid) {
+                    return 'Please enter a valid phone number.';
                   }
                   return null;
                 }),
@@ -75,7 +121,7 @@ class SignUpForm extends StatelessWidget {
                   obscureText: controller.isPwdHidden.value,
                   controller: controller.password,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person_outline_outlined),
+                    prefixIcon: const Icon(Icons.password_outlined),
                     label: const Text('Password'),
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -99,7 +145,7 @@ class SignUpForm extends StatelessWidget {
               () => TextFormField(
                   obscureText: controller.isCPwdHidden.value,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person_outline_outlined),
+                    prefixIcon: const Icon(Icons.password_outlined),
                     label: const Text('Confirm Password'),
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -147,7 +193,7 @@ class SignUpForm extends StatelessWidget {
                       controller.fullName.text.trim(),
                       controller.email.text.trim(),
                       controller.password.text.trim(),
-                      encryptedPwd,
+                      controller.phoneNo.text.trim(),
                     );
                   }
                 },
