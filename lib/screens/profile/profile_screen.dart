@@ -15,9 +15,12 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new)),
-        title: Text('Profile', style: Theme.of(context).textTheme.displayLarge),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Get.back();
+        //     },
+        //     icon: const Icon(Icons.arrow_back_ios_new)),
+        title: Text('Profile', style: TextStyle(fontSize: 26)),
         // actions: [
         //   IconButton(onPressed: () {}, icon: icon)
         // ],

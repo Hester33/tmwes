@@ -52,13 +52,13 @@ class UserDb extends GetxController {
         .get();
     final userData =
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).single;
-    //final userData = snapshot.docs.map((doc) => UserModel.fromSnapshot(doc));
     return userData;
   }
 
   //Fetch ALl Users
   Future<List<UserModel>> allUser() async {
     final snapshot = await firestore.collection(usersCollection).get();
+    //store snapshot in usersData as a list
     final usersData =
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
     return usersData;

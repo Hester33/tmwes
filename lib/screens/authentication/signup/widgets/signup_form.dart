@@ -16,6 +16,8 @@ class SignUpForm extends StatelessWidget {
     final controller = SignUpController.instance;
     final _formKey = GlobalKey<FormState>();
 
+    //! Name, DOB, Gender, Email, Phone no, Pwd, CPwd
+    //! check box for term n cond
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: Form(

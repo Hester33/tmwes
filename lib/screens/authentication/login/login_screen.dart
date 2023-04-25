@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/constants/image.dart';
+import 'package:tmwes/screens/authentication/login/widgets/forget_password.dart';
 import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
 
 import '../../../database/authentication_db.dart';
@@ -42,26 +43,9 @@ class LoginScreen extends StatelessWidget {
               /* --- Form --- */
               const LoginForm(),
               /* --- End --- */
-
 //  Widget forgotPassword() {
 //     return
 //! Modify
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ForgotPasswordScreen()));
-                      _authDb.resetPassword("1181203140@student.mmu.edu.my");
-                    },
-                    child: const Text(
-                      'Forgot password?',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13),
-                    ),
-                  )),
               //}
               TextButton(
                 onPressed: () {

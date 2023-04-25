@@ -13,7 +13,7 @@ class ControllerBindings extends Bindings {
         fenix: true);
     Get.lazyPut<AuthenticationDb>(() => AuthenticationDb());
     Get.lazyPut<UserDb>(() => UserDb(), fenix: true);
-    Get.lazyPut<LoginController>(() => LoginController());
+    Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
     Get.lazyPut<SignUpController>(() => SignUpController(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
   }

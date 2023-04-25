@@ -43,7 +43,8 @@ class UserModel {
     };
   }
 
-  //Map user from Firebase to UserModel
+  //*Map user from Firebase to UserModel
+  // .fromSnapshot = named constrcutor
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data();
     return UserModel(

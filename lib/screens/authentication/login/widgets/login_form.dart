@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/controllers/login_controller.dart';
+import 'package:tmwes/screens/authentication/login/widgets/forget_password.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -49,7 +50,8 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20.0),
+            const ForgotPasswordBtn(),
+            //const SizedBox(height: 20.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

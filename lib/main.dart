@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/database/user_db.dart';
 import 'firebase_options.dart';
@@ -35,7 +36,10 @@ class MyApp extends StatelessWidget {
       title: 'TMWES',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.xTheme,
-      home: const Center(child: CircularProgressIndicator()),
+      home: const Center(
+          child: CircularProgressIndicator(
+        backgroundColor: primaryColor,
+      )),
     );
   }
 }
