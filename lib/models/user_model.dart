@@ -37,14 +37,16 @@ class UserModel {
   // .fromSnapshot = named constrcutor
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data();
+    Timestamp dob = data!["dob"] as Timestamp;
+    Timestamp dj = data["date_joined"] as Timestamp;
     return UserModel(
-        id: data!["id"],
+        id: data["id"],
         username: data["username"],
         fullName: data["fullname"],
-        dateOfBirth: data["dob"],
+        dateOfBirth: dob.toDate(),
         email: data["email"],
         phoneNumber: data["phone_no"],
-        dateJoined: data["date_joined"]);
+        dateJoined: dj.toDate());
   }
 }
 // Future<String> encrypt() async {

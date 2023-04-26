@@ -10,14 +10,14 @@ class UserDb extends GetxController {
 
   //store user in FireStore
   Future<void> storeUser(String? uid, String username, String fullName,
-      DateTime dateOfBirth, String email, String phoneNo) async {
+      DateTime? dateOfBirth, String email, String phoneNo) async {
     User? currentUser = auth.currentUser;
 
     final user = UserModel(
       id: uid,
       username: username,
       fullName: fullName,
-      dateOfBirth: dateOfBirth,
+      dateOfBirth: dateOfBirth!,
       email: email,
       phoneNumber: phoneNo,
       //auto added
@@ -66,4 +66,26 @@ class UserDb extends GetxController {
   }
 
   //  currentUser.updateEmail(newEmail);
+  Future<void> updateUserDetails(UserModel user) async {
+    User? currentUser = auth.currentUser;
+    await firestore
+        .collection(usersCollection)
+        .doc(user.id)
+        .update(user.toJson())
+        .whenComplete(
+          () => Get.snackbar("Success", "Your account has been updated!",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green),
+        )
+        .catchError((error, stackTrace) {
+      Get.snackbar("Error", "Something went wrong. Try again",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+      print(error.toString());
+    });
+
+    currentUser?.updateEmail(user.email);
+  }
 }

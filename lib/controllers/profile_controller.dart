@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/database/user_db.dart';
+
+import '../models/user_model.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
-  // final AuthenticationDb _authDb = Get.find();
-  // final UserDb _userDb = Get.find();
   final _authDb = AuthenticationDb.instance;
   final _userDb = UserDb.instance;
 
@@ -23,8 +24,17 @@ class ProfileController extends GetxController {
     }
   }
 
+  updateUserDetails(UserModel user) async {
+    await _userDb.updateUserDetails(user);
+  }
+
   resetPwd() {
     final email = _authDb.firebaseUser.value?.email;
     _authDb.resetPassword(email!);
+  }
+
+  String formatDate(DateTime? dateJoined) {
+    String formattedDate = DateFormat('d MMMM yyyy').format(dateJoined!);
+    return formattedDate;
   }
 }

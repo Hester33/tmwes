@@ -48,17 +48,18 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Obx(
-                  () => Column(
-                    children: [
-                      Text(
-                        'Hi ${AuthenticationDb.instance.userName.value.toString()},\nHow are you feeling today?',
-                        textAlign: TextAlign.left,
-                      ),
-                      //Text('How are you feeling today?'),
-                    ],
-                  ),
+                // Obx(
+                //   () =>
+                Column(
+                  children: [
+                    Text(
+                      'Hi ${user?.displayName.toString()},\nHow are you feeling today?',
+                      textAlign: TextAlign.left,
+                    ),
+                    //Text('How are you feeling today?'),
+                  ],
                 ),
+                //),
                 Row(
                   children: [
                     IconButton(

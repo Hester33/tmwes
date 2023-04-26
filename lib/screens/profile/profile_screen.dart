@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
+import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
@@ -13,6 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProfileController.instance;
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -30,18 +32,58 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              SizedBox(
-                width: 100,
-                height: 100,
-                //child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image(image: AssetImage(profile))),
-                child: Image(image: AssetImage(profile)),
+              FutureBuilder(
+                future: controller.getUserData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      UserModel userData = snapshot.data as UserModel;
+                      return Column(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            //child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image(image: AssetImage(profile))),
+                            child: Image(image: AssetImage(profile)),
+                          ),
+                          Text(userData.username,
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium),
+                          const SizedBox(height: 5),
+                          Text(userData.email,
+                              style: Theme.of(context).textTheme.bodyLarge),
+                          const SizedBox(height: 8),
+                          Text.rich(
+                            TextSpan(
+                              text: 'Date Joined: ',
+                              //style: const TextStyle(fontSize: 12),
+                              children: [
+                                TextSpan(
+                                    text: controller
+                                        .formatDate(userData.dateJoined),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          // Text('Date Joined: ',
+                          //     style: Theme.of(context).textTheme.bodyLarge),
+                          // const SizedBox(height: 20),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text(snapshot.error.toString()));
+                    } else {
+                      return const Center(
+                        child: Text('Somsthing went wrong'),
+                      );
+                    }
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
               ),
-              const SizedBox(height: 10),
-              Text('Name', style: Theme.of(context).textTheme.headlineMedium),
-              Text('email@gmail.com',
-                  style: Theme.of(context).textTheme.bodyLarge),
-              Text('Date Joined: ',
-                  style: Theme.of(context).textTheme.bodyLarge),
               const SizedBox(height: 20),
               Row(
                 children: [

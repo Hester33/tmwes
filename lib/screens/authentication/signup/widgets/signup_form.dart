@@ -164,30 +164,17 @@ class SignUpForm extends StatelessWidget {
                   }),
             ),
             const SizedBox(height: 20),
+            //! add term n cond
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  //if (_formKey.currentState!.validate() && isAgree==true) {
                   if (_formKey.currentState!.validate()) {
                     final String encryptedPwd = BCrypt.hashpw(
                       controller.password.text,
                       BCrypt.gensalt(),
                     );
-                    //*Email & Pwd Authentication
-                    /*SignUpController.instance.signUp(
-                        controller.email.text.trim(),
-                        controller.password.text.trim());*/
-                    //-----------------------------------------------------------------------//
-                    // final user = UserModel(
-                    //   username: controller.username.text.trim(),
-                    //   fullName: controller.fullName.text.trim(),
-                    //   email: controller.email.text.trim(),
-                    //   password: encryptedPwd,
-                    // );
-                    // SignUpController.instance.storeUser(
-                    //     user,
-                    //     controller.password.text.trim(),
-                    //     controller.username.text.trim());
                     SignUpController.instance.storeUser(
                       controller.username.text.trim(),
                       controller.fullName.text.trim(),

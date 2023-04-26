@@ -45,7 +45,8 @@ class SignUpController extends GetxController {
         helpText: 'Select D.O.B',
         confirmText: 'Confirm');
     if (pickedDate != null) {
-      String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
+      //String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
+      String formattedDate = DateFormat('d MMMM yyyy').format(pickedDate!);
       dob.value.text = formattedDate;
       selectedDate = pickedDate!;
       //return pickedDate;
