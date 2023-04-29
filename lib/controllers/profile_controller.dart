@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/database/user_db.dart';
+import 'package:tmwes/screens/profile/profile_screen.dart';
+import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
 import '../models/user_model.dart';
 
@@ -28,13 +31,42 @@ class ProfileController extends GetxController {
     await _userDb.updateUserDetails(user);
   }
 
+  String formatDate(DateTime? dateJoined) {
+    String formattedDate = DateFormat('d MMMM yyyy').format(dateJoined!);
+    return formattedDate;
+  }
+
   resetPwd() {
     final email = _authDb.firebaseUser.value?.email;
     _authDb.resetPassword(email!);
   }
 
-  String formatDate(DateTime? dateJoined) {
-    String formattedDate = DateFormat('d MMMM yyyy').format(dateJoined!);
-    return formattedDate;
+  Future<dynamic> resetPwdDialog() {
+    return Get.defaultDialog(
+      title: "Email sent!",
+      middleText: "Please check your email to change the password.",
+      titleStyle: const TextStyle(color: Colors.green),
+      middleTextStyle: const TextStyle(color: Colors.blueGrey),
+      textConfirm: "Ok",
+      confirmTextColor: Colors.white,
+      onConfirm: () => Get.to(() => const WelcomeScreen()),
+      barrierDismissible: false,
+    );
+  }
+
+  Future<dynamic> confirmLogoutDialog() {
+    return Get.defaultDialog(
+      title: "Are you sure want to logout?",
+      middleText: "",
+      titlePadding: EdgeInsets.only(top: 20),
+      //titleStyle: const TextStyle(color: Colors.green),
+      //middleTextStyle: const TextStyle(color: Colors.blueGrey),
+      textConfirm: "Yes",
+      confirmTextColor: Colors.white,
+      onConfirm: () => AuthenticationDb.instance.logout(),
+      textCancel: "No",
+      onCancel: () => Get.to(() => const ProfileScreen()),
+      barrierDismissible: false,
+    );
   }
 }
