@@ -13,7 +13,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset Password'),
+        title: const Text('Reset Password'),
         elevation: 0,
       ),
       body: SizedBox(
@@ -22,7 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           child: Center(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -40,7 +40,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       //textAlign: TextAlign.start,
                       style: TextStyle(color: Colors.black87, fontSize: 16),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Form(
                       key: _formKey,
                       child: Column(

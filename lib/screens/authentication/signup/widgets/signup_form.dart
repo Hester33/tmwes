@@ -168,7 +168,6 @@ class SignUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             //! add term n cond
-
             Obx(
               () => Row(
                 children: [
@@ -198,7 +197,6 @@ class SignUpForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
             Obx(
               () => SizedBox(
                 width: double.infinity,

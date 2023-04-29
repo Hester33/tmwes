@@ -6,7 +6,7 @@ import 'package:tmwes/database/user_db.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:tmwes/screens/home/home.dart';
+import 'package:tmwes/screens/home/home_screen.dart';
 import 'package:tmwes/screens/splashScreen/splash_screen.dart';
 import 'package:tmwes/utils/theme/theme.dart';
 

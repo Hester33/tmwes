@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/exceptions/exceptions.dart';
 import 'package:tmwes/helpers/loading.dart';
-import 'package:tmwes/screens/home/home.dart';
+import 'package:tmwes/screens/home/home_screen.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
 class AuthenticationDb extends GetxController {
@@ -37,7 +37,7 @@ class AuthenticationDb extends GetxController {
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => const Home());
+        : Get.offAll(() => const HomeScreen());
   }
 
   Future<String?> createUserWithEmailAndPwd(
@@ -52,7 +52,7 @@ class AuthenticationDb extends GetxController {
       //!=null
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
-          : Get.offAll(() => const Home());
+          : Get.offAll(() => const HomeScreen());
       return firebaseUser.value!.uid;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
@@ -78,7 +78,7 @@ class AuthenticationDb extends GetxController {
           .then((value) => userName.value = firebaseUser.value!.displayName!);
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
-          : Get.offAll(() => const Home());
+          : Get.offAll(() => const HomeScreen());
     } on FirebaseAuthException catch (e) {
       //! Create exception
       final ex = LoginWithEmailAndPasswordFailure.code(e.code);
