@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
+import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
-import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
 import '../../constants/image.dart';
 import 'widgets/menu.dart';
@@ -17,16 +17,11 @@ class ProfileScreen extends StatelessWidget {
     final controller = ProfileController.instance;
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Get.back();
-        //     },
-        //     icon: const Icon(Icons.arrow_back_ios_new)),
-        title: Text('Profile', style: TextStyle(fontSize: 26)),
-        // actions: [
-        //   IconButton(onPressed: () {}, icon: icon)
-        // ],
-      ),
+          //   title: Text('Profile', style: TextStyle(fontSize: 26)),
+          //   // actions: [
+          //   //   IconButton(onPressed: () {}, icon: icon)
+          //   // ],
+          ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(30),
@@ -56,7 +51,6 @@ class ProfileScreen extends StatelessWidget {
                           Text.rich(
                             TextSpan(
                               text: 'Date Joined: ',
-                              //style: const TextStyle(fontSize: 12),
                               children: [
                                 TextSpan(
                                     text: controller
@@ -67,9 +61,6 @@ class ProfileScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // Text('Date Joined: ',
-                          //     style: Theme.of(context).textTheme.bodyLarge),
-                          // const SizedBox(height: 20),
                         ],
                       );
                     } else if (snapshot.hasError) {
@@ -92,10 +83,6 @@ class ProfileScreen extends StatelessWidget {
                     child: ElevatedButton(
                         onPressed: () =>
                             Get.to(() => const EditProfileScreen()),
-                        // style: ElevatedButton.styleFrom(
-                        //     backgroundColor: primaryColor,
-                        //     side: BorderSide.none,
-                        //     shape: const StadiumBorder(),),
                         child: const Text('Edit Profile')),
                   ),
                   const SizedBox(width: 10),
@@ -103,34 +90,9 @@ class ProfileScreen extends StatelessWidget {
                     //width: 200,
                     child: ElevatedButton(
                         onPressed: () {
-                          ProfileController.instance.resetPwd();
-                          Get.defaultDialog(
-                            title: "Email sent!",
-                            middleText:
-                                "Please check your email to change the password.",
-                            //backgroundColor: Colors.green,
-                            titleStyle: TextStyle(color: Colors.green),
-                            middleTextStyle: TextStyle(color: Colors.blueGrey),
-                            textConfirm: "Ok",
-                            confirmTextColor: Colors.white,
-                            onConfirm: () =>
-                                Get.to(() => const WelcomeScreen()),
-                            //buttonColor: Colors.red,
-                            barrierDismissible: false,
-                            //radius: 50,
-                            // content: Column(
-                            //   children: [
-                            //     Container(child: Text("Hello 1")),
-                            //     Container(child: Text("Hello 2")),
-                            //     Container(child: Text("Hello 3")),
-                            //   ],
-                            //)
-                          );
+                          controller.resetPwd();
+                          controller.resetPwdDialog();
                         },
-                        // style: ElevatedButton.styleFrom(
-                        //     backgroundColor: primaryColor,
-                        //     side: BorderSide.none,
-                        //     shape: const StadiumBorder()),
                         child: const Text('Change password')),
                   ),
                 ],
@@ -166,7 +128,9 @@ class ProfileScreen extends StatelessWidget {
                   icon: Icons.logout,
                   textColor: Colors.red,
                   endIcon: false,
-                  onPress: () {}),
+                  onPress: () {
+                    controller.confirmLogoutDialog();
+                  }),
             ],
           ),
         ),
