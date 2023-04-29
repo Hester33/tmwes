@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/firebase_const.dart';
@@ -47,21 +48,26 @@ class LoginScreen extends StatelessWidget {
 //     return
 //! Modify
               //}
-              TextButton(
-                onPressed: () {
-                  Get.off(() => const SignUpScreen());
-                },
-                child: Text.rich(
-                  TextSpan(
-                      text: "Don't have an account? ",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      children: const [
-                        TextSpan(
-                            text: 'SIGN UP',
-                            style: TextStyle(color: Colors.blue)),
-                      ]),
-                ),
-              )
+              // TextButton(
+              //   onPressed: () {
+              //     Get.off(() => const SignUpScreen());
+              //   },
+              //   child:
+              Text.rich(
+                TextSpan(
+                    text: "Don't have an account? ",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: [
+                      TextSpan(
+                          text: 'SIGN UP',
+                          style: TextStyle(color: Colors.blue),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.off(() => const SignUpScreen());
+                            }),
+                    ]),
+              ),
+              //)
             ],
           ),
         )),

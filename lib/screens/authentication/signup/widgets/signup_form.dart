@@ -1,8 +1,11 @@
 import 'package:bcrypt/bcrypt.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
 import 'package:tmwes/models/user_model.dart';
+
+import '../../login/login_screen.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({
@@ -163,32 +166,75 @@ class SignUpForm extends StatelessWidget {
                     return null;
                   }),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             //! add term n cond
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  //if (_formKey.currentState!.validate() && isAgree==true) {
-                  if (_formKey.currentState!.validate()) {
-                    final String encryptedPwd = BCrypt.hashpw(
-                      controller.password.text,
-                      BCrypt.gensalt(),
-                    );
-                    SignUpController.instance.storeUser(
-                      controller.username.text.trim(),
-                      controller.fullName.text.trim(),
-                      controller.email.text.trim(),
-                      controller.password.text.trim(),
-                      controller.phoneNo.text.trim(),
-                    );
-                  }
-                },
-                child: Text(
-                  'Sign Up'.toUpperCase(),
+
+            Obx(
+              () => Row(
+                children: [
+                  Checkbox(
+                    value: controller.isAgree.value,
+                    onChanged: (value) {
+                      controller.isAgree.value = value ?? false;
+                    },
+                  ),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                          text: "I have read and agree to the ",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          children: [
+                            TextSpan(
+                                text: 'Terms and Conditions.',
+                                style: TextStyle(color: Colors.blue),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    controller.termsAndConditionsDialog();
+                                  }),
+                          ]),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            Obx(
+              () => SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: controller.isAgree.value
+                      ? () {
+                          //if (_formKey.currentState!.validate() && isAgree==true) { onPressed: agree ? _doSomething : null,
+                          if (_formKey.currentState!.validate()) {
+                            final String encryptedPwd = BCrypt.hashpw(
+                              controller.password.text,
+                              BCrypt.gensalt(),
+                            );
+                            SignUpController.instance.storeUser(
+                              controller.username.text.trim(),
+                              controller.fullName.text.trim(),
+                              controller.email.text.trim(),
+                              controller.password.text.trim(),
+                              controller.phoneNo.text.trim(),
+                            );
+                          }
+                        }
+                      : null,
+                  child: Text(
+                    'Sign Up'.toUpperCase(),
+                  ),
                 ),
               ),
-            )
+            ),
+            // Obx(
+            //   () => controller.isAgree.value
+            //       ? Text("")
+            //       : const Text(
+            //           "Please accept the term and condition.",
+            //           style: TextStyle(color: Colors.red),
+            //         ),
+            // ),
           ])),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
@@ -32,25 +33,31 @@ class SignUpScreen extends StatelessWidget {
                 /* --- Signup Form --- */
                 const SignUpForm(),
                 /* ---- End --- */
-                TextButton(
-                  onPressed: () {
-                    //!disable user to click the btn if the field is empty
-                    //          ElevatedButton(
-                    // onPressed: agree ? _doSomething : null,
-                    // child: const Text('Continue'))
-                    Get.off(() => const LoginScreen());
-                  },
-                  child: Text.rich(
-                    TextSpan(children: [
-                      TextSpan(
-                        text: "Already have an account? ",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const TextSpan(
-                          text: 'LOGIN', style: TextStyle(color: Colors.blue)),
-                    ]),
-                  ),
-                )
+                // TextButton(
+                //   onPressed: () {
+                //     //!disable user to click the btn if the field is empty
+                //     //          ElevatedButton(
+                //     // onPressed: agree ? _doSomething : null,
+                //     // child: const Text('Continue'))
+                //     Get.off(() => const LoginScreen());
+                //   },
+                //child:
+                Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text: "Already have an account? ",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    TextSpan(
+                        text: 'LOGIN',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.off(() => const LoginScreen());
+                          }),
+                  ]),
+                ),
+                //)
               ],
             ),
           ),

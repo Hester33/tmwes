@@ -5,6 +5,8 @@ import 'package:tmwes/database/authentication_db.dart';
 import 'package:tmwes/database/user_db.dart';
 import 'package:tmwes/models/user_model.dart';
 
+import '../constants/text.dart';
+
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
 
@@ -16,6 +18,7 @@ class SignUpController extends GetxController {
   final password = TextEditingController();
   var isPwdHidden = true.obs;
   var isCPwdHidden = true.obs;
+  var isAgree = false.obs;
   var selectedDate = DateTime.now();
   static DateTime? pickedDate;
 
@@ -65,5 +68,24 @@ class SignUpController extends GetxController {
 
     userDb.storeUser(uid, username, fullName, pickedDate!, email, phoneNo);
     //UserDb.instance.storeUser(uid, username, fullName, email, encryptedPwd);
+  }
+
+  Future<dynamic> termsAndConditionsDialog() {
+    return Get.defaultDialog(
+      titlePadding: const EdgeInsets.only(top: 10),
+      title: "Privacy Policy:",
+      content: const Flexible(
+        child: SingleChildScrollView(
+            child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(termsAndConditions),
+        )),
+      ),
+      middleTextStyle: const TextStyle(color: Colors.blueGrey),
+      textConfirm: "Ok",
+      confirmTextColor: Colors.white,
+      onConfirm: () => Get.back(),
+      barrierDismissible: false,
+    );
   }
 }
