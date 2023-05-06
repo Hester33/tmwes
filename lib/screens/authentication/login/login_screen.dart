@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                           text: 'SIGN UP',
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(color: Colors.blue),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Get.off(() => const SignUpScreen());

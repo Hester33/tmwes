@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/database/authentication_db.dart';
@@ -16,6 +17,9 @@ import 'helpers/init_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  //hide system bottom navigation bar
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
+      overlays: [SystemUiOverlay.top]);
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
     Get.put(AuthenticationDb());

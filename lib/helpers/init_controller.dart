@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/controllers/login_controller.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
@@ -16,7 +17,8 @@ class ControllerBindings extends Bindings {
     Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
     Get.lazyPut<SignUpController>(() => SignUpController(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
+    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
   }
 }
 
-//* Can add "tag" parameter if there's > 1 controller in the class
+//* Can add "tag" parameter if there's > 1 saeme controller type in the class

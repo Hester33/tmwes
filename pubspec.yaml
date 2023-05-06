@@ -39,13 +39,20 @@ dependencies:
   get: ^4.6.5
   bcrypt: ^1.1.3
 
-  ##--- Format date & Time ---##
-  intl: ^0.17.0
-
   ##--- Firebase packages---##
   firebase_core: ^2.9.0
   firebase_auth: ^4.4.0
   cloud_firestore: ^4.5.1
+
+  ##--- Format date & Time ---##
+  intl: ^0.17.0
+
+  ##--- Generate location ---##
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
+
+  ##--- Make request to API ---##
+  http: ^0.13.6
   
 
 dev_dependencies:

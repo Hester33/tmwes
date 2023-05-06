@@ -50,18 +50,18 @@ class UserModel {
   }
 }
 // Future<String> encrypt() async {
-  //   String pwd = password;
-  //   final String encryptedText = BCrypt.hashpw(
-  //     pwd,
-  //     BCrypt.gensalt(),
-  //   );
-  //   return encryptedText;
-  // }
+//   String pwd = password;
+//   final String encryptedText = BCrypt.hashpw(
+//     pwd,
+//     BCrypt.gensalt(),
+//   );
+//   return encryptedText;
+// }
 
-  // Future<bool> checkencryptText() async {
-  //   final bool checkPassword = BCrypt.checkpw(
-  //     password,
-  //     encrypt() as String,
-  //   );
-  //   return checkPassword;
-  // }
+// Future<bool> checkencryptText() async {
+//   final bool checkPassword = BCrypt.checkpw(
+//     password,
+//     encrypt() as String,
+//   );
+//   return checkPassword;
+// }

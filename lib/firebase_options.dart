@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '518803896548',
     projectId: 'tmwes-73322',
     storageBucket: 'tmwes-73322.appspot.com',
-    androidClientId: '518803896548-aij2bafrhg6r4l913qnqmq6q4hg5sod1.apps.googleusercontent.com',
-    iosClientId: '518803896548-ucs2mqsf1mudijt55u2690dqq7o2l337.apps.googleusercontent.com',
+    androidClientId:
+        '518803896548-aij2bafrhg6r4l913qnqmq6q4hg5sod1.apps.googleusercontent.com',
+    iosClientId:
+        '518803896548-ucs2mqsf1mudijt55u2690dqq7o2l337.apps.googleusercontent.com',
     iosBundleId: 'com.example.tmwes',
   );
 }
