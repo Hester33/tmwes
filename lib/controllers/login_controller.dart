@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/database/authentication_db.dart';
+import 'package:tmwes/services/authentication_db.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();

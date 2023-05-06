@@ -6,7 +6,7 @@ import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/screens/authentication/login/widgets/forget_password.dart';
 import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
 
-import '../../../database/authentication_db.dart';
+import '../../../services/authentication_db.dart';
 import 'widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {

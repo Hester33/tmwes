@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/controllers/home_controller.dart';
-import 'package:tmwes/database/authentication_db.dart';
+import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/screens/profile/profile_screen.dart';
 import 'package:tmwes/widgets/bottom_app_bar.dart';
 

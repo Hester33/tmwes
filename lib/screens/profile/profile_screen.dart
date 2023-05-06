@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
-import 'package:tmwes/database/authentication_db.dart';
+import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tmwes/database/authentication_db.dart';
-import 'package:tmwes/database/user_db.dart';
+import 'package:tmwes/services/authentication_db.dart';
+import 'package:tmwes/services/user_db.dart';
 import 'package:tmwes/models/user_model.dart';
 
 import '../constants/text.dart';
