@@ -1,6 +1,16 @@
+//instance for getting API response
+class CurrentWeatherModel {
+  final Current current;
+  CurrentWeatherModel({required this.current});
+
+  factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) =>
+      //return a (Map)current data from API
+      CurrentWeatherModel(current: Current.fromJson(json['current']));
+}
+
 class Current {
   int? dt;
-  double? temp;
+  int? temp;
   int? pressure;
   int? humidity;
   double? windSpeed;
@@ -17,7 +27,7 @@ class Current {
 
   factory Current.fromJson(Map<String, dynamic> json) => Current(
         dt: json['dt'] as int?,
-        temp: (json['temp'] as num?)?.toDouble(),
+        temp: (json['temp'] as num?)?.round(), //round off the temperature
         pressure: json['pressure'] as int?,
         humidity: json['humidity'] as int?,
         windSpeed: (json['wind_speed'] as num?)?.toDouble(),

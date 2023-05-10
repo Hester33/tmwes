@@ -3,7 +3,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
-import 'package:tmwes/screens/home/home_screen.dart';
+import 'package:tmwes/api/fetch_weather.dart';
+import 'package:tmwes/constants/text.dart';
+import 'package:tmwes/models/current_weather_model.dart';
+import 'package:tmwes/models/weather_model.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find();
@@ -13,11 +16,16 @@ class HomeController extends GetxController {
   final RxDouble _latitude = 2.9757.obs;
   final RxDouble _longtitude = 101.5821.obs;
   var city = ''.obs;
+  final weatherData = WeatherModel().obs;
 
   //function for private variables to be called
   RxBool checkLoading() => _isLoading;
   RxDouble getLatitude() => _latitude;
   RxDouble getLongtitude() => _longtitude;
+
+  WeatherModel getWeatherData() {
+    return weatherData.value;
+  }
 
   @override
   void onInit() {
@@ -63,7 +71,14 @@ class HomeController extends GetxController {
       //update latitude and longtitude
       _latitude.value = value.latitude;
       _longtitude.value = value.longitude;
-      _isLoading.value = false;
+
+      //call weather API
+      return FetchWeatherApi()
+          .processData(value.latitude, value.longitude)
+          .then((value) {
+        weatherData.value = value;
+        _isLoading.value = false;
+      });
     });
   }
 
@@ -94,5 +109,17 @@ class HomeController extends GetxController {
       onCancel: () => Get.back(),
       barrierDismissible: false,
     );
+  }
+
+  List<String> getHealthRecommendationText(String? desc) {
+    if (desc == "Clear" || desc == "Clouds") {
+      return clouds;
+    } else if (desc == "Drizzle" || desc == "Rain") {
+      return rain;
+    } else if (desc == "Thunderstorm") {
+      return thunderstorm;
+    } else {
+      return otherWeather;
+    }
   }
 }
