@@ -1,4 +1,4 @@
-import 'package:tmwes/models/custom_weather.dart';
+import 'package:tmwes/models/weather/weather.dart';
 
 class HourlyWeatherModel {
   //final Hourly hourly;
