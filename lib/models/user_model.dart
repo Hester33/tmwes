@@ -36,6 +36,8 @@ class UserModel {
   //*Map user from Firebase to UserModel
   // .fromSnapshot = named constrcutor
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+    //Map<String,dynamic>
+    //String=key name, dynamic=value
     final data = doc.data();
     Timestamp dob = data!["dob"] as Timestamp;
     Timestamp dj = data["date_joined"] as Timestamp;

@@ -1,7 +1,7 @@
 class Temp {
   double? day;
-  double? min;
-  double? max;
+  int? min;
+  int? max;
   double? night;
   double? eve;
   double? morn;
@@ -10,8 +10,8 @@ class Temp {
 
   factory Temp.fromJson(Map<String, dynamic> json) => Temp(
         day: (json['day'] as num?)?.toDouble(),
-        min: (json['min'] as num?)?.toDouble(),
-        max: (json['max'] as num?)?.toDouble(),
+        min: (json['min'] as num?)?.round(),
+        max: (json['max'] as num?)?.round(),
         night: (json['night'] as num?)?.toDouble(),
         eve: (json['eve'] as num?)?.toDouble(),
         morn: (json['morn'] as num?)?.toDouble(),
