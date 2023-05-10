@@ -1,4 +1,4 @@
-import 'rain.dart';
+// import 'rain.dart';
 import 'weather.dart';
 
 class Hourly {
@@ -16,7 +16,7 @@ class Hourly {
   double? windGust;
   List<Weather>? weather;
   double? pop;
-  Rain? rain;
+  // Rain? rain;
 
   Hourly({
     this.dt,
@@ -33,7 +33,7 @@ class Hourly {
     this.windGust,
     this.weather,
     this.pop,
-    this.rain,
+    // this.rain,
   });
 
   factory Hourly.fromJson(Map<String, dynamic> json) => Hourly(
@@ -53,9 +53,9 @@ class Hourly {
             ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
             .toList(),
         pop: (json['pop'] as num?)?.toDouble(),
-        rain: json['rain'] == null
-            ? null
-            : Rain.fromJson(json['rain'] as Map<String, dynamic>),
+        // rain: json['rain'] == null
+        //     ? null
+        //     : Rain.fromJson(json['rain'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {
@@ -73,6 +73,6 @@ class Hourly {
         'wind_gust': windGust,
         'weather': weather?.map((e) => e.toJson()).toList(),
         'pop': pop,
-        'rain': rain?.toJson(),
+        // 'rain': rain?.toJson(),
       };
 }

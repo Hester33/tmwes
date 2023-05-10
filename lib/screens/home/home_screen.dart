@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/controllers/home_controller.dart';
-import 'package:tmwes/services/authentication_db.dart';
-import 'package:tmwes/screens/profile/profile_screen.dart';
+import 'package:tmwes/screens/home/widgets/daily_weather_forecast.dart';
+import 'package:tmwes/screens/home/widgets/health_recommendation.dart';
+import 'package:tmwes/screens/home/widgets/hourly_weather_forecast.dart';
+import 'package:tmwes/screens/home/widgets/migraine_risk.dart';
 import 'package:tmwes/widgets/bottom_app_bar.dart';
 
 import 'widgets/current_weather.dart';
@@ -20,32 +22,83 @@ class HomeScreen extends StatelessWidget {
     var isHover = false.obs;
     return SafeArea(
       child: Scaffold(
-        //backgroundColor: Colors.yellow.shade700,
-        // appBar: AppBar(
-        //   title: Text('Hi, Hester!\nHow are you feeling today?'),
-        //   elevation: 0,
-        //   //backgroundColor: Colors.transparent,
-        //   actions: [
-        //     // Row(
-        //     //   children: [
-        //     //     Container(
-        //     //       margin: const EdgeInsets.only(right: 20, top: 7),
-        //     //       decoration: BoxDecoration(
-        //     //           borderRadius: BorderRadius.circular(10),
-        //     //           color: Color(0xffe0e0e0)),
-        //     //       child: IconButton(
-        //     //         onPressed: () {},
-        //     //         icon: Icon(Icons.home),
-        //     //       ),
-        //     //     )
-        //     //   ],
-        //     // )
-        //     IconButton(
-        //         onPressed: () {}, icon: const Icon(Icons.location_on_sharp)),
-        //     IconButton(
-        //         onPressed: () {}, icon: const Icon(Icons.location_on_sharp)),
-        //   ],
-        // ),
+        backgroundColor: Colors.blueGrey.shade50,
+        appBar: AppBar(
+          title: const Padding(
+            padding: EdgeInsets.all(10),
+            child: Text.rich(
+              TextSpan(
+                text: 'Hi, Hester!\n',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: [
+                  TextSpan(
+                    text: 'How are you feeling today?',
+                    style: TextStyle(
+                      color: Color(0xFF455A64),
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            // Text(
+            //   'Hi, Hester!\nHow are you feeling today?',
+            //   style: TextStyle(color: Colors.black, fontSize: 18),
+            // ),
+          ),
+          elevation: 3,
+          backgroundColor: Colors.transparent,
+          actions: [
+            // Row(
+            //   children: [
+            //     Container(
+            //       margin: const EdgeInsets.only(right: 20, top: 7),
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10),
+            //           color: Color(0xffe0e0e0)),
+            //       child: IconButton(
+            //           color: Colors.black,
+            //           iconSize: 30,
+            //           onPressed: () {},
+            //           icon: const Icon(Icons.calendar_month_outlined)),
+            //     ),
+            //     Container(
+            //       margin: const EdgeInsets.only(right: 20, top: 7),
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(10),
+            //           color: Color(0xffe0e0e0)),
+            //       child: IconButton(
+            //           color: primaryColor,
+            //           iconSize: 30,
+            //           onPressed: () {},
+            //           icon: const Icon(Icons.location_on_sharp)),
+            //     )
+            //   ],
+            // ),
+            Container(
+              padding: EdgeInsets.only(top: 5, right: 15),
+              child: Row(
+                children: [
+                  IconButton(
+                      color: Colors.blueGrey.shade700,
+                      iconSize: 30,
+                      onPressed: () {},
+                      icon: const Icon(Icons.calendar_month_outlined)),
+                  IconButton(
+                      color: Colors.blueGrey.shade700,
+                      iconSize: 30,
+                      onPressed: () {
+                        controller.confirmUpdateLocationDialog();
+                      },
+                      icon: const Icon(Icons.location_on_sharp)),
+                ],
+              ),
+            ),
+          ],
+        ),
         body:
             //SingleChildScrollView(
             //child:
@@ -58,35 +111,43 @@ class HomeScreen extends StatelessWidget {
               // Container(
               //   padding: const EdgeInsets.fromLTRB(30, 5, 30, 30),
               //  child:
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      //! Text rich
-                      Text(
-                        'Hi ${user?.displayName.toString()}\nHow are you feeling today?',
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            AuthenticationDb.instance.logout();
-                          },
-                          icon: const Icon(Icons.calendar_month_outlined)),
-                      IconButton(
-                          onPressed: () {
-                            controller.confirmUpdateLocationDialog();
-                          },
-                          icon:
-                              const Icon(Icons.location_on_sharp)), //*fmd_good
-                    ],
-                  )
-                ],
-              ),
+              // Container(
+              //   width: MediaQuery.of(context).size.width,
+              //   color: Colors.blueGrey,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Column(
+              //         children: [
+              //           //! Text rich
+              //           Text(
+              //             'Hi ${user?.displayName.toString()}\nHow are you feeling today?',
+              //             textAlign: TextAlign.left,
+              //           ),
+              //         ],
+              //       ),
+              //       Row(
+              //         children: [
+              //           IconButton(
+              //               color: primaryColor,
+              //               iconSize: 30,
+              //               onPressed: () {
+              //                 AuthenticationDb.instance.logout();
+              //               },
+              //               icon: const Icon(Icons.calendar_month_outlined)),
+              //           IconButton(
+              //               color: primaryColor,
+              //               iconSize: 30,
+              //               onPressed: () {
+              //                 controller.confirmUpdateLocationDialog();
+              //               },
+              //               icon: const Icon(
+              //                   Icons.location_on_sharp)), //*fmd_good
+              //         ],
+              //       )
+              //     ],
+              //   ),
+              // ),
               //),
               const SizedBox(height: 20),
 
@@ -122,7 +183,21 @@ class HomeScreen extends StatelessWidget {
                         //     ),
                         //   ),
                         // ),
-                        const CurrentWeatherWidget(),
+                        CurrentWeatherWidget(
+                            currentWeatherData: controller
+                                .getWeatherData()
+                                .getCurrentWeather()),
+                        HealthRecommendationWidget(
+                            currentWeatherData: controller
+                                .getWeatherData()
+                                .getCurrentWeather()),
+                        const MigraineRiskWidget(),
+                        HourlyWeatherForecastWidget(
+                            hourlyWeatherData:
+                                controller.getWeatherData().getHourlyWeather()),
+                        DailyWeatherForecastWidget(
+                            dailyWeatherData:
+                                controller.getWeatherData().getDailyWeather()),
                       ],
                     ))
             ],
