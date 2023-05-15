@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tmwes/controllers/hit6_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/controllers/login_controller.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
@@ -18,6 +19,7 @@ class ControllerBindings extends Bindings {
     Get.lazyPut<SignUpController>(() => SignUpController(), fenix: true);
     Get.lazyPut<ProfileController>(() => ProfileController(), fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    Get.lazyPut<HIT6Controller>(() => HIT6Controller(), fenix: true);
   }
 }
 
