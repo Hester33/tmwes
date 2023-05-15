@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tmwes/screens/hit6/hit6_screen.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
 import 'package:tmwes/screens/profile/profile_screen.dart';
 
@@ -58,7 +59,9 @@ class bottomAppBarWidget extends StatelessWidget {
                 const EdgeInsets.only(right: 20.0, top: 10.0, bottom: 10.0),
             child: InkWell(
               //onTap: () => Get.to(() => const ProfileScreen()),
-              onTap: () {},
+              onTap: () {
+                Get.to(() => const HIT6Screen());
+              },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: const [

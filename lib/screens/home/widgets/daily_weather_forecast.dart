@@ -17,7 +17,7 @@ class DailyWeatherForecastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.white70),
@@ -26,12 +26,15 @@ class DailyWeatherForecastWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text("Hourly Forecast",
+                Text("Daily Forecast",
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
                         ?.apply(fontSizeDelta: 3),
                     textAlign: TextAlign.left),
+                const SizedBox(
+                  height: 15,
+                )
               ],
             ),
             SizedBox(
@@ -45,31 +48,41 @@ class DailyWeatherForecastWidget extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        height: 60,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        height: 50,
+                        //padding: const EdgeInsets.only(top: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(getDay(dailyWeatherData.daily[index].dt!),
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                            SizedBox(
+                              width: 100,
+                              child: Text(
+                                  getDay(dailyWeatherData.daily[index + 1].dt!),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium
+                                      ?.apply(fontSizeDelta: -1)),
+                            ),
                             Row(
                               children: [
                                 Image.asset(
-                                    "assets/weather/${dailyWeatherData.daily[index].weather![0].icon}.png",
+                                    "assets/weather/${dailyWeatherData.daily[index + 1].weather![0].icon}.png",
                                     height: 30),
                                 Text(
-                                    "  ${dailyWeatherData.daily[index].weather![0].main}",
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge)
+                                    "  ${dailyWeatherData.daily[index + 1].weather![0].main}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.apply(fontSizeDelta: 2))
                               ],
                             ),
                             Text(
-                                "${dailyWeatherData.daily[index].temp!.max}°C/${dailyWeatherData.daily[index].temp!.min}°C"),
-                            const Divider(),
+                                "${dailyWeatherData.daily[index + 1].temp!.max}°C/${dailyWeatherData.daily[index + 1].temp!.min}°C"),
                           ],
                         ),
-                      )
+                      ),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
                     ],
                   );
                 }),

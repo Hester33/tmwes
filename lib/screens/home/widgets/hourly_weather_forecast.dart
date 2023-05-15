@@ -31,6 +31,7 @@ class HourlyWeatherForecastWidget extends StatelessWidget {
                         .headlineMedium
                         ?.apply(fontSizeDelta: 3),
                     textAlign: TextAlign.left),
+                SizedBox(height: 15)
               ],
             ),
             Container(
@@ -49,7 +50,7 @@ class HourlyWeatherForecastWidget extends StatelessWidget {
                         margin: EdgeInsets.only(right: 15),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: dividerLine.withAlpha(150),
+                          color: dividerLine.withAlpha(90),
                           // boxShadow: [
                           //   BoxShadow(
                           //       offset: const Offset(0.5, 0),

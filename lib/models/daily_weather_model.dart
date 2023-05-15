@@ -8,8 +8,7 @@ class DailyWeatherModel {
   factory DailyWeatherModel.fromJson(Map<String, dynamic> json) =>
       //return a (Map)current data from API
       DailyWeatherModel(
-          daily:
-              List<Daily>.from(json['hourly'].map((e) => Daily.fromJson(e))));
+          daily: List<Daily>.from(json['daily'].map((e) => Daily.fromJson(e))));
 }
 
 class Daily {

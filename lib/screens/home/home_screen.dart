@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.blueGrey.shade50,
         appBar: AppBar(
           title: const Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             child: Text.rich(
               TextSpan(
                 text: 'Hi, Hester!\n',
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
             //   style: TextStyle(color: Colors.black, fontSize: 18),
             // ),
           ),
-          elevation: 3,
+          elevation: 0,
           backgroundColor: Colors.transparent,
           actions: [
             // Row(
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
             //   ],
             // ),
             Container(
-              padding: EdgeInsets.only(top: 5, right: 15),
+              padding: EdgeInsets.only(top: 10, right: 15),
               child: Row(
                 children: [
                   IconButton(
@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
             //SingleChildScrollView(
             //child:
             Container(
-          padding: const EdgeInsets.fromLTRB(30, 5, 30, 30),
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
           child: ListView(
             //*column
             scrollDirection: Axis.vertical,
@@ -187,14 +187,18 @@ class HomeScreen extends StatelessWidget {
                             currentWeatherData: controller
                                 .getWeatherData()
                                 .getCurrentWeather()),
+                        const SizedBox(height: 20),
                         HealthRecommendationWidget(
                             currentWeatherData: controller
                                 .getWeatherData()
                                 .getCurrentWeather()),
+                        const SizedBox(height: 20),
                         const MigraineRiskWidget(),
+                        const SizedBox(height: 20),
                         HourlyWeatherForecastWidget(
                             hourlyWeatherData:
                                 controller.getWeatherData().getHourlyWeather()),
+                        const SizedBox(height: 20),
                         DailyWeatherForecastWidget(
                             dailyWeatherData:
                                 controller.getWeatherData().getDailyWeather()),
