@@ -5,6 +5,32 @@ class MigraineRiskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return
+    // FutureBuilder(
+    //       //the getUserData() function will store the data in future
+    //       future: controller.getUserData(),
+    //       builder: (context, snapshot) {
+    //         //if data is completely fetched
+    //         if (snapshot.connectionState == ConnectionState.done) {
+    //           if (snapshot.hasData) {
+    //             //map snapshot data to UserModel
+    //             UserModel userData = snapshot.data as UserModel;
+
+    //             //Controllers
+    //             final username = TextEditingController(text: userData.username);
+    //             final fullName = TextEditingController(text: userData.fullName);
+    //             // final dob = TextEditingController(
+    //             //         text: controller.formatDate(userData.dateOfBirth))
+    //             //     .obs; //!obs??
+    //             signUpController.dob.value.text =
+    //                 controller.formatDate(userData.dateOfBirth);
+    //             final email = TextEditingController(text: userData.email);
+    //             final phoneNo =
+    //                 TextEditingController(text: userData.phoneNumber);
+
+    //             var isPwdHidden = true.obs;
+    //             var isCPwdHidden = true.obs;
+
     return Container(
       height: 60,
       child: Column(
@@ -50,5 +76,7 @@ class MigraineRiskWidget extends StatelessWidget {
         ],
       ),
     );
+    //   }
+    // );
   }
 }
