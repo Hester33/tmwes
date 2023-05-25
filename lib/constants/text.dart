@@ -23,7 +23,7 @@ const List<String> thunderstorm = [
 
 const List<String> otherWeather = [
   "Get 7 to 8 hours of sleep each night.",
-  "ETake medication at the first sign of an oncoming headache.",
+  "Take medication at the first sign of an oncoming headache.",
   "Keep an eye on temperature and pressure forecast."
 ];
 
@@ -36,75 +36,6 @@ const List<String> otherWeather = [
 //Stay away from foods that cause migraines, like those that contain caffeine, monosodium glutamate (MSG) and nitrates
 
 //*----- HIT-6 questions -----*//
-final Oriquestions = [
-  {
-    'questionText':
-        'Q1. When you have headaches, how often is the pain severe?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-  {
-    'questionText':
-        'Q2. How often do headaches limit your ability to do usual daily activities including household work, work, school, or social activities?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-  {
-    'questionText':
-        'Q3. When you have a headache, how often do you wish you could lie down?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-  {
-    'questionText':
-        'Q4. In the past 4 weeks, how often have you felt too tired to do work or daily activities because of your headaches?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-  {
-    'questionText':
-        'Q5. In the past 4 weeks, how often have you felt fed up or irritated because of your headaches?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-  {
-    'questionText':
-        'Q6. In the past 4 weeks, how often did headaches limit your ability to concentrate on work or daily activities?',
-    'answers': [
-      {'text': 'Never', 'score': 6},
-      {'text': 'Rarely', 'score': 8},
-      {'text': 'Sometimes', 'score': 10},
-      {'text': 'Very Often', 'score': 11},
-      {'text': 'Always', 'score': 13},
-    ],
-  },
-];
-
 final finalQuestions = [
   'Q1. When you have headaches, how often is the pain severe?',
   'Q2. How often do headaches limit your ability to do usual daily activities including household work, work, school, or social activities?',
@@ -117,52 +48,58 @@ final finalQuestions = [
 final questions = [
   {
     'questionIndex': 0,
-    'questionText':
-        'Q1. When you have headaches, how often is the pain severe?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+    'questionText': 'When you have headaches, how often is the pain severe?',
   },
   {
     'questionIndex': 1,
     'questionText':
-        'Q2. How often do headaches limit your ability to do usual daily activities including household work, work, school, or social activities?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+        'How often do headaches limit your ability to do usual daily activities including household work, work, school, or social activities?',
   },
   {
     'questionIndex': 2,
     'questionText':
-        'Q3. When you have a headache, how often do you wish you could lie down?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+        'When you have a headache, how often do you wish you could lie down?',
   },
   {
     'questionIndex': 3,
     'questionText':
-        'Q4. In the past 4 weeks, how often have you felt too tired to do work or daily activities because of your headaches?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+        'In the past 4 weeks, how often have you felt too tired to do work or daily activities because of your headaches?',
   },
   {
     'questionIndex': 4,
     'questionText':
-        'Q5. In the past 4 weeks, how often have you felt fed up or irritated because of your headaches?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+        'In the past 4 weeks, how often have you felt fed up or irritated because of your headaches?',
   },
   {
     'questionIndex': 5,
     'questionText':
-        'Q6. In the past 4 weeks, how often did headaches limit your ability to concentrate on work or daily activities?',
-    'selectedAnswer': -1,
-    'selectedAnswerScore': 0,
+        'In the past 4 weeks, how often did headaches limit your ability to concentrate on work or daily activities?',
   },
 ];
 
 final answers = [
-  {'ansIndex': 0, 'selected': -1, 'text': 'Never', 'score': 6},
-  {'ansIndex': 1, 'selected': -1, 'text': 'Rarely', 'score': 8},
-  {'ansIndex': 2, 'selected': -1, 'text': 'Sometimes', 'score': 10},
-  {'ansIndex': 3, 'selected': -1, 'text': 'Very Often', 'score': 11},
-  {'ansIndex': 4, 'selected': -1, 'text': 'Always', 'score': 13},
+  {'ansIndex': 0, 'text': 'Never', 'score': 6},
+  {'ansIndex': 1, 'text': 'Rarely', 'score': 8},
+  {'ansIndex': 2, 'text': 'Sometimes', 'score': 10},
+  {'ansIndex': 3, 'text': 'Very Often', 'score': 11},
+  {'ansIndex': 4, 'text': 'Always', 'score': 13},
+];
+
+//*----- Migraine Precautions -----*//
+const List<String> severeMigraine = [
+  "Take your HIT-6 results to your doctor for treatment!",
+  "Follow your healthcare professional's instructions and take any prescribed medications.",
+  "Find a quiet and dark room to rest in to reduce external stimuli such as noise and light.",
+];
+
+const List<String> moderateMigraine = [
+  "Apply cold or hot packs to the head or neck to relief pain.",
+  "Maintain a consistent sleep routine to help regulate your body's natural rhythms.",
+  "Practice stress management techniques, such as relaxation exercises or meditation that help you unwind.",
+];
+
+const List<String> lowLvlMigraine = [
+  "Make sure to drink an adequate amount of water throughout the day.",
+  "Avoid or minimize exposure to any potential food and drink triggers.",
+  "Adopt a well-balanced diet, exercise regularly, and ensure you get sufficient sleep."
 ];
