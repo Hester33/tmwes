@@ -45,12 +45,23 @@ class UserDb extends GetxController {
     }
   }
 
+//!CHECKKKK
   //Fetch User from FireStore
   Future<UserModel> getUserDetails(String id) async {
     final snapshot = await firestore
         .collection(usersCollection)
         .where("id", isEqualTo: id)
-        .get();
+        .get()
+        .whenComplete(
+          () => print("User's data fetched succesfully!"),
+        )
+        .catchError((error, stackTrace) {
+      Get.snackbar("Error", "No Data",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+      return error;
+    });
     final userData =
         snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).single;
     return userData;
@@ -58,7 +69,15 @@ class UserDb extends GetxController {
 
   //Fetch ALl Users
   Future<List<UserModel>> allUser() async {
-    final snapshot = await firestore.collection(usersCollection).get();
+    final snapshot = await firestore
+        .collection(usersCollection)
+        .get()
+        .whenComplete(
+          () => print("User's data fetched succesfully!"),
+        )
+        .catchError((error, stackTrace) {
+      Get.snackbar("Error", "No Data");
+    });
     //store snapshot in usersData as a list
     final usersData =
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
