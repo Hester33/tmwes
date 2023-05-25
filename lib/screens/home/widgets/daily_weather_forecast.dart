@@ -30,7 +30,7 @@ class DailyWeatherForecastWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.apply(fontSizeDelta: 3),
+                        ?.apply(fontSizeDelta: 1),
                     textAlign: TextAlign.left),
                 const SizedBox(
                   height: 15,
@@ -60,7 +60,7 @@ class DailyWeatherForecastWidget extends StatelessWidget {
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium
-                                      ?.apply(fontSizeDelta: -1)),
+                                      ?.apply(fontSizeDelta: -2)),
                             ),
                             Row(
                               children: [
@@ -72,7 +72,7 @@ class DailyWeatherForecastWidget extends StatelessWidget {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyLarge
-                                        ?.apply(fontSizeDelta: 2))
+                                        ?.apply(fontSizeDelta: 1))
                               ],
                             ),
                             Text(

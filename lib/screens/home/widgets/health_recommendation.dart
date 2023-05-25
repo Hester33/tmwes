@@ -39,7 +39,7 @@ class HealthRecommendationWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.apply(color: Colors.white, fontSizeDelta: 3),
+                        ?.apply(color: Colors.white, fontSizeDelta: 1),
                   ),
                 )),
             //Text("data"),
@@ -51,15 +51,16 @@ class HealthRecommendationWidget extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         text: "${currentWeatherData.current.weather![0].main} ",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.apply(fontSizeDelta: 2),
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        // ?.apply(fontSizeDelta: 2),
                         children: [
                           TextSpan(
                             text:
                                 "(${currentWeatherData.current.weather![0].description})",
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.apply(fontSizeDelta: -1),
                           )
                         ],
                       ),
@@ -88,13 +89,10 @@ class HealthRecommendationWidget extends StatelessWidget {
                               SizedBox(
                                   width: 10), //space between bullet and text
                               Expanded(
-                                child: Text(
-                                  recommendationText,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.apply(fontSizeDelta: 2),
-                                ), //text
+                                child: Text(recommendationText,
+                                    style: Theme.of(context).textTheme.bodyLarge
+                                    //?.apply(fontSizeDelta: 2),
+                                    ), //text
                               )
                             ]);
                       }).toList(),

@@ -29,7 +29,7 @@ class HourlyWeatherForecastWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.apply(fontSizeDelta: 3),
+                        ?.apply(fontSizeDelta: 1),
                     textAlign: TextAlign.left),
                 SizedBox(height: 15)
               ],
@@ -141,21 +141,21 @@ class HourlyDetails extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(humidityImg, width: 20, height: 20),
+                  Image.asset(humidityImg, width: 18, height: 18),
                   Text(" $humidity%",
                       style: Theme.of(context).textTheme.bodyLarge)
                 ],
               ),
               Row(
                 children: [
-                  Image.asset(windImg, width: 20, height: 20),
+                  Image.asset(windImg, width: 18, height: 18),
                   Text(" ${windSpeed}m/s",
                       style: Theme.of(context).textTheme.bodyLarge)
                 ],
               ),
               Row(
                 children: [
-                  Image.asset(pressureImg, width: 20, height: 20),
+                  Image.asset(pressureImg, width: 18, height: 18),
                   Text("${pressure}hPa",
                       style: Theme.of(context).textTheme.bodyLarge)
                 ],
