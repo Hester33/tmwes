@@ -36,13 +36,10 @@ class CurrentWeatherWidget extends StatelessWidget {
                   Image.asset(
                     "assets/weather/${currentWeatherData.current.weather![0].icon}.png",
                   ),
-                  Text(
-                    "${currentWeatherData.current.temp!.toInt()}°C",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge
-                        ?.apply(fontSizeDelta: 3),
-                  ),
+                  Text("${currentWeatherData.current.temp!.toInt()}°C",
+                      style: Theme.of(context).textTheme.displayLarge
+                      //?.apply(fontSizeDelta: 3),
+                      ),
                   Obx(
                     () => Text(controller.city.value.toString(),
                         textAlign: TextAlign.center,
@@ -87,7 +84,10 @@ class CurrentWeatherWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10), color: primaryColor),
               child: const Text(
                 'TODAY',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
