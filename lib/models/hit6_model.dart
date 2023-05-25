@@ -6,19 +6,23 @@ class HIT6Model {
   final int score;
   final DateTime recordDate;
   final List<int>? selectedAns;
+  final String? weather;
 
+//! Add weather variables
   HIT6Model(
       {this.userId,
       required this.score,
       required this.recordDate,
-      this.selectedAns});
+      this.selectedAns,
+      this.weather});
 
   Map<String, dynamic> toJson() {
     return {
-      "userId": userId,
+      "uid": userId,
       "score": score,
       "record_date": recordDate,
       "selected_ans": selectedAns,
+      "weather": weather,
     };
   }
 
@@ -28,17 +32,17 @@ class HIT6Model {
   //           .toList(),
   factory HIT6Model.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     //Map<String,dynamic>
-    //String=key name, dynamic=value
+    //String=key_name, dynamic=value
     final data = doc.data();
     Timestamp rDate = data!["record_date"] as Timestamp;
-    Timestamp dj = data["date_joined"] as Timestamp;
     return HIT6Model(
-      userId: data["userId"],
-      score: data["username"],
+      userId: data["uid"],
+      score: data["score"],
       recordDate: rDate.toDate(),
       selectedAns: data["selected_ans"] is Iterable
           ? List.from(data['selected_ans'])
           : null,
+      weather: data["weather"],
     );
   }
 }
