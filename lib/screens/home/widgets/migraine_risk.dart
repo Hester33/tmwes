@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tmwes/constants/shared_functions.dart';
+import 'package:tmwes/controllers/home_controller.dart';
 
 class MigraineRiskWidget extends StatelessWidget {
   const MigraineRiskWidget({super.key});
 
+  //!reference
+  // if (snapshot.hasError) {
+  //         return const Text('Something went wrong');
+  //       }
+
+  //       if (snapshot.connectionState == ConnectionState.waiting) {
+  //         return const Text("Loading");
+  //       }
+
   @override
   Widget build(BuildContext context) {
+    final controller = HomeController.instance;
     // return
     // FutureBuilder(
     //       //the getUserData() function will store the data in future
@@ -44,14 +57,29 @@ class MigraineRiskWidget extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   fit: FlexFit.tight,
-                  child: Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red,
+                  child: Obx(
+                    () => Container(
+                      //height: 30,
+                      padding: const EdgeInsets.all(4),
+
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: migraineRiskColour(controller.pScore.value),
+                      ),
+                      child: Column(
+                        children: [
+                          const Text("Previous Migraine Risk: ",
+                              textAlign: TextAlign.center),
+                          //!pass the function here
+                          Text(
+                            calcMigraineRisk(controller.pScore.value),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: const Text("Previous Migraine Risk: ",
-                        textAlign: TextAlign.center),
                   ),
                 ),
                 const SizedBox(
@@ -60,16 +88,38 @@ class MigraineRiskWidget extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   fit: FlexFit.tight,
-                  child: Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red,
+                  child: Obx(
+                    () => Container(
+                      padding: EdgeInsets.all(4),
+                      //height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: migraineRiskColour(controller.cScore.value),
+                      ),
+                      child: Column(
+                        children: [
+                          const Text("Current Migraine Risk: ",
+                              textAlign: TextAlign.center),
+                          Text(
+                            calcMigraineRisk(controller.cScore.value),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: const Text("Current Migraine Risk: ",
-                        textAlign: TextAlign.center),
                   ),
-                )
+                ),
+                // Flexible(
+                //   flex: 1,
+                //   fit: FlexFit.tight,
+                //   child: ElevatedButton(
+                //     onPressed: () => controller.migraineRiskData(),
+                //     child: const Text("Migraine Risk: ",
+                //         textAlign: TextAlign.center),
+                //   ),
+                // ),
               ],
             ),
           ),
