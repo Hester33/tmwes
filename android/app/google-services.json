@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "518803896548",
-    "project_id": "tmwes-73322",
-    "storage_bucket": "tmwes-73322.appspot.com"
+    "project_number": "865493893983",
+    "project_id": "tmwes-8e86f",
+    "storage_bucket": "tmwes-8e86f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:518803896548:android:d7d350d12ac7b0dcfb14f1",
+        "mobilesdk_app_id": "1:865493893983:android:d4e2d385dd7927678aecea",
         "android_client_info": {
           "package_name": "com.hester.tmwes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "518803896548-aij2bafrhg6r4l913qnqmq6q4hg5sod1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hester.tmwes",
-            "certificate_hash": "78f868115c35c9acc9c43b75bc8e427e8faf66b5"
-          }
-        },
-        {
-          "client_id": "518803896548-i50395kn8a2k999klfnfapedj4vau5hr.apps.googleusercontent.com",
+          "client_id": "865493893983-8cuqt445g19t42oqn6u3sujh6ckda4pr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCgqIyv4ycG6DCezOlc-VmsTwM0TydvpNU"
+          "current_key": "AIzaSyBfye4xMrac984lGkZmrikQQlGSiVuvFqY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "518803896548-i50395kn8a2k999klfnfapedj4vau5hr.apps.googleusercontent.com",
+              "client_id": "865493893983-8cuqt445g19t42oqn6u3sujh6ckda4pr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
