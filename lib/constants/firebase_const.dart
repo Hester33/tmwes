@@ -7,5 +7,10 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 // User? currentUser = auth.currentUser;
 //Rx<User?> currentUser = Rx<User?>(auth.currentUser);
 
+//add you country utc here
+//UTC+8
+const Duration utc = Duration(hours: 8);
+
 //*collection
 const usersCollection = "users";
+const hit6Collection = "hit6";
