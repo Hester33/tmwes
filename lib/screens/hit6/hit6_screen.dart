@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/controllers/hit6_controller.dart';
-import 'package:tmwes/screens/hit6/result_screen.dart';
+import 'package:tmwes/screens/hit6/hit6_result_screen.dart';
 
 class HIT6Screen extends StatelessWidget {
   const HIT6Screen({Key? key}) : super(key: key);
@@ -17,7 +17,6 @@ class HIT6Screen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HIT-6'),
-        //! add submit btn
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
@@ -27,15 +26,16 @@ class HIT6Screen extends StatelessWidget {
               final question = questions[index]['questionText'].toString();
 
               return Container(
-                  margin: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(20),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 20),
                         Text(
                           'Question ${index + 1}: $question',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 20),
                         Center(
                           child: Wrap(
                             spacing: 15,
@@ -55,7 +55,7 @@ class HIT6Screen extends StatelessWidget {
                                                   .isSelected(
                                                       index, answerIndex)
                                               ? primaryColor.withOpacity(0.8)
-                                              : Colors.blue.shade200,
+                                              : Colors.blue.shade100,
                                         ),
                                         onPressed: () {
                                           //!test
@@ -77,7 +77,9 @@ class HIT6Screen extends StatelessWidget {
                                             ? Text(answerText,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyLarge)
+                                                    .bodyLarge
+                                                    ?.apply(
+                                                        color: Colors.white))
                                             : Text(answerText,
                                                 style: Theme.of(context)
                                                     .textTheme
@@ -93,14 +95,22 @@ class HIT6Screen extends StatelessWidget {
                               ? Column(
                                   children: [
                                     const SizedBox(height: 20),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        int score =
-                                            controller.calculateScore(answers);
-                                        //!check score
-                                        print('Score: $score');
-                                      },
-                                      child: const Text("Submit"),
+                                    SizedBox(
+                                      width: 130,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          int score = controller
+                                              .calculateScore(answers);
+                                          //!check score
+                                          print('Score: $score');
+                                          controller.storeRecord();
+                                          Get.off(() => ResultScreen(
+                                              score, controller.resetTest));
+                                        },
+                                        child: const Text("Submit",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                      ),
                                     ),
                                   ],
                                 )
