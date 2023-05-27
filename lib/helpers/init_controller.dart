@@ -3,6 +3,7 @@ import 'package:tmwes/controllers/hit6_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/controllers/login_controller.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
+import 'package:tmwes/controllers/record_migraine_controller.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
 import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/services/hit6_db.dart';
@@ -22,6 +23,8 @@ class ControllerBindings extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<HIT6Db>(() => HIT6Db(), fenix: true);
     Get.lazyPut<HIT6Controller>(() => HIT6Controller(), fenix: true);
+    Get.lazyPut<RecordMigraineController>(() => RecordMigraineController(),
+        fenix: true);
   }
 }
 
