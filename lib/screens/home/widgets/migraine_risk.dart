@@ -44,7 +44,7 @@ class MigraineRiskWidget extends StatelessWidget {
     //             var isPwdHidden = true.obs;
     //             var isCPwdHidden = true.obs;
 
-    return Container(
+    return SizedBox(
       height: 60,
       child: Column(
         children: [
