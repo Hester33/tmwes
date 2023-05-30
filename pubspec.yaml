@@ -53,6 +53,9 @@ dependencies:
 
   ##--- Make request to API ---##
   http: ^0.13.6
+
+  ##--- Flutter Calendar ---##
+  table_calendar: ^3.0.9
   
 
 dev_dependencies:
