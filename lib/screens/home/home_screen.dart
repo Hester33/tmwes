@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
-import 'package:tmwes/controllers/calendar_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/screens/home/widgets/daily_weather_forecast.dart';
 import 'package:tmwes/screens/home/widgets/health_recommendation.dart';
 import 'package:tmwes/screens/home/widgets/hourly_weather_forecast.dart';
 import 'package:tmwes/screens/home/widgets/migraine_risk.dart';
-import 'package:tmwes/screens/recordMigraine/record_migraine_screen.dart';
 import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/widgets/bottom_app_bar.dart';
 
@@ -20,8 +18,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = HomeController.instance;
-    final calendarController = CalendarController.instance;
+    final controller = Get.put(HomeController());
     User? user = auth.currentUser;
     var isHover = false.obs;
     return SafeArea(
@@ -147,12 +144,7 @@ class HomeScreen extends StatelessWidget {
                           color: primaryColor,
                           iconSize: 30,
                           onPressed: () {
-                            Get.to(() => RecordMigraineScreen(
-                                firstDate: calendarController.firstDay.value,
-                                lastDate: calendarController.lastDay.value,
-                                selectedDate:
-                                    calendarController.selectedDay.value));
-                            //AuthenticationDb.instance.logout();
+                            AuthenticationDb.instance.logout();
                           },
                           icon: const Icon(Icons.calendar_month_outlined)),
                       IconButton(
@@ -231,12 +223,7 @@ class HomeScreen extends StatelessWidget {
         extendBody: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.to(() => RecordMigraineScreen(
-                firstDate: calendarController.firstDay.value,
-                lastDate: calendarController.lastDay.value,
-                selectedDate: calendarController.selectedDay.value));
-          },
+          onPressed: () {},
           backgroundColor: primaryColor,
           foregroundColor: Colors.white,
           elevation: 0,

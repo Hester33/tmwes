@@ -16,12 +16,7 @@ class HIT6Screen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('HIT-6',
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall
-                ?.apply(color: Colors.white)),
-        centerTitle: true,
+        title: const Text('HIT-6'),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
@@ -37,7 +32,7 @@ class HIT6Screen extends StatelessWidget {
                       children: [
                         const SizedBox(height: 20),
                         Text(
-                          'Question ${index + 1}:\n$question',
+                          'Question ${index + 1}: $question',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: 20),
@@ -54,7 +49,7 @@ class HIT6Screen extends StatelessWidget {
                               return SizedBox(
                                   width: 250,
                                   child: Obx(() => ElevatedButton(
-                                        //change style for pressed button
+                                        //!change style (for pressed button)
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: controller
                                                   .isSelected(
@@ -72,7 +67,7 @@ class HIT6Screen extends StatelessWidget {
                                           //     !controller.selectedAns.value;
                                           controller.answerQuestion(
                                               score,
-                                              index,
+                                              index, //!test
                                               questions,
                                               answers,
                                               answer['ansIndex']);
