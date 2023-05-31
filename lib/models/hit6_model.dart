@@ -5,16 +5,16 @@ class HIT6Model {
   final String? userId;
   final int score;
   final DateTime recordDate;
-  final List<int>? selectedAns;
-  final String? weather;
+  final List<int> selectedAns;
+  //final String? weather;
 
-//! Add weather variables
-  HIT6Model(
-      {this.userId,
-      required this.score,
-      required this.recordDate,
-      this.selectedAns,
-      this.weather});
+  HIT6Model({
+    this.userId,
+    required this.score,
+    required this.recordDate,
+    required this.selectedAns,
+    //this.weather
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -22,7 +22,7 @@ class HIT6Model {
       "score": score,
       "record_date": recordDate,
       "selected_ans": selectedAns,
-      "weather": weather,
+      //"weather": weather,
     };
   }
 
@@ -39,10 +39,11 @@ class HIT6Model {
       userId: data["uid"],
       score: data["score"],
       recordDate: rDate.toDate(),
-      selectedAns: data["selected_ans"] is Iterable
-          ? List.from(data['selected_ans'])
-          : null,
-      weather: data["weather"],
+      selectedAns: List.from(data['selected_ans']),
+      // data["selected_ans"] is Iterable
+      //     ? List.from(data['selected_ans'])
+      //     : null,
+      //weather: data["weather"],
     );
   }
 }
