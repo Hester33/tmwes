@@ -69,8 +69,6 @@ class SignUpForm extends StatelessWidget {
                     }
                     return null;
                   },
-                  //!not sure
-                  //keyboardType: TextInputType.number,
                   onTap: () {
                     //final DateTime date = controller.chooseDate() as DateTime;
                     controller.chooseDate();

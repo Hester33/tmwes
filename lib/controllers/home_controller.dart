@@ -142,7 +142,7 @@ class HomeController extends GetxController {
 
   Future<void> migraineRiskData() async {
     try {
-      List<HIT6Model> migraineRiskData = await _hit6Db.getAllHIT6Records();
+      List<HIT6Model> migraineRiskData = await _hit6Db.getMigraineRisk();
       // Perform logic on the migraineRiskData
       // Access individual HIT6Model objects and their properties
       //!reference
@@ -181,8 +181,6 @@ class HomeController extends GetxController {
         String? uid = model.userId;
         int score = model.score;
         DateTime recordDate = model.recordDate;
-        //?not sure
-        //recordDate = recordDate.add(utc);
         String formattedRecordDate =
             DateFormat("d MMM yyyy HH:mm:ss").format(recordDate);
 
