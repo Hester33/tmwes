@@ -7,7 +7,6 @@ import 'package:tmwes/models/user_model.dart';
 
 class UserDb extends GetxController {
   static UserDb get instance => Get.find();
-  late final Rx<User?> firebaseUser;
 
   //store user in FireStore
   Future<void> storeUser(String? uid, String username, String fullName,
@@ -88,9 +87,6 @@ class UserDb extends GetxController {
   //  currentUser.updateEmail(newEmail);
   Future<void> updateUserDetails(UserModel user) async {
     User? currentUser = auth.currentUser;
-    firebaseUser = Rx<User?>(auth.currentUser);
-    //update the username in firebase
-    firebaseUser.value!.updateDisplayName(user.username);
     await firestore
         .collection(usersCollection)
         .doc(user.id)

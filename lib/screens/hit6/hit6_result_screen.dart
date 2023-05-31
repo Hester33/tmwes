@@ -18,8 +18,7 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeController = HomeController.instance;
     final hit6Controller = HIT6Controller.instance;
-    //! check score
-    hit6Controller.getIndex(resultScore);
+    hit6Controller.getIndex();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -51,8 +50,7 @@ class ResultScreen extends StatelessWidget {
               SizedBox(
                 height: 260,
                 child: ListView.builder(
-                  //!check shadow
-                  physics: const BouncingScrollPhysics(),
+                  //!check
                   clipBehavior: Clip.none,
                   itemCount: hit6Controller.resultMessages.length,
                   itemBuilder: (context, index) {
@@ -63,8 +61,7 @@ class ResultScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(color: Colors.grey.shade200),
-                            //!check index
-                            color: index == hit6Controller.index.value
+                            color: index == hit6Controller.index
                                 ? migraineRiskColour(resultScore)
                                 : Colors.white,
                           ),
@@ -106,7 +103,7 @@ class ResultScreen extends StatelessWidget {
                   },
                 ),
               ),
-              MigrainePrecautionsWidget(score: hit6Controller.totalScore.value),
+              const MigrainePrecautionsWidget(),
               //!pass the function here
               SizedBox(
                 width: 130,
@@ -116,7 +113,7 @@ class ResultScreen extends StatelessWidget {
                     homeController.migraineRiskData();
                     print(
                         "result screen total s:${hit6Controller.totalScore.value}");
-                    Get.offAll(() => const HomeScreen());
+                    Get.off(() => const HomeScreen());
                   },
                   style: ElevatedButton.styleFrom(
                     //backgroundColor: Colors.green,

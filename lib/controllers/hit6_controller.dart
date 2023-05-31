@@ -15,7 +15,7 @@ class HIT6Controller extends GetxController {
   var questionIndex = 0.obs;
   var totalScore = 0.obs;
   var selectedAnswerIndices = <int>[].obs;
-  var index = 0.obs;
+  int index = 0;
 
   @override
   void onInit() {
@@ -33,6 +33,9 @@ class HIT6Controller extends GetxController {
     //!assign answer index to question
     selectedAnswerIndices[index] = answer as int;
     print('AnswerInC: $answer');
+    //!no need
+    // Update the selected answer for the current question
+    //questions[index]['selectedAnswerScore'] = score;
 
 //!check if the questions have save the answer
     print('questions Object: $questions');
@@ -56,10 +59,6 @@ class HIT6Controller extends GetxController {
 
   Future<List<HIT6Model>> getAllRecords() async {
     return await hit6Db.getAllHIT6Records();
-  }
-
-  getHit6Record(DateTime recordDate) async {
-    return await hit6Db.getHIT6Record(recordDate);
   }
 
   // int calculateScore(List<Map<String, dynamic>> questions, answers) {
@@ -89,6 +88,8 @@ class HIT6Controller extends GetxController {
       // Add the score of the selected answer to the total score
       totalScore.value += score;
     }
+    //   !checking total score
+    print('Total Score: $totalScore');
     return totalScore.value;
   }
 
@@ -99,12 +100,12 @@ class HIT6Controller extends GetxController {
   }
 
 //*-----HIT-6 Result-----*//
-  List<String> getMigrainePrecautions(int score) {
-    if (score >= 60) {
+  List<String> getMigrainePrecautions() {
+    if (totalScore.value >= 60) {
       return severeMigraine;
-    } else if (score > 55 && totalScore.value < 60) {
+    } else if (totalScore.value > 55 && totalScore.value < 60) {
       return severeMigraine;
-    } else if (score >= 50 && totalScore.value <= 55) {
+    } else if (totalScore.value >= 50 && totalScore.value <= 55) {
       return moderateMigraine;
     } else {
       //if (totalScore.value >= 36 && totalScore.value <= 49)
@@ -121,15 +122,14 @@ class HIT6Controller extends GetxController {
   ];
 
   // Get the result message based on the result score
-  void getIndex(score) {
+  void getIndex() {
     String resultText = '';
     for (int i = 0; i < resultMessages.length; i++) {
-      //! check score
-      if (score >= (resultMessages[i]['score'] as int)) {
-        index.value = i;
+      if (totalScore.value >= (resultMessages[i]['score'] as int)) {
+        index = i;
+        break;
       }
     }
-    //return index;
   }
 
   //*-----HIT-6 Record-----*//
@@ -144,17 +144,5 @@ class HIT6Controller extends GetxController {
     } else {
       return Colors.grey[200];
     }
-  }
-
-  getMigraineImpactMessage(int score) {
-    String message = 'No message found';
-
-    for (var result in resultMessages) {
-      if (score >= result['score']) {
-        message = result['message'];
-        break;
-      }
-    }
-    return message;
   }
 }
