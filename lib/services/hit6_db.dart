@@ -9,7 +9,7 @@ import 'package:tmwes/models/weather_model.dart';
 
 class HIT6Db extends GetxController {
   static HIT6Db get instance => Get.find();
-  final weatherData = WeatherModel().getCurrentWeather();
+  //final weatherData = WeatherModel().getCurrentWeather();
 
   //! Might add weather in to the model
   //store HIT-6 details in FireStore
@@ -23,7 +23,7 @@ class HIT6Db extends GetxController {
       recordDate: DateTime.now(),
       selectedAns: selectedAns,
       //record the current weather
-      weather: weatherData.current.weather![0].main,
+      //weather: weatherData.current.weather![0].main,
     );
     if (currentUser != null) {
       await firestore
@@ -43,6 +43,20 @@ class HIT6Db extends GetxController {
         print(error.toString());
       });
     }
+  }
+
+  //Fetch All HIT-6 records
+  Future<List<HIT6Model>> getAllHIT6Records() async {
+    User? currentUser = auth.currentUser;
+    final snapshot = await firestore
+        .collection(hit6Collection)
+        .where("uid", isEqualTo: currentUser?.uid)
+        .orderBy("record_date", descending: true)
+        .get();
+    //store snapshot in usersData as a list
+    final records =
+        snapshot.docs.map((e) => HIT6Model.fromSnapshot(e)).toList();
+    return records;
   }
 
   Future<List<HIT6Model>> getMigraineRisk() async {
@@ -70,20 +84,6 @@ class HIT6Db extends GetxController {
     final record =
         snapshot.docs.map((doc) => HIT6Model.fromSnapshot(doc)).single;
     return record;
-  }
-
-  //Fetch All HIT-6 records
-  Future<List<HIT6Model>> getAllHIT6Records() async {
-    User? currentUser = auth.currentUser;
-    final snapshot = await firestore
-        .collection(hit6Collection)
-        .where("uid", isEqualTo: currentUser?.uid)
-        .orderBy("record_date", descending: true)
-        .get();
-    //store snapshot in usersData as a list
-    final records =
-        snapshot.docs.map((e) => HIT6Model.fromSnapshot(e)).toList();
-    return records;
   }
 
   // //  currentUser.updateEmail(newEmail);
