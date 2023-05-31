@@ -7,47 +7,49 @@ import 'package:tmwes/controllers/home_controller.dart';
 
 class MigrainePrecautionsWidget extends StatelessWidget {
   //final CurrentWeatherModel currentWeatherData;
+  final int score;
 
-  const MigrainePrecautionsWidget({super.key});
+  const MigrainePrecautionsWidget({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
     final controller = HIT6Controller.instance;
-    final homeController = HomeController.instance;
-    String migraineRiskText = calcMigraineRisk(controller.totalScore.value);
+    String migraineRiskText = calcMigraineRisk(score);
     return Container(
       width: 400,
       //height: 200,
       //padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white70),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white70,
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+
       //alignment: Alignment.center,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
             Positioned(
-                top: -10,
-                left: 0,
-                right: 0,
-                child: Obx(
-                  () => Container(
-                    padding: const EdgeInsets.only(top: 7),
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 400,
-                    //!check colour
-                    decoration: BoxDecoration(
-                        color: migraineRiskColour(controller.totalScore.value)),
-                    child: Text(
-                      "$migraineRiskText Migraine Risk",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.apply(color: Colors.white, fontSizeDelta: 1),
-                    ),
-                  ),
-                )),
+              top: -10,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.only(top: 7),
+                alignment: Alignment.center,
+                height: 50,
+                width: 400,
+                //!check colour
+                decoration: BoxDecoration(color: migraineRiskColour(score)),
+                child: Text(
+                  "$migraineRiskText Migraine Risk",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.apply(color: Colors.white, fontSizeDelta: 1),
+                ),
+              ),
+            ),
             //Text("data"),
             Container(
                 padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
@@ -74,7 +76,7 @@ class MigrainePrecautionsWidget extends StatelessWidget {
                     Column(
                       //* map the health recommendation text based on the current weather
                       children: controller
-                          .getMigrainePrecautions()
+                          .getMigrainePrecautions(score)
                           .map((precautionText) {
                         return Row(
                             crossAxisAlignment: CrossAxisAlignment.start,

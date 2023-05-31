@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/constants/colors.dart';
+import 'package:tmwes/constants/shared_functions.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
-import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
 
@@ -53,8 +52,7 @@ class ProfileScreen extends StatelessWidget {
                               text: 'Date Joined: ',
                               children: [
                                 TextSpan(
-                                    text: controller
-                                        .formatDate(userData.dateJoined),
+                                    text: formatDate(userData.dateJoined),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ))
@@ -67,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                       return Center(child: Text(snapshot.error.toString()));
                     } else {
                       return const Center(
-                        child: Text('Somsthing went wrong'),
+                        child: Text('Something went wrong'),
                       );
                     }
                   } else {
@@ -98,8 +96,6 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
 
-              //! 1. Create change pwd button
-              //! 2. Once user click on it, snow snackbar/dialog box & wait for 1s then LOGOUT
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 10),
