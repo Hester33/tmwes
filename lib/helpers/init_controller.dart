@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tmwes/controllers/calendar_controller.dart';
 import 'package:tmwes/controllers/hit6_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/controllers/login_controller.dart';
@@ -25,6 +26,7 @@ class ControllerBindings extends Bindings {
     Get.lazyPut<HIT6Controller>(() => HIT6Controller(), fenix: true);
     Get.lazyPut<RecordMigraineController>(() => RecordMigraineController(),
         fenix: true);
+    Get.lazyPut<CalendarController>(() => CalendarController(), fenix: true);
   }
 }
 
