@@ -103,3 +103,35 @@ const List<String> lowLvlMigraine = [
   "Avoid or minimize exposure to any potential food and drink triggers.",
   "Adopt a well-balanced diet, exercise regularly, and ensure you get sufficient sleep."
 ];
+
+//*----- Record Migraine Text -----*//
+final painLvl = [
+  {'index': 0, 'text': 'Very Mild'},
+  {'index': 1, 'text': 'Tolerable'},
+  {'index': 2, 'text': 'Discomforting'},
+  {'index': 3, 'text': 'Distressing'},
+  {'index': 4, 'text': 'Very Distressing'},
+  {'index': 5, 'text': 'Painful'},
+  {'index': 6, 'text': 'Intense'},
+  {'index': 7, 'text': 'Very Intense'},
+  {'index': 8, 'text': 'Horrible'},
+  {'index': 9, 'text': 'Unbearable'},
+];
+
+List<Map<String, dynamic>> painPosition = [
+  {'index': 0, 'text': 'Left Side'},
+  {'index': 1, 'text': 'Right Side'},
+  {'index': 2, 'text': 'Both Side'},
+  {'index': 3, 'text': 'Forehead'},
+  {'index': 4, 'text': 'Back of Head'},
+  {'index': 5, 'text': 'Behind of eye'},
+  {'index': 6, 'text': 'Temples'},
+  {'index': 7, 'text': 'From Neck'},
+];
+
+List<Map<String, dynamic>> triggers = [
+  {'index': 0, 'text': 'Alcohol'},
+  {'index': 1, 'text': 'Caffeine'},
+  {'index': 2, 'text': 'Change in Weather'},
+  {'index': 3, 'text': 'Stress'},
+];
