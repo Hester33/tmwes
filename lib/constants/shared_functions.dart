@@ -1,4 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+//format the date
+String formatDate(DateTime? date) {
+  String formattedDate = DateFormat('d MMMM yyyy').format(date!);
+  return formattedDate;
+}
+
+String formatRecordDate(DateTime? date) {
+  String formattedDate = DateFormat('d/M/y').format(date!);
+  return formattedDate;
+}
 
 //calculate migraine risk based on HIT-6 scores
 String calcMigraineRisk(int value) {
@@ -16,7 +28,9 @@ String calcMigraineRisk(int value) {
 }
 
 migraineRiskColour(int value) {
-  if (value > 55) {
+  if (value > 59) {
+    return Colors.red;
+  } else if (value > 55 && value < 60) {
     return Colors.redAccent;
   } else if (value >= 50 && value <= 55) {
     return Colors.orangeAccent;

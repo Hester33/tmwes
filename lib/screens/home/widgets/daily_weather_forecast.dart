@@ -40,6 +40,8 @@ class DailyWeatherForecastWidget extends StatelessWidget {
             SizedBox(
               height: 300,
               child: ListView.builder(
+                //! check the scroll behaviour
+                shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: dailyWeatherData.daily.length > 7
                     ? 7
