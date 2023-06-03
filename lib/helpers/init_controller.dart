@@ -8,6 +8,7 @@ import 'package:tmwes/controllers/record_migraine_controller.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
 import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/services/hit6_db.dart';
+import 'package:tmwes/services/record_migraine_db.dart';
 import 'package:tmwes/services/user_db.dart';
 import 'package:tmwes/widgets/animation/controller_fade_in_aniamtion.dart';
 
@@ -27,6 +28,7 @@ class ControllerBindings extends Bindings {
     Get.lazyPut<RecordMigraineController>(() => RecordMigraineController(),
         fenix: true);
     Get.lazyPut<CalendarController>(() => CalendarController(), fenix: true);
+    Get.lazyPut<RecordMigraineDb>(() => RecordMigraineDb(), fenix: true);
   }
 }
 
