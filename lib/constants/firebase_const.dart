@@ -14,3 +14,4 @@ const Duration utc = Duration(hours: 8);
 //*collection
 const usersCollection = "users";
 const hit6Collection = "hit6";
+const migraineRecordCollection = "records";
