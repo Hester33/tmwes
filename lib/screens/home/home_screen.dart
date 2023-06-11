@@ -5,6 +5,7 @@ import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/controllers/calendar_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
+import 'package:tmwes/screens/calendar/calendar_screen.dart';
 import 'package:tmwes/screens/home/widgets/daily_weather_forecast.dart';
 import 'package:tmwes/screens/home/widgets/health_recommendation.dart';
 import 'package:tmwes/screens/home/widgets/hourly_weather_forecast.dart';
@@ -147,12 +148,14 @@ class HomeScreen extends StatelessWidget {
                           color: primaryColor,
                           iconSize: 30,
                           onPressed: () {
-                            Get.to(() => RecordMigraineScreen(
-                                firstDate: calendarController.firstDay.value,
-                                lastDate: calendarController.lastDay.value,
-                                selectedDate:
-                                    calendarController.selectedDay.value));
+                            // Get.to(() => RecordMigraineScreen(
+                            //   currentWeatherData: ,
+                            //     firstDate: calendarController.firstDay.value,
+                            //     lastDate: calendarController.lastDay.value,
+                            //     selectedDate:
+                            //         calendarController.selectedDay.value));
                             //AuthenticationDb.instance.logout();
+                            Get.to(() => const CalendarScreen());
                           },
                           icon: const Icon(Icons.calendar_month_outlined)),
                       IconButton(
@@ -233,8 +236,8 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Get.to(() => RecordMigraineScreen(
-                firstDate: calendarController.firstDay.value,
-                lastDate: calendarController.lastDay.value,
+                currentWeatherData:
+                    controller.getWeatherData().getCurrentWeather(),
                 selectedDate: calendarController.selectedDay.value));
           },
           backgroundColor: primaryColor,
