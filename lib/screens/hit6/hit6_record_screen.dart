@@ -89,7 +89,7 @@ class HIT6RecordScreen extends StatelessWidget {
                   return Center(child: Text(snapshot.error.toString()));
                 } else {
                   return const Center(
-                    child: Text('Somsthing went wrong'),
+                    child: Text('Something went wrong'),
                   );
                 }
               } else {

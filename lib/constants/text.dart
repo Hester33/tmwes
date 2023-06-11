@@ -136,7 +136,7 @@ List<Map<String, dynamic>> triggers = [
   {'index': 3, 'text': 'Stress'},
 ];
 
-List<Map<String, dynamic>> medicine = [
+List<Map<String, dynamic>> medicines = [
   {'index': 0, 'text': 'Advil'},
   {'index': 1, 'text': 'Aspirin'},
   {'index': 2, 'text': 'Ibuprofen'},
