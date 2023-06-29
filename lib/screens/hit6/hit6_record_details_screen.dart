@@ -93,16 +93,18 @@ class HIT6RecordDetailsScreen extends StatelessWidget {
                                                   const SizedBox(width: 10),
                                                   SizedBox(
                                                     width: 80,
-                                                    child: Text(
-                                                      "${controller.resultMessages[controller.index.value]['scoreRange']}",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineMedium
-                                                          ?.apply(
-                                                              color:
-                                                                  primaryColor),
-                                                      textAlign:
-                                                          TextAlign.center,
+                                                    child: Obx(
+                                                      () => Text(
+                                                        "${controller.resultMessages[controller.index.value]['scoreRange']}",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineMedium
+                                                            ?.apply(
+                                                                color:
+                                                                    primaryColor),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
                                                     ),
                                                   ),
                                                   const SizedBox(width: 20),

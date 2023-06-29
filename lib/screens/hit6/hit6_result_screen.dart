@@ -120,7 +120,7 @@ class ResultScreen extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     //backgroundColor: Colors.green,
-                    padding: const EdgeInsets.all(14),
+                    padding: const EdgeInsets.all(13),
                   ),
                   child: const Text(
                     'Confirm',
