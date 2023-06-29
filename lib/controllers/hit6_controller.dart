@@ -117,7 +117,7 @@ class HIT6Controller extends GetxController {
     {'score': 59, 'scoreRange': "60 - 78", 'message': 'Severe impact'},
     {'score': 55, 'scoreRange': "56 - 59", 'message': 'Substantial impact'},
     {'score': 49, 'scoreRange': "50 - 55", 'message': 'Some impact'},
-    {'score': 0, 'scoreRange': "0 - 49", 'message': 'Litle or no impact'},
+    {'score': 0, 'scoreRange': "0 - 49", 'message': 'Little or no impact'},
   ];
 
   // Get the result message based on the result score
@@ -127,6 +127,7 @@ class HIT6Controller extends GetxController {
       //! check score
       if (score >= (resultMessages[i]['score'] as int)) {
         index.value = i;
+        return;
       }
     }
     //return index;
