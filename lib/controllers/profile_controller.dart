@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tmwes/screens/report/report_screen.dart';
 import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/services/user_db.dart';
 import 'package:tmwes/screens/profile/profile_screen.dart';
@@ -13,7 +14,7 @@ class ProfileController extends GetxController {
 
   final _authDb = AuthenticationDb.instance;
   final _userDb = UserDb.instance;
-
+  int timeRange = 0;
   // final _authDb = Get.put(AuthenticationDb());
   //final _userDb = Get.put(UserDb());
 
@@ -58,7 +59,7 @@ class ProfileController extends GetxController {
     return Get.defaultDialog(
       title: "Are you sure want to logout?",
       middleText: "",
-      titlePadding: EdgeInsets.only(top: 20),
+      titlePadding: const EdgeInsets.only(top: 20),
       //titleStyle: const TextStyle(color: Colors.green),
       //middleTextStyle: const TextStyle(color: Colors.blueGrey),
       textConfirm: "Yes",
@@ -67,6 +68,50 @@ class ProfileController extends GetxController {
       textCancel: "No",
       onCancel: () => Get.to(() => const ProfileScreen()),
       barrierDismissible: false,
+    );
+  }
+
+  Future<dynamic> reportTimeRangeDialog() {
+    return Get.defaultDialog(
+      titlePadding: const EdgeInsets.only(top: 10),
+      title: "Time Period",
+      content: Column(children: [
+        const SizedBox(height: 10),
+        SizedBox(
+          width: 90,
+          child: ElevatedButton(
+            onPressed: () {
+              timeRange = 1;
+              Get.off(() => Report(timeRange: timeRange));
+            },
+            child: const Text("1 month"),
+          ),
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          width: 90,
+          child: ElevatedButton(
+            onPressed: () {
+              timeRange = 2;
+              Get.off(() => Report(timeRange: timeRange));
+            },
+            child: const Text("2 months"),
+          ),
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          width: 90,
+          child: ElevatedButton(
+            onPressed: () {
+              timeRange = 3;
+              Get.off(() => Report(timeRange: timeRange));
+            },
+            child: const Text("3 months"),
+          ),
+        ),
+      ]),
+      middleTextStyle: const TextStyle(color: Colors.blueGrey),
+      //barrierDismissible: false,
     );
   }
 }
