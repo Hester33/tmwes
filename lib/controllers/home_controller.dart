@@ -3,12 +3,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import 'package:tmwes/api/fetch_weather.dart';
-import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/constants/text.dart';
-import 'package:tmwes/models/current_weather_model.dart';
 import 'package:tmwes/models/hit6_model.dart';
 import 'package:tmwes/models/weather_model.dart';
 import 'package:tmwes/services/hit6_db.dart';
@@ -113,7 +110,7 @@ class HomeController extends GetxController {
     return Get.defaultDialog(
       title: "Update location?",
       middleText: "",
-      titlePadding: EdgeInsets.only(top: 20),
+      titlePadding: const EdgeInsets.only(top: 20),
       textConfirm: "Yes",
       confirmTextColor: Colors.white,
       onConfirm: () {
