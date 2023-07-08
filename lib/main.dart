@@ -4,12 +4,8 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/services/authentication_db.dart';
-import 'package:tmwes/services/user_db.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:tmwes/screens/home/home_screen.dart';
-import 'package:tmwes/screens/splashScreen/splash_screen.dart';
 import 'package:tmwes/utils/theme/theme.dart';
 
 import 'helpers/init_controller.dart';
