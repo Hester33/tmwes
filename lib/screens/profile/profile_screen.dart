@@ -4,6 +4,7 @@ import 'package:tmwes/constants/shared_functions.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
+import 'package:tmwes/screens/report/report_screen.dart';
 
 import '../../constants/image.dart';
 import 'widgets/menu.dart';
@@ -16,11 +17,14 @@ class ProfileScreen extends StatelessWidget {
     final controller = ProfileController.instance;
     return Scaffold(
       appBar: AppBar(
-          //   title: Text('Profile', style: TextStyle(fontSize: 26)),
-          //   // actions: [
-          //   //   IconButton(onPressed: () {}, icon: icon)
-          //   // ],
-          ),
+        leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(Icons.arrow_back_ios_new)),
+        //   title: Text('Profile', style: TextStyle(fontSize: 26)),
+        //   // actions: [
+        //   //   IconButton(onPressed: () {}, icon: icon)
+        //   // ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(30),
@@ -116,9 +120,12 @@ class ProfileScreen extends StatelessWidget {
               const Divider(color: Colors.grey),
               const SizedBox(height: 10),
               MenuWidget(
-                  title: "FAQ",
+                  title: "Report",
                   icon: Icons.chat_bubble_outline_outlined,
-                  onPress: () {}),
+                  onPress: () {
+                    //Get.to(() => const Report());
+                    controller.reportTimeRangeDialog();
+                  }),
               MenuWidget(
                   title: "Logout",
                   icon: Icons.logout,

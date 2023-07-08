@@ -47,7 +47,7 @@ class DailyWeatherForecastWidget extends StatelessWidget {
                 itemBuilder: ((context, index) {
                   return Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 50,
                         //padding: const EdgeInsets.only(top: 20),
                         child: Row(
