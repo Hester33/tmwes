@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/models/hit6_model.dart';
-import 'package:tmwes/models/weather_model.dart';
 import 'package:tmwes/services/hit6_db.dart';
 
 import '../constants/text.dart';

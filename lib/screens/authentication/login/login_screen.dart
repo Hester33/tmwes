@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/constants/image.dart';
-import 'package:tmwes/screens/authentication/login/widgets/forget_password.dart';
 import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
 
 import '../../../services/authentication_db.dart';
@@ -15,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //! final _authDb = Get.put(AuthenticationDb());
-    AuthenticationDb _authDb = Get.find();
+    AuthenticationDb authDb = Get.find();
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

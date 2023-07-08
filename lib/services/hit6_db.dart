@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/models/hit6_model.dart';
-import 'package:tmwes/models/weather_model.dart';
 
 class HIT6Db extends GetxController {
   static HIT6Db get instance => Get.find();
@@ -36,7 +35,7 @@ class HIT6Db extends GetxController {
                 colorText: Colors.green.shade800),
           )
           .catchError((error, stackTrace) {
-        Get.snackbar("Error", "${error.toString()}",
+        Get.snackbar("Error", error.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.2),
             colorText: Colors.red);

@@ -228,7 +228,7 @@ class RecordMigraineController extends GetxController {
     return Get.defaultDialog(
       title: "Are you sure want to delete?",
       middleText: "",
-      titlePadding: EdgeInsets.only(top: 20),
+      titlePadding: const EdgeInsets.only(top: 20),
       textConfirm: "Yes",
       confirmTextColor: Colors.white,
       onConfirm: () {

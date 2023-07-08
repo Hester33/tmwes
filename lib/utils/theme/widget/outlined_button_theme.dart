@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
 
 class TOutlinedButtonTheme {
   TOutlinedButtonTheme._(); //*To avoid creating instances

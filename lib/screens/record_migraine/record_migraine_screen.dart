@@ -207,7 +207,7 @@ class RecordMigraineScreen extends StatelessWidget {
                 final pPosition = painPosition[index];
                 return Obx(
                   () => Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade200),
                         borderRadius: BorderRadius.circular(20),
@@ -373,7 +373,7 @@ class RecordMigraineScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                 ),
-                child: Text('Submit')),
+                child: const Text('Submit')),
           ]),
         ),
       ),

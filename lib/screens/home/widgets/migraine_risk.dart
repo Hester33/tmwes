@@ -90,7 +90,7 @@ class MigraineRiskWidget extends StatelessWidget {
                   fit: FlexFit.tight,
                   child: Obx(
                     () => Container(
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       //height: 30,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),

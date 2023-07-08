@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
 import 'package:tmwes/models/user_model.dart';
-import 'package:tmwes/screens/profile/profile_screen.dart';
 
 import '../../constants/image.dart';
 
@@ -15,7 +14,7 @@ class EditProfileScreen extends StatelessWidget {
     // final controller = Get.put(ProfileController());
     final signUpController = SignUpController.instance;
     final controller = ProfileController.instance;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -63,7 +62,7 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 30),
                     Form(
-                        key: _formKey,
+                        key: formKey,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -181,7 +180,7 @@ class EditProfileScreen extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     //if (_formKey.currentState!.validate() && isAgree==true) {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (formKey.currentState!.validate()) {
                                       final userDetails = UserModel(
                                           id: userData.id,
                                           username: username.text.trim(),

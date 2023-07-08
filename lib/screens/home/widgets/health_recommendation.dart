@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tmwes/constants/colors.dart';
-import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/models/current_weather_model.dart';
 
@@ -33,7 +32,7 @@ class HealthRecommendationWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   height: 50,
                   width: 400,
-                  decoration: BoxDecoration(color: primaryColor),
+                  decoration: const BoxDecoration(color: primaryColor),
                   child: Text(
                     "Health Recommendation",
                     style: Theme.of(context)
@@ -44,7 +43,7 @@ class HealthRecommendationWidget extends StatelessWidget {
                 )),
             //Text("data"),
             Container(
-                padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -86,7 +85,7 @@ class HealthRecommendationWidget extends StatelessWidget {
                                 "\u2022",
                                 style: TextStyle(fontSize: 16),
                               ), //bullet text
-                              SizedBox(
+                              const SizedBox(
                                   width: 10), //space between bullet and text
                               Expanded(
                                 child: Text(recommendationText,

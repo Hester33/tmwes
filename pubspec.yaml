@@ -57,6 +57,10 @@ dependencies:
   ##--- Flutter Calendar ---##
   table_calendar: ^3.0.9
   collection: ^1.17.0
+
+  ##--- Make Report ---##
+  pdf: ^3.10.4
+  printing: ^5.11.0
   
 
 dev_dependencies:

@@ -7,13 +7,10 @@ import 'package:tmwes/screens/profile/profile_screen.dart';
 
 import '../constants/colors.dart';
 
-class bottomAppBarWidget extends StatelessWidget {
-  const bottomAppBarWidget({
+class BottomAppBarWidget extends StatelessWidget {
+  const BottomAppBarWidget({
     super.key,
-    required this.isHover,
   });
-
-  final RxBool isHover;
 
   @override
   Widget build(BuildContext context) {
@@ -30,24 +27,20 @@ class bottomAppBarWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10.0),
             child: InkWell(
               onTap: () async {
-                isHover.value = true;
-                print(isHover.value);
-                await Get.to(() => const HomeScreen())
-                    ?.then((value) => isHover.value = false);
+                await Get.to(() => const HomeScreen());
               },
               child: Obx(
-                () => Column(
+                () => const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.home,
-                      //!test
-                      color: isHover.value ? Colors.amber : Colors.white,
+                      color: Colors.white,
                     ),
                     Text(
                       "Home",
                       style: TextStyle(
-                        color: isHover.value ? Colors.amber : Colors.white,
+                        color: Colors.white,
                       ),
                     )
                   ],
@@ -59,13 +52,12 @@ class bottomAppBarWidget extends StatelessWidget {
             padding:
                 const EdgeInsets.only(right: 20.0, top: 10.0, bottom: 10.0),
             child: InkWell(
-              //onTap: () => Get.to(() => const ProfileScreen()),
               onTap: () {
                 Get.to(() => const HIT6Screen());
               },
-              child: Column(
+              child: const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Icon(
                     Icons.list_alt_outlined,
                     color: Colors.white,
@@ -84,9 +76,9 @@ class bottomAppBarWidget extends StatelessWidget {
               onTap: () {
                 Get.to(() => const HIT6RecordScreen());
               },
-              child: Column(
+              child: const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Icon(
                     Icons.leaderboard_rounded,
                     //* library_books
@@ -104,9 +96,9 @@ class bottomAppBarWidget extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: InkWell(
               onTap: () => Get.to(() => const ProfileScreen()),
-              child: Column(
+              child: const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Icon(
                     Icons.manage_accounts,
                     //* miscellaneous_services, more_horiz_outlined, account_circle

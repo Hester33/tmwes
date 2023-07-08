@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/constants/text.dart';
-import 'package:tmwes/models/current_weather_model.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
 
@@ -26,7 +25,7 @@ class EditMigraineRecordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Edit Migraine Record'),
+        title: const Text('Edit Migraine Record'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -371,7 +370,7 @@ class EditMigraineRecordScreen extends StatelessWidget {
 
                   Get.off(() => const HomeScreen());
                 },
-                child: Text('Submit')),
+                child: const Text('Submit')),
           ]),
         ),
       ),

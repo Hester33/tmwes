@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/controllers/login_controller.dart';
 import 'package:tmwes/screens/authentication/login/forgot_password_screen.dart';
 
 class ForgotPasswordBtn extends StatelessWidget {

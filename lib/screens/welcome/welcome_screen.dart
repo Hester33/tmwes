@@ -5,7 +5,6 @@ import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/screens/authentication/login/login_screen.dart';
 import 'package:tmwes/screens/authentication/signup/signup_screen.dart';
-import 'package:tmwes/screens/profile/profile_screen.dart';
 import 'package:tmwes/widgets/animation/controller_fade_in_aniamtion.dart';
 import 'package:tmwes/widgets/animation/fade_in_animation.dart';
 import 'package:tmwes/widgets/animation/model_fade_in_animation.dart';

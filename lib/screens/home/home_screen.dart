@@ -6,6 +6,7 @@ import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/controllers/calendar_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
 import 'package:tmwes/screens/calendar/calendar_screen.dart';
+import 'package:tmwes/screens/calendar/old_calendar_screen.dart';
 import 'package:tmwes/screens/home/widgets/daily_weather_forecast.dart';
 import 'package:tmwes/screens/home/widgets/health_recommendation.dart';
 import 'package:tmwes/screens/home/widgets/hourly_weather_forecast.dart';
@@ -24,7 +25,6 @@ class HomeScreen extends StatelessWidget {
     final controller = HomeController.instance;
     final calendarController = CalendarController.instance;
     User? user = auth.currentUser;
-    var isHover = false.obs;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.blueGrey.shade50,
@@ -245,7 +245,7 @@ class HomeScreen extends StatelessWidget {
           elevation: 0,
           child: const Icon(Icons.add),
         ),
-        bottomNavigationBar: bottomAppBarWidget(isHover: isHover),
+        bottomNavigationBar: const BottomAppBarWidget(),
       ),
     );
   }

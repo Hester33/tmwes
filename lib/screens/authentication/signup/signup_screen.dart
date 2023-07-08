@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/screens/authentication/login/login_screen.dart';
 
 import 'widgets/signup_form.dart';

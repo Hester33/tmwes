@@ -3,9 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
-import 'package:tmwes/models/user_model.dart';
 
-import '../../login/login_screen.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({
@@ -17,13 +15,13 @@ class SignUpForm extends StatelessWidget {
     //final controller = Get.put(SignUpController());
     // SignUpController controller = Get.find();
     final controller = SignUpController.instance;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     //! check box for term n cond
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: Form(
-          key: _formKey,
+          key: formKey,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             //*Username
@@ -185,7 +183,7 @@ class SignUpForm extends StatelessWidget {
                           children: [
                             TextSpan(
                                 text: 'Terms and Conditions.',
-                                style: TextStyle(color: Colors.blue),
+                                style: const TextStyle(color: Colors.blue),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     controller.termsAndConditionsDialog();
@@ -204,7 +202,7 @@ class SignUpForm extends StatelessWidget {
                   onPressed: controller.isAgree.value
                       ? () {
                           //if (_formKey.currentState!.validate() && isAgree==true) { onPressed: agree ? _doSomething : null,
-                          if (_formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate()) {
                             final String encryptedPwd = BCrypt.hashpw(
                               controller.password.text,
                               BCrypt.gensalt(),

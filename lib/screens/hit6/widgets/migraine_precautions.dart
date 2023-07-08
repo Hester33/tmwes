@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tmwes/constants/shared_functions.dart';
 
 import 'package:tmwes/controllers/hit6_controller.dart';
-import 'package:tmwes/controllers/home_controller.dart';
 
 class MigrainePrecautionsWidget extends StatelessWidget {
   //final CurrentWeatherModel currentWeatherData;

@@ -1,14 +1,11 @@
 //get data
 //collection("cname").where("keywords", "array-contains", "drama")
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/models/current_weather_model.dart';
-import 'package:tmwes/models/hit6_model.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
-import 'package:tmwes/models/weather_model.dart';
 
 class RecordMigraineDb extends GetxController {
   static RecordMigraineDb get instance => Get.find();
@@ -56,7 +53,7 @@ class RecordMigraineDb extends GetxController {
                 colorText: Colors.green.shade800),
           )
           .catchError((error, stackTrace) {
-        Get.snackbar("Error", "${error.toString()}",
+        Get.snackbar("Error", error.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.2),
             colorText: Colors.red);
@@ -110,6 +107,49 @@ class RecordMigraineDb extends GetxController {
         .toList();
     return records;
   }
+
+  //Fetch specific Migraine records for report
+  Future<List<RecordMigraineModel>> getMigraineRecordsforReport(
+    DateTime startTime,
+    DateTime endTime,
+  ) async {
+    User? currentUser = auth.currentUser;
+    final int targetMonth = DateTime.now().month;
+    final int targetYear = DateTime.now().year;
+    // DateTime startTime =
+    //     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    // int day = 0;
+    // if (timeRange == 1) {
+    //   day = 30;
+    // } else if (timeRange == 2) {
+    //   day = 60;
+    // }else if (timeRange == 3) {
+    //   day = 90;
+    // }
+    // DateTime endTime = startTime.add(Duration(days: day));
+    final snapshot = await firestore
+        .collection(usersCollection)
+        .doc(currentUser?.uid)
+        .collection(migraineRecordCollection)
+        .where("record_date", isGreaterThanOrEqualTo: startTime)
+        .where("record_date", isLessThanOrEqualTo: endTime)
+        .orderBy("record_date", descending: true)
+        .get();
+    final records =
+        snapshot.docs.map((e) => RecordMigraineModel.fromSnapshot(e)).toList();
+    // if (snapshot.docs.isEmpty) {
+    //   print("no data.");
+    // }
+
+    return records;
+  }
+
+  // final int targetMonth = month; // Assuming July (month number 7)
+// final int monthDuration = md;
+// final QuerySnapshot snapshot = await recordsCollection
+//     .where('timestamp', isGreaterThanOrEqualTo: DateTime(2023, targetMonth, 1))
+//     .where('timestamp', isLessThanOrEqualTo: DateTime(2023, targetMonth + md, 1))
+//     .get();
 
   // //  currentUser.updateEmail(newEmail);
   // Future<void> updateUserDetails(UserModel user) async {

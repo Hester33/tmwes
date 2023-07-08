@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/exceptions/exceptions.dart';
-import 'package:tmwes/helpers/loading.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 

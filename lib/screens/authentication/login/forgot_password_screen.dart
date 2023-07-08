@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/controllers/login_controller.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
@@ -10,7 +9,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = LoginController.instance;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Reset Password'),
@@ -42,7 +41,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Form(
-                      key: _formKey,
+                      key: formKey,
                       child: Column(
                         children: [
                           TextFormField(
@@ -66,7 +65,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                               width: double.infinity,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
+                                    if (formKey.currentState!.validate()) {
                                       //!demo loading in btn
                                       controller.showLoading.value = true;
                                       controller.resetPwd(
@@ -78,9 +77,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                                         middleText:
                                             "Please check your email to reset the password.",
                                         titleStyle:
-                                            TextStyle(color: Colors.green),
+                                            const TextStyle(color: Colors.green),
                                         middleTextStyle:
-                                            TextStyle(color: Colors.blueGrey),
+                                            const TextStyle(color: Colors.blueGrey),
                                         textConfirm: "Ok",
                                         confirmTextColor: Colors.white,
                                         onConfirm: () => Get.offAll(

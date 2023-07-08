@@ -13,7 +13,7 @@ class LoginForm extends StatelessWidget {
     // !final controller = Get.put(LoginController());
     // LoginController controller = Get.find();
     final controller = LoginController.instance;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return Form(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
