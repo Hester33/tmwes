@@ -9,14 +9,14 @@ import 'package:tmwes/controllers/record_migraine_controller.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 import 'package:tmwes/screens/record_migraine/edit_migraine_record.dart';
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({super.key});
+class OldCalendarScreen extends StatefulWidget {
+  const OldCalendarScreen({super.key});
 
   @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
+  State<OldCalendarScreen> createState() => _OldCalendarScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
+class _OldCalendarScreenState extends State<OldCalendarScreen> {
   //!might delete
   late List<RecordMigraineModel> selectedEvents;
   @override
