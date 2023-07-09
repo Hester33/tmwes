@@ -39,8 +39,12 @@ class HIT6RecordScreen extends StatelessWidget {
                           children: [
                             const SizedBox(height: 20),
                             Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
                               elevation: 0.5,
                               child: ListTile(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
                                   onTap: () {
                                     Get.to(() => HIT6RecordDetailsScreen(
                                           recordDate:
