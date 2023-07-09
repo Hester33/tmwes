@@ -26,6 +26,8 @@ class HIT6Db extends GetxController {
     );
     if (currentUser != null) {
       await firestore
+          .collection(usersCollection)
+          .doc(currentUser.uid)
           .collection(hit6Collection)
           .add(record.toJson())
           .whenComplete(
@@ -48,8 +50,10 @@ class HIT6Db extends GetxController {
   Future<List<HIT6Model>> getAllHIT6Records() async {
     User? currentUser = auth.currentUser;
     final snapshot = await firestore
+        .collection(usersCollection)
+        .doc(currentUser?.uid)
         .collection(hit6Collection)
-        .where("uid", isEqualTo: currentUser?.uid)
+        //.where("uid", isEqualTo: currentUser?.uid)
         .orderBy("record_date", descending: true)
         .get();
     //store snapshot in usersData as a list
@@ -58,24 +62,13 @@ class HIT6Db extends GetxController {
     return records;
   }
 
-  Future<List<HIT6Model>> getMigraineRisk() async {
-    User? currentUser = auth.currentUser;
-    final snapshot = await firestore
-        .collection(hit6Collection)
-        .where("uid", isEqualTo: currentUser?.uid)
-        .orderBy("record_date", descending: true)
-        .limit(2)
-        .get();
-    final records =
-        snapshot.docs.map((doc) => HIT6Model.fromSnapshot(doc)).toList();
-    return records;
-  }
-
 //! can pass record date as parameter and retrieve data (for view single record)
   //Fetch single HIT-6 record from FireStore
   Future<HIT6Model> getHIT6Record(DateTime recordDate) async {
     User? currentUser = auth.currentUser;
     final snapshot = await firestore
+        .collection(usersCollection)
+        .doc(currentUser?.uid)
         .collection(hit6Collection)
         .where("uid", isEqualTo: currentUser?.uid)
         .where("record_date", isEqualTo: recordDate)
@@ -83,6 +76,21 @@ class HIT6Db extends GetxController {
     final record =
         snapshot.docs.map((doc) => HIT6Model.fromSnapshot(doc)).single;
     return record;
+  }
+
+  Future<List<HIT6Model>> getMigraineRisk() async {
+    User? currentUser = auth.currentUser;
+    final snapshot = await firestore
+        .collection(usersCollection)
+        .doc(currentUser?.uid)
+        .collection(hit6Collection)
+        //.where("uid", isEqualTo: currentUser?.uid)
+        .orderBy("record_date", descending: true)
+        .limit(2)
+        .get();
+    final records =
+        snapshot.docs.map((doc) => HIT6Model.fromSnapshot(doc)).toList();
+    return records;
   }
 
   // //  currentUser.updateEmail(newEmail);
