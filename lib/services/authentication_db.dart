@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/exceptions/exceptions.dart';
+import 'package:tmwes/helpers/loading.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
 import 'package:tmwes/screens/welcome/welcome_screen.dart';
 
@@ -62,14 +63,27 @@ class AuthenticationDb extends GetxController {
     } catch (_) {
       const ex = SignUpWithEmailAndPasswordFailure();
       print('EXCEPTION - ${ex.msg}');
-      throw ex;
+      throw ex.msg;
     }
     return null;
   }
 
+//Verify the user's email
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      throw ex.msg;
+    } catch (_) {
+      const ex = SignUpWithEmailAndPasswordFailure();
+      throw ex.msg;
+    }
+  }
+
   Future<void> loginUserWithEmailAndPwd(String email, String password) async {
     try {
-      //showLoading();
+      showLoading();
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = firebaseUser.value!.displayName!);
