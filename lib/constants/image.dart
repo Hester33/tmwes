@@ -11,8 +11,12 @@ final String pressureImg = _getImagePath("weather/pressure.png");
 //record migraine
 final String painLvlIcon = _getImagePath("images/lightning-bolt.png");
 final String painPositionIcon = _getImagePath("images/pain-position.png");
-final String triggerIcon = _getImagePath("images/triggers.png");
+final String weatherIcon = _getImagePath("images/weather.png");
+final String triggerIcon = _getImagePath("images/trigger.png");
 final String medicineIcon = _getImagePath("images/medicine.png");
+
+//FAQ
+final String HIT6ScoreRangeImg = _getImagePath("images/HIT6ScoreRange.png");
 
 String _getImagePath(String fileName) {
   return imageAssetsRoot + fileName;
