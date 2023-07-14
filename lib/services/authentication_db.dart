@@ -13,14 +13,7 @@ class AuthenticationDb extends GetxController {
   //firebase authentication instance
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
-
   var userName = ''.obs;
-
-  //@override
-  // void onInit() {
-  //   userName = RxString(userProfile != null ? userProfile!.displayName! : '');
-  //   super.onInit();
-  // }
 
   @override
   void onReady() {
@@ -47,7 +40,6 @@ class AuthenticationDb extends GetxController {
           .then((value) => userName.value = username);
       firebaseUser.value!.updateDisplayName(userName.value);
 
-      //!=null
       firebaseUser.value == null
           ? Get.offAll(() => const WelcomeScreen())
           : Get.offAll(() => const HomeScreen());
@@ -113,9 +105,7 @@ class AuthenticationDb extends GetxController {
   Future<void> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    }
-    //.catchError((e) => print('FIREBASE AUTH EXPECTION -  ${e.code}'));
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       //! Create exception
       final ex = LoginWithEmailAndPasswordFailure.code(e.code);
       Get.snackbar("Error", ex.msg,

@@ -38,30 +38,29 @@ class HomeScreen extends StatelessWidget {
             ),
             width: screenWidth,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(children: [
-                  //! Text rich
-                  Text.rich(
-                    TextSpan(
-                        text: 'Hi, ${user?.displayName.toString()}!\n',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                        children: const [
-                          TextSpan(
-                            text: 'How are you feeling today?',
-                            style: TextStyle(
-                              color: Color(0xFF455A64),
-                              fontSize: 16,
-                            ),
-                          )
-                        ]),
-                  ),
-                ]),
-                Row(
-                  children: [
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(children: [
+                    //! Text rich
+                    Text.rich(
+                      TextSpan(
+                          text: 'Hi, ${user?.displayName.toString()}!\n',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                          children: const [
+                            TextSpan(
+                              text: 'How are you feeling today?',
+                              style: TextStyle(
+                                color: Color(0xFF455A64),
+                                fontSize: 16,
+                              ),
+                            )
+                          ]),
+                    ),
+                  ]),
+                  Row(children: [
                     IconButton(
                         color: primaryColor,
                         iconSize: 30,
@@ -76,10 +75,8 @@ class HomeScreen extends StatelessWidget {
                           controller.confirmUpdateLocationDialog();
                         },
                         icon: const Icon(Icons.location_on_sharp)), //*fmd_good
-                  ],
-                )
-              ],
-            ),
+                  ])
+                ]),
           ),
           const SizedBox(height: 20),
           Container(
@@ -94,27 +91,25 @@ class HomeScreen extends StatelessWidget {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Column(
-                    children: [
-                      CurrentWeatherWidget(
-                          currentWeatherData:
-                              controller.getWeatherData().getCurrentWeather()),
-                      const SizedBox(height: 20),
-                      HealthRecommendationWidget(
-                          currentWeatherData:
-                              controller.getWeatherData().getCurrentWeather()),
-                      const SizedBox(height: 25),
-                      const MigraineRiskWidget(),
-                      const SizedBox(height: 25),
-                      HourlyWeatherForecastWidget(
-                          hourlyWeatherData:
-                              controller.getWeatherData().getHourlyWeather()),
-                      const SizedBox(height: 20),
-                      DailyWeatherForecastWidget(
-                          dailyWeatherData:
-                              controller.getWeatherData().getDailyWeather()),
-                    ],
-                  )),
+                : Column(children: [
+                    CurrentWeatherWidget(
+                        currentWeatherData:
+                            controller.getWeatherData().getCurrentWeather()),
+                    const SizedBox(height: 20),
+                    HealthRecommendationWidget(
+                        currentWeatherData:
+                            controller.getWeatherData().getCurrentWeather()),
+                    const SizedBox(height: 25),
+                    const MigraineRiskWidget(),
+                    const SizedBox(height: 25),
+                    HourlyWeatherForecastWidget(
+                        hourlyWeatherData:
+                            controller.getWeatherData().getHourlyWeather()),
+                    const SizedBox(height: 20),
+                    DailyWeatherForecastWidget(
+                        dailyWeatherData:
+                            controller.getWeatherData().getDailyWeather()),
+                  ])),
           )
         ]),
         extendBody: true,

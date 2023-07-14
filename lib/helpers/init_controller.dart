@@ -32,4 +32,4 @@ class ControllerBindings extends Bindings {
   }
 }
 
-//* Can add "tag" parameter if there's > 1 saeme controller type in the class
+//* Can add "tag" parameter if there's > 1 same controller type in the class

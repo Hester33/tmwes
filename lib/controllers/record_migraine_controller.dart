@@ -11,7 +11,6 @@ class RecordMigraineController extends GetxController {
 
   final List<RxBool> buttonStates =
       List.generate(painLvl.length, (_) => false.obs);
-  //!might change the type to RxBool
   var selectedDate = DateTime.now().obs;
   var sTime = TimeOfDay.now().replacing(hour: TimeOfDay.now().hour - 1);
   var eTime = TimeOfDay.now(); //minute: TimeOfDay.now().minute
@@ -36,7 +35,6 @@ class RecordMigraineController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Initialize the selectedAnswers list with the capacity of questions length
     pCheckBoxIsChecked.value = List<bool>.filled(painPosition.length, false);
     tCheckBoxIsChecked.value = List<bool>.filled(triggers.length, false);
     mCheckBoxIsChecked.value = List<bool>.filled(medicines.length, false);
@@ -133,8 +131,6 @@ class RecordMigraineController extends GetxController {
     }
   }
 
-  getTrigger(String? trigger) {}
-
   Future<void> storeMigraineRecord(
       CurrentWeatherModel currentWeatherData) async {
     //calculate the migraine attack duration
@@ -159,6 +155,7 @@ class RecordMigraineController extends GetxController {
         selectedPosition.add(painPosition[index]["text"]);
       }
     }).toList();
+    // ignore: avoid_print
     print("selected position: $selectedPosition");
 
     List<String> selectedTriggers = [];
@@ -202,9 +199,6 @@ class RecordMigraineController extends GetxController {
         selectedTriggers.toList(),
         selectedMedicine.toList());
   }
-
-//! might add currentWeatherData
-  Future<void> updateMigraineRecord() async {}
 
   Future<dynamic> confirmDeleteRecord() {
     return Get.defaultDialog(

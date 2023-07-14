@@ -5,17 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tmwes/constants/firebase_const.dart';
-import 'package:tmwes/models/current_weather_model.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 
 class RecordMigraineDb extends GetxController {
   static RecordMigraineDb get instance => Get.find();
-  //final weatherData = WeatherModel().getCurrentWeather();
 
   //! Add weather in to the model
   //store Migraine record details in FireStore
   Future<void> recordMigraine(
-      //CurrentWeatherModel weatherData,
       String weather,
       DateTime recordDate,
       DateTime selectedStartTime,
@@ -31,9 +28,7 @@ class RecordMigraineDb extends GetxController {
     String sTime = DateFormat('HH:mm').format(selectedStartTime);
 
     final record = RecordMigraineModel(
-      //userId: currentUser?.uid,
       //*record the current weather
-      //weather: weatherData.current.weather![0].main,
       weather: weather,
       mRecordDate: recordDate,
       startTime: sTime,
@@ -74,19 +69,15 @@ class RecordMigraineDb extends GetxController {
         .collection(usersCollection)
         .doc(currentUser?.uid)
         .collection(migraineRecordCollection)
-        //.where("record_date", isEqualTo: selectedDate)
-        // .orderBy("record_date", descending: true)
         .get();
     final records =
         snapshot.docs.map((e) => RecordMigraineModel.fromSnapshot(e)).toList();
     return records;
   }
 
-  //! can pass record date as parameter and retrieve data (for view single record)
   //Fetch single migraine record from FireStore
   Future<RecordMigraineModel> getMigraineRecord(DateTime selectedDate) async {
     User? currentUser = auth.currentUser;
-    //Timestamp sDate = Timestamp.fromDate(selectedDate);
     final snapshot = await firestore
         .collection(usersCollection)
         .doc(currentUser?.uid)
@@ -105,19 +96,7 @@ class RecordMigraineDb extends GetxController {
     DateTime endTime,
   ) async {
     User? currentUser = auth.currentUser;
-    final int targetMonth = DateTime.now().month;
-    final int targetYear = DateTime.now().year;
-    // DateTime startTime =
-    //     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    // int day = 0;
-    // if (timeRange == 1) {
-    //   day = 30;
-    // } else if (timeRange == 2) {
-    //   day = 60;
-    // }else if (timeRange == 3) {
-    //   day = 90;
-    // }
-    // DateTime endTime = startTime.add(Duration(days: day));
+
     final snapshot = await firestore
         .collection(usersCollection)
         .doc(currentUser?.uid)
@@ -128,41 +107,7 @@ class RecordMigraineDb extends GetxController {
         .get();
     final records =
         snapshot.docs.map((e) => RecordMigraineModel.fromSnapshot(e)).toList();
-    // if (snapshot.docs.isEmpty) {
-    //   print("no data.");
-    // }
 
     return records;
   }
-
-  // final int targetMonth = month; // Assuming July (month number 7)
-// final int monthDuration = md;
-// final QuerySnapshot snapshot = await recordsCollection
-//     .where('timestamp', isGreaterThanOrEqualTo: DateTime(2023, targetMonth, 1))
-//     .where('timestamp', isLessThanOrEqualTo: DateTime(2023, targetMonth + md, 1))
-//     .get();
-
-  // //  currentUser.updateEmail(newEmail);
-  // Future<void> updateUserDetails(UserModel user) async {
-  //   User? currentUser = auth.currentUser;
-  //   await firestore
-  //       .collection(usersCollection)
-  //       .doc(user.id)
-  //       .update(user.toJson())
-  //       .whenComplete(
-  //         () => Get.snackbar("Success", "Your account has been updated!",
-  //             snackPosition: SnackPosition.BOTTOM,
-  //             backgroundColor: Colors.green.withOpacity(0.1),
-  //             colorText: Colors.green),
-  //       )
-  //       .catchError((error, stackTrace) {
-  //     Get.snackbar("Error", "Something went wrong. Try again",
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.redAccent.withOpacity(0.1),
-  //         colorText: Colors.red);
-  //     print(error.toString());
-  //   });
-
-  //   currentUser?.updateEmail(user.email);
-  // }
 }

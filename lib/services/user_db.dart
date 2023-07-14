@@ -45,7 +45,6 @@ class UserDb extends GetxController {
     }
   }
 
-//!CHECKKKK
   //Fetch User from FireStore
   Future<UserModel> getUserDetails(String id) async {
     final snapshot = await firestore
@@ -53,6 +52,7 @@ class UserDb extends GetxController {
         .where("id", isEqualTo: id)
         .get()
         .whenComplete(
+          // ignore: avoid_print
           () => print("User's data fetched succesfully!"),
         )
         .catchError((error, stackTrace) {
@@ -73,6 +73,7 @@ class UserDb extends GetxController {
         .collection(usersCollection)
         .get()
         .whenComplete(
+          // ignore: avoid_print
           () => print("User's data fetched succesfully!"),
         )
         .catchError((error, stackTrace) {
@@ -105,6 +106,7 @@ class UserDb extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
+      // ignore: avoid_print
       print(error.toString());
     });
 

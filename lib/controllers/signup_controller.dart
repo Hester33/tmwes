@@ -36,7 +36,6 @@ class SignUpController extends GetxController {
     }
   }
 
-//Future<void> chooseDate(), and change pickedDate to obs
   Future<void> chooseDate() async {
     pickedDate = await showDatePicker(
         context: Get.context!,
@@ -47,11 +46,9 @@ class SignUpController extends GetxController {
         helpText: 'Select D.O.B',
         confirmText: 'Confirm');
     if (pickedDate != null) {
-      //String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
       String formattedDate = DateFormat('d MMMM yyyy').format(pickedDate!);
       dob.value.text = formattedDate;
       selectedDate = pickedDate!;
-      //return pickedDate;
     }
   }
 
@@ -66,7 +63,6 @@ class SignUpController extends GetxController {
         .createUserWithEmailAndPwd(email, password, username);
 
     userDb.storeUser(uid, username, fullName, pickedDate!, email, phoneNo);
-    //UserDb.instance.storeUser(uid, username, fullName, email, encryptedPwd);
   }
 
   Future<dynamic> termsAndConditionsDialog() {

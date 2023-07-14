@@ -10,8 +10,6 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final controller = Get.put(SignUpController());
-    // SignUpController controller = Get.find();
     final controller = SignUpController.instance;
     final formKey = GlobalKey<FormState>();
 
@@ -65,10 +63,7 @@ class SignUpForm extends StatelessWidget {
                     }
                     return null;
                   },
-                  //!not sure
-                  //keyboardType: TextInputType.number,
                   onTap: () {
-                    //final DateTime date = controller.chooseDate() as DateTime;
                     controller.chooseDate();
                   }),
             ),
@@ -99,7 +94,6 @@ class SignUpForm extends StatelessWidget {
                   prefixIcon: Icon(Icons.phone_android_outlined),
                   label: Text('Phone Number'),
                   //! test
-                  //hintText: '+6012345678',
                 ),
                 validator: (value) {
                   bool isPhoneNoValid =
@@ -163,34 +157,31 @@ class SignUpForm extends StatelessWidget {
                   }),
             ),
             const SizedBox(height: 10),
-            //! add term n cond
             Obx(
-              () => Row(
-                children: [
-                  Checkbox(
-                    value: controller.isAgree.value,
-                    onChanged: (value) {
-                      controller.isAgree.value = value ?? false;
-                    },
+              () => Row(children: [
+                Checkbox(
+                  value: controller.isAgree.value,
+                  onChanged: (value) {
+                    controller.isAgree.value = value ?? false;
+                  },
+                ),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                        text: "I have read and agree to the ",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        children: [
+                          TextSpan(
+                              text: 'Terms and Conditions.',
+                              style: const TextStyle(color: Colors.blue),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  controller.termsAndConditionsDialog();
+                                }),
+                        ]),
                   ),
-                  Expanded(
-                    child: Text.rich(
-                      TextSpan(
-                          text: "I have read and agree to the ",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          children: [
-                            TextSpan(
-                                text: 'Terms and Conditions.',
-                                style: const TextStyle(color: Colors.blue),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    controller.termsAndConditionsDialog();
-                                  }),
-                          ]),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ]),
             ),
             const SizedBox(height: 20),
             Obx(
@@ -199,7 +190,6 @@ class SignUpForm extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: controller.isAgree.value
                       ? () {
-                          //if (_formKey.currentState!.validate() && isAgree==true) { onPressed: agree ? _doSomething : null,
                           if (formKey.currentState!.validate()) {
                             SignUpController.instance.storeUser(
                               controller.username.text.trim(),

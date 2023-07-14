@@ -27,38 +27,27 @@ class SignUpScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30.0),
-            child: Column(
-              children: [
-                /* --- Signup Form --- */
-                const SignUpForm(),
-                /* ---- End --- */
-                // TextButton(
-                //   onPressed: () {
-                //     //!disable user to click the btn if the field is empty
-                //     //          ElevatedButton(
-                //     // onPressed: agree ? _doSomething : null,
-                //     // child: const Text('Continue'))
-                //     Get.off(() => const LoginScreen());
-                //   },
-                //child:
-                Text.rich(
-                  TextSpan(children: [
-                    TextSpan(
-                      text: "Already have an account? ",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    TextSpan(
-                        text: 'LOGIN',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Get.off(() => const LoginScreen());
-                          }),
-                  ]),
-                ),
-                //)
-              ],
-            ),
+            child: Column(children: [
+              /* --- Signup Form --- */
+              const SignUpForm(),
+              /* ---- End --- */
+
+              Text.rich(
+                TextSpan(children: [
+                  TextSpan(
+                    text: "Already have an account? ",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  TextSpan(
+                      text: 'LOGIN',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.off(() => const LoginScreen());
+                        }),
+                ]),
+              ),
+            ]),
           ),
         ),
       ),

@@ -5,7 +5,6 @@ import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/models/user_model.dart';
 import 'package:tmwes/screens/faq/faq_screen.dart';
 import 'package:tmwes/screens/profile/edit_profile_screen.dart';
-import 'package:tmwes/screens/report/report_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/image.dart';
@@ -22,10 +21,6 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(Icons.arrow_back_ios_new)),
-        //   title: Text('Profile', style: TextStyle(fontSize: 26)),
-        //   // actions: [
-        //   //   IconButton(onPressed: () {}, icon: icon)
-        //   // ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -37,34 +32,28 @@ class ProfileScreen extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
                     UserModel userData = snapshot.data as UserModel;
-                    return Column(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          height: 100,
-                          //child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image(image: AssetImage(profile))),
-                          child: Image(image: AssetImage(profile)),
-                        ),
-                        Text(userData.username,
-                            style: Theme.of(context).textTheme.headlineMedium),
-                        const SizedBox(height: 5),
-                        Text(userData.email,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(height: 8),
-                        Text.rich(
+                    return Column(children: [
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Image(image: AssetImage(profile)),
+                      ),
+                      Text(userData.username,
+                          style: Theme.of(context).textTheme.headlineMedium),
+                      const SizedBox(height: 5),
+                      Text(userData.email,
+                          style: Theme.of(context).textTheme.bodyLarge),
+                      const SizedBox(height: 8),
+                      Text.rich(
+                        TextSpan(text: 'Date Joined: ', children: [
                           TextSpan(
-                            text: 'Date Joined: ',
-                            children: [
-                              TextSpan(
-                                  text: formatDate(userData.dateJoined),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
+                              text: formatDate(userData.dateJoined),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ))
+                        ]),
+                      ),
+                    ]);
                   } else if (snapshot.hasError) {
                     return Center(child: Text(snapshot.error.toString()));
                   } else {
@@ -78,26 +67,22 @@ class ProfileScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  //width: 200,
-                  child: ElevatedButton(
-                      onPressed: () => Get.to(() => const EditProfileScreen()),
-                      child: const Text('Edit Profile')),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  //width: 200,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        controller.resetPwd();
-                        controller.resetPwdDialog();
-                      },
-                      child: const Text('Change password')),
-                ),
-              ],
-            ),
+            Row(children: [
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: () => Get.to(() => const EditProfileScreen()),
+                    child: const Text('Edit Profile')),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: () {
+                      controller.resetPwd();
+                      controller.resetPwdDialog();
+                    },
+                    child: const Text('Change password')),
+              ),
+            ]),
 
             const SizedBox(height: 20),
             const Divider(),
@@ -108,7 +93,6 @@ class ProfileScreen extends StatelessWidget {
                 title: "Migraine Report",
                 icon: Icons.fact_check_outlined,
                 onPress: () {
-                  //Get.to(() => const Report());
                   controller.reportTimeRangeDialog();
                 }),
             MenuWidget(
@@ -125,7 +109,6 @@ class ProfileScreen extends StatelessWidget {
                 }),
             MenuWidget(
                 title: "FAQ",
-                //icon: Icons.chat_bubble_outline_outlined,
                 icon: Icons.question_answer_outlined,
                 onPress: () {
                   Get.to(() => const FaqScreen());
@@ -136,7 +119,6 @@ class ProfileScreen extends StatelessWidget {
                 title: "Terms of Use",
                 icon: Icons.privacy_tip_outlined,
                 onPress: () {
-                  //Get.to(() => const Report());
                   controller.termsOfUseDialog();
                 }),
             MenuWidget(

@@ -154,25 +154,10 @@ class EditProfileScreen extends StatelessWidget {
                                   }),
                               const SizedBox(height: 20),
 
-                              //------------------------------------------------------------------------------------//
-                              //*Date Joined
-                              // TextFormField(
-                              //   initialValue:
-                              //       controller.formatDate(userData.dateJoined),
-                              //   decoration: const InputDecoration(
-                              //       prefixIcon:
-                              //           Icon(Icons.password), //! change icon
-                              //       label: Text('Date Joined: '),
-                              //       //!Test
-                              //       border: InputBorder.none),
-                              //   readOnly: true,
-                              // ),
-                              // const SizedBox(height: 20),
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    //if (_formKey.currentState!.validate() && isAgree==true) {
                                     if (formKey.currentState!.validate()) {
                                       final userDetails = UserModel(
                                           id: userData.id,
@@ -190,76 +175,11 @@ class EditProfileScreen extends StatelessWidget {
                                       await controller
                                           .updateUserDetails(userDetails);
                                     }
-                                    //Get.offAll(() => const ProfileScreen());
                                   },
                                   child: const Text('Confirm'),
                                 ),
                               ),
-                              //------------------------------------------------------------------------------------//
                             ])),
-                    //! Form(
-                    //     child: Column(
-                    //   children: [
-                    //     //*Username
-                    //     TextFormField(
-                    //       initialValue: userData.username,
-                    //       decoration: const InputDecoration(
-                    //         prefixIcon: Icon(Icons.person_outline_outlined),
-                    //         label: Text('Username'),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(height: 20),
-                    //     //*Full Name
-                    //     TextFormField(
-                    //       initialValue: userData.fullName,
-                    //       decoration: const InputDecoration(
-                    //         prefixIcon: Icon(Icons.person_outline_outlined),
-                    //         label: Text('Full Name'),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(height: 20),
-                    //     //*EmailAddress
-                    //     TextFormField(
-                    //       initialValue: userData.email,
-                    //       decoration: const InputDecoration(
-                    //         prefixIcon: Icon(Icons.email_outlined),
-                    //         label: Text('Email'),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(height: 20),
-                    //     //*Password
-                    //     TextFormField(
-                    //       decoration: const InputDecoration(
-                    //           prefixIcon: Icon(Icons.password),
-                    //           label: Text('Password'),
-                    //           suffixIcon: IconButton(
-                    //               onPressed: null,
-                    //               icon: Icon(Icons.remove_red_eye_sharp))),
-                    //     ),
-                    //     const SizedBox(height: 20),
-                    //     //*Date Joined
-                    //     TextFormField(
-                    //       initialValue: controller.formatDate(userData.dateJoined),
-                    //       decoration: const InputDecoration(
-                    //           prefixIcon: Icon(Icons.password),
-                    //           label: Text('Date Joined: '),
-                    //           suffixIcon: IconButton(
-                    //               onPressed: null,
-                    //               icon: Icon(Icons.remove_red_eye_sharp)),
-                    //               //!Test
-                    //               border: InputBorder.none),
-                    //               readOnly: true,
-                    //     ),
-                    //     const SizedBox(height: 20),
-                    //     SizedBox(
-                    //       width: double.infinity,
-                    //       child: ElevatedButton(
-                    //         onPressed: () {},
-                    //         child: const Text('Confirm'),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ))
                   ],
                 );
               } else if (snapshot.hasError) {

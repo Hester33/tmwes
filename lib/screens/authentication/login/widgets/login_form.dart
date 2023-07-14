@@ -13,7 +13,6 @@ class LoginForm extends StatelessWidget {
     // !final controller = Get.put(LoginController());
     // LoginController controller = Get.find();
     final controller = LoginController.instance;
-    final formKey = GlobalKey<FormState>();
     return Form(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -51,15 +50,12 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const ForgotPasswordBtn(),
-            //const SizedBox(height: 20.0),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  //if (_formKey.currentState!.validate()) {
                   LoginController.instance.login(controller.email.text.trim(),
                       controller.password.text.trim());
-                  //}
                 },
                 child: Text(
                   'Login'.toUpperCase(),

@@ -59,8 +59,8 @@ class _ReportState extends State<Report> {
     startTime = endTime.subtract(Duration(days: day));
     records = await RecordMigraineDb.instance
         .getMigraineRecordsforReport(startTime, endTime);
-    print("$startTime, $endTime");
     if (records.isEmpty) {
+      // ignore: avoid_print
       print("no records.");
       checkRecord = false;
     }
@@ -86,13 +86,8 @@ class _ReportState extends State<Report> {
                 ?.apply(color: Colors.white)),
       ),
       body: PdfPreview(
-        // maxPageWidth: 1000,
-        // useActions: false,
-        // canChangePageFormat: true,
         canChangeOrientation: false,
-        // pageFormats:pageformat,
         canDebug: false,
-
         build: (format) => generateDocument(
           format,
         ),
@@ -140,68 +135,69 @@ class _ReportState extends State<Report> {
                 ),
               ]),
               pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                children: [
-                  pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text(
-                          ' ${userData.fullName}',
-                          style: pw.TextStyle(
-                              fontSize: 20, fontWeight: pw.FontWeight.bold),
-                        ),
-                        pw.Row(children: [
-                          pw.Text(' Time Period: ',
-                              style: pw.TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: pw.FontWeight.bold)),
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
                           pw.Text(
-                              '${formatRecordDate(startTime)} - ${formatRecordDate(endTime)}',
-                              style: pw.TextStyle(
-                                fontSize: 18,
-                                fontWeight: pw.FontWeight.bold,
-                              )),
-                        ]),
-                        pw.Text(
-                          ' Age: $age',
-                          style: pw.TextStyle(
-                              fontSize: 18, fontWeight: pw.FontWeight.bold),
-                        ),
-                      ]),
-                  pw.Table(
-                      border: pw.TableBorder.all(color: PdfColors.blueGrey700),
-                      defaultVerticalAlignment:
-                          pw.TableCellVerticalAlignment.middle,
-                      children: [
-                        pw.TableRow(
-                            decoration: const pw.BoxDecoration(
-                                color: PdfColors.blueGrey300),
-                            children: [
-                              pw.Padding(
-                                padding: const pw.EdgeInsets.symmetric(
-                                    horizontal: 10),
-                                child: pw.Column(children: [
-                                  pw.Text(
-                                    'Number of Attack',
-                                    style: pw.TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: pw.FontWeight.bold),
-                                  )
-                                ]),
-                              )
-                            ]),
-                        pw.TableRow(children: [
-                          pw.Center(
-                            child: pw.Text(
-                              '${records.length}',
-                              style: pw.TextStyle(
-                                  fontSize: 16, fontWeight: pw.FontWeight.bold),
-                            ),
+                            ' ${userData.fullName}',
+                            style: pw.TextStyle(
+                                fontSize: 20, fontWeight: pw.FontWeight.bold),
+                          ),
+                          pw.Row(children: [
+                            pw.Text(' Time Period: ',
+                                style: pw.TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: pw.FontWeight.bold)),
+                            pw.Text(
+                                '${formatRecordDate(startTime)} - ${formatRecordDate(endTime)}',
+                                style: pw.TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: pw.FontWeight.bold,
+                                )),
+                          ]),
+                          pw.Text(
+                            ' Age: $age',
+                            style: pw.TextStyle(
+                                fontSize: 18, fontWeight: pw.FontWeight.bold),
                           ),
                         ]),
-                      ]),
-                ],
-              ),
+                    pw.Table(
+                        border:
+                            pw.TableBorder.all(color: PdfColors.blueGrey700),
+                        defaultVerticalAlignment:
+                            pw.TableCellVerticalAlignment.middle,
+                        children: [
+                          pw.TableRow(
+                              decoration: const pw.BoxDecoration(
+                                  color: PdfColors.blueGrey300),
+                              children: [
+                                pw.Padding(
+                                  padding: const pw.EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: pw.Column(children: [
+                                    pw.Text(
+                                      'Number of Attack',
+                                      style: pw.TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: pw.FontWeight.bold),
+                                    )
+                                  ]),
+                                )
+                              ]),
+                          pw.TableRow(children: [
+                            pw.Center(
+                              child: pw.Text(
+                                '${records.length}',
+                                style: pw.TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: pw.FontWeight.bold),
+                              ),
+                            ),
+                          ]),
+                        ]),
+                  ]),
             ]),
           );
         },

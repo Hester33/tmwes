@@ -52,7 +52,6 @@ class HIT6Screen extends StatelessWidget {
                               return SizedBox(
                                   width: 250,
                                   child: Obx(() => ElevatedButton(
-                                        //change style for pressed button
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: controller
                                                   .isSelected(

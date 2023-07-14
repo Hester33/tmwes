@@ -5,10 +5,6 @@ class HourlyWeatherModel {
   final List<Hourly> hourly;
   HourlyWeatherModel({required this.hourly});
 
-  // factory HourlyWeatherModel.fromJson(Map<String, dynamic> json) =>
-  //     //return a (Map)current data from API
-  //     HourlyWeatherModel(hourly: Hourly.fromJson(json['hourly']));
-
   factory HourlyWeatherModel.fromJson(Map<String, dynamic> json) =>
       //return a (Map)current data from API
       HourlyWeatherModel(

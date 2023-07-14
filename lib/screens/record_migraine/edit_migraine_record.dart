@@ -6,7 +6,6 @@ import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
-
 import '../../controllers/record_migraine_controller.dart';
 
 class EditMigraineRecordScreen extends StatelessWidget {
@@ -19,7 +18,6 @@ class EditMigraineRecordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = RecordMigraineController.instance;
-    //controller.selectedDate.value = selectedDate ?? DateTime.now();
 
     controller.painLvlIndex.value = -1;
     return Scaffold(
@@ -32,15 +30,7 @@ class EditMigraineRecordScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(30),
           child: Column(children: [
-            //*-----Date-----*//
-            // Align(
-            //   alignment: Alignment.topLeft,
-            //   child: Text("Date",
-            //       style: Theme.of(context)
-            //           .textTheme
-            //           .headlineMedium!
-            //           .apply(color: primaryColor)),
-            // ),
+            //*-----Date picker-----*//
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               const Icon(Icons.calendar_month_outlined, size: 30),
               const SizedBox(width: 10),
@@ -55,45 +45,40 @@ class EditMigraineRecordScreen extends StatelessWidget {
               ),
             ]),
             const SizedBox(height: 10),
-//!time picker
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Obx(
-                  () => SizedBox(
-                    width: 130,
-                    child: TextFormField(
-                        controller: controller.startTime.value,
-                        //initialValue: controller.startTime.value.toString(),
-                        //initialValue:"${controller.startTime.value.hour}:${controller.startTime.value.minute}",
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.date_range_outlined),
-                          label: Text('Start Time'),
-                        ),
-                        readOnly: true,
-                        onTap: () {
-                          controller.chooseStartTime();
-                        }),
-                  ),
+            //*-----Time picker-----*//
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Obx(
+                () => SizedBox(
+                  width: 130,
+                  child: TextFormField(
+                      controller: controller.startTime.value,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.date_range_outlined),
+                        label: Text('Start Time'),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        controller.chooseStartTime();
+                      }),
                 ),
-                const Text("to"),
-                Obx(
-                  () => SizedBox(
-                    width: 130,
-                    child: TextFormField(
-                        controller: controller.endTime.value,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.date_range_outlined),
-                          label: Text('End Time'),
-                        ),
-                        readOnly: true,
-                        onTap: () {
-                          controller.chooseEndTime();
-                        }),
-                  ),
+              ),
+              const Text("to"),
+              Obx(
+                () => SizedBox(
+                  width: 130,
+                  child: TextFormField(
+                      controller: controller.endTime.value,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.date_range_outlined),
+                        label: Text('End Time'),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        controller.chooseEndTime();
+                      }),
                 ),
-              ],
-            ),
+              ),
+            ]),
 
             const SizedBox(height: 10),
             const Divider(thickness: 1),
@@ -140,7 +125,6 @@ class EditMigraineRecordScreen extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(10, (index) {
                   return Container(
                     width: 140,
@@ -192,12 +176,10 @@ class EditMigraineRecordScreen extends StatelessWidget {
             Column(
               children: List.generate(painPosition.length, (index) {
                 final pPosition = painPosition[index];
-                //! check if the retrieve value equal pain position value, then make the checkbox = true
-                //for (int i = 0; i < event.painPosition!.length; i++) {
+                // check if the retrieve value equal pain position value, then make the checkbox = true
                 if (pPosition["text"] == event.painPosition![0]) {
                   controller.pCheckBoxIsChecked[index] = true;
                 }
-                //}
 
                 return Obx(
                   () => Container(
@@ -240,47 +222,6 @@ class EditMigraineRecordScreen extends StatelessWidget {
                         .apply(color: primaryColor)),
               ],
             ),
-            const SizedBox(height: 15),
-            // Column(
-            //   children: List.generate(triggers.length, (index) {
-            //     final trigger = triggers[index];
-            //     if (trigger["text"] == event.triggers![index]) {
-            //       controller.tCheckBoxIsChecked[index] = true;
-            //     } else if (event.triggers!.contains(trigger["text"])) {
-            //       //controller.tOthersField.value=;
-            //     }
-            //     //! find the different value from the trigger list (for tOtherTextFielduu)
-            //     Set<int> uniqueSet = trigger["text"].toSet();
-            //     List<int> differentValues = trigger["text"]
-            //         .where((value) => !uniqueSet.remove(value))
-            //         .toList();
-            //     return Column(
-            //       children: [
-            //         Obx(
-            //           () => Container(
-            //             margin: const EdgeInsets.symmetric(vertical: 5),
-            //             decoration: BoxDecoration(
-            //                 border: Border.all(color: Colors.grey.shade200),
-            //                 borderRadius: BorderRadius.circular(20),
-            //                 color: controller.tCheckBoxIsChecked[index]
-            //                     ? primaryColor.withOpacity(0.1)
-            //                     : Colors.white70),
-            //             child: CheckboxListTile(
-            //               activeColor: primaryColor,
-            //               checkboxShape: RoundedRectangleBorder(
-            //                   borderRadius: BorderRadius.circular(5)),
-            //               value: controller.tCheckBoxIsChecked[index],
-            //               title: Text(trigger["text"]),
-            //               onChanged: (val) {
-            //                 controller.tCheckBoxIsChecked[index] = val!;
-            //               },
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     );
-            //   }),
-            // ),
             const SizedBox(height: 10),
 
             SizedBox(
@@ -302,20 +243,18 @@ class EditMigraineRecordScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             //*-----Medicine-----*//
-            Row(
-              children: [
-                Image.asset(
-                  medicineIcon,
-                  width: 25,
-                  height: 25,
-                ),
-                Text(" Medicine",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .apply(color: primaryColor)),
-              ],
-            ),
+            Row(children: [
+              Image.asset(
+                medicineIcon,
+                width: 25,
+                height: 25,
+              ),
+              Text(" Medicine",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .apply(color: primaryColor)),
+            ]),
             const SizedBox(height: 15),
             Column(
               children: List.generate(medicines.length, (index) {
@@ -364,10 +303,6 @@ class EditMigraineRecordScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
                 onPressed: () {
-                  print('${controller.tCheckBoxIsChecked}');
-                  print('${controller.mCheckBoxIsChecked}');
-                  //controller.storeMigraineRecord(currentWeatherData);
-
                   Get.off(() => const HomeScreen());
                 },
                 child: const Text('Submit')),

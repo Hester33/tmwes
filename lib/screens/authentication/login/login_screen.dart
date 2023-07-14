@@ -12,7 +12,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //! final _authDb = Get.put(AuthenticationDb());
     AuthenticationDb authDb = Get.find();
     final size = MediaQuery.of(context).size;
     return SafeArea(
@@ -32,42 +31,31 @@ class LoginScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Container(
           padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(logo),
-                height: size.height * 0.3,
-              ),
+          child: Column(children: [
+            Image(
+              image: AssetImage(logo),
+              height: size.height * 0.3,
+            ),
 
-              /* --- Form --- */
-              const LoginForm(),
-              /* --- End --- */
-//  Widget forgotPassword() {
-//     return
-//! Modify
-              //}
-              // TextButton(
-              //   onPressed: () {
-              //     Get.off(() => const SignUpScreen());
-              //   },
-              //   child:
-              Text.rich(
-                TextSpan(
-                    text: "Don't have an account? ",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    children: [
-                      TextSpan(
-                          text: 'SIGN UP',
-                          style: const TextStyle(color: Colors.blue),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Get.off(() => const SignUpScreen());
-                            }),
-                    ]),
-              ),
-              //)
-            ],
-          ),
+            /* --- Form --- */
+            const LoginForm(),
+            /* --- End --- */
+
+            Text.rich(
+              TextSpan(
+                  text: "Don't have an account? ",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  children: [
+                    TextSpan(
+                        text: 'SIGN UP',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.off(() => const SignUpScreen());
+                          }),
+                  ]),
+            ),
+          ]),
         )),
       ),
     );

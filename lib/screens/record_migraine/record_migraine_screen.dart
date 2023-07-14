@@ -5,27 +5,20 @@ import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/models/current_weather_model.dart';
 import 'package:tmwes/screens/calendar/calendar_screen.dart';
-import 'package:tmwes/screens/home/home_screen.dart';
-
 import '../../controllers/record_migraine_controller.dart';
 
 class RecordMigraineScreen extends StatelessWidget {
-  // final DateTime firstDate;
-  // final DateTime lastDate;
   final DateTime? selectedDate;
   final CurrentWeatherModel currentWeatherData;
   const RecordMigraineScreen({
     super.key,
     required this.currentWeatherData,
     required this.selectedDate,
-    // required this.firstDate,
-    // required this.lastDate
   });
 
   @override
   Widget build(BuildContext context) {
     final controller = RecordMigraineController.instance;
-    //! might remove the selectedDate (not letting the user choose date)
     controller.selectedDate.value = selectedDate ?? DateTime.now();
 
     controller.painLvlIndex.value = -1;
@@ -69,42 +62,39 @@ class RecordMigraineScreen extends StatelessWidget {
             ]),
             const SizedBox(height: 10),
             //*-----Time Picker-----*//
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Obx(
-                  () => SizedBox(
-                    width: 130,
-                    child: TextFormField(
-                        controller: controller.startTime.value,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.access_time_outlined),
-                          label: Text('Start Time'),
-                        ),
-                        readOnly: true,
-                        onTap: () {
-                          controller.chooseStartTime();
-                        }),
-                  ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Obx(
+                () => SizedBox(
+                  width: 130,
+                  child: TextFormField(
+                      controller: controller.startTime.value,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.access_time_outlined),
+                        label: Text('Start Time'),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        controller.chooseStartTime();
+                      }),
                 ),
-                const Text("to"),
-                Obx(
-                  () => SizedBox(
-                    width: 130,
-                    child: TextFormField(
-                        controller: controller.endTime.value,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.access_time_outlined),
-                          label: Text('End Time'),
-                        ),
-                        readOnly: true,
-                        onTap: () {
-                          controller.chooseEndTime();
-                        }),
-                  ),
+              ),
+              const Text("to"),
+              Obx(
+                () => SizedBox(
+                  width: 130,
+                  child: TextFormField(
+                      controller: controller.endTime.value,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.access_time_outlined),
+                        label: Text('End Time'),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        controller.chooseEndTime();
+                      }),
                 ),
-              ],
-            ),
+              ),
+            ]),
 
             const SizedBox(height: 10),
             const Divider(thickness: 1),
@@ -134,7 +124,6 @@ class RecordMigraineScreen extends StatelessWidget {
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: primaryColor.withOpacity(0.2))),
-                          //labelText: 'Others',
                           hintText: 'Enter weather description',
                         ),
                       ),
@@ -186,7 +175,6 @@ class RecordMigraineScreen extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(10, (index) {
                   return Container(
                     width: 140,
@@ -219,20 +207,18 @@ class RecordMigraineScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             //*-----Pain Position-----*//
-            Row(
-              children: [
-                Image.asset(
-                  painPositionIcon,
-                  width: 30,
-                  height: 30,
-                ),
-                Text(" Pain Position",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .apply(color: primaryColor)),
-              ],
-            ),
+            Row(children: [
+              Image.asset(
+                painPositionIcon,
+                width: 30,
+                height: 30,
+              ),
+              Text(" Pain Position",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .apply(color: primaryColor)),
+            ]),
             const SizedBox(height: 15),
 
             Column(
@@ -393,14 +379,10 @@ class RecordMigraineScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
                 onPressed: () {
-                  print('${controller.tCheckBoxIsChecked}');
-                  print('${controller.mCheckBoxIsChecked}');
                   controller.storeMigraineRecord(currentWeatherData);
-
-                  Get.off(() => const CalendarScreen());
+                  Get.offAll(() => const CalendarScreen());
                 },
                 style: ElevatedButton.styleFrom(
-                  //backgroundColor: Colors.green,
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 28),
                   shape: RoundedRectangleBorder(

@@ -23,27 +23,16 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(30),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //     // Text(
-                    //     //   'Reset Password',
-                    //     //   style: TextStyle(
-                    //     //       color: Colors.black,
-                    //     //       fontWeight: FontWeight.w500,
-                    //     //       fontSize: 22),
-                    //     // ),
-                    //     // SizedBox(height: 10),
-                    //! might be deleted
-                    const Text(
-                      'Please enter your email to reset the password.',
-                      //textAlign: TextAlign.start,
-                      style: TextStyle(color: Colors.black87, fontSize: 16),
-                    ),
-                    const SizedBox(height: 10),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Please enter your email to reset the password.',
+                        style: TextStyle(color: Colors.black87, fontSize: 16),
+                      ),
+                      const SizedBox(height: 10),
+                      Form(
+                        key: formKey,
+                        child: Column(children: [
                           TextFormField(
                               controller: controller.email,
                               decoration: const InputDecoration(
@@ -66,7 +55,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                               child: ElevatedButton(
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
-                                      //!demo loading in btn
                                       controller.showLoading.value = true;
                                       controller.resetPwd(
                                           controller.email.text.trim());
@@ -76,10 +64,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                                         title: "Email sent!",
                                         middleText:
                                             "Please check your email to reset the password.",
-                                        titleStyle:
-                                            const TextStyle(color: Colors.green),
-                                        middleTextStyle:
-                                            const TextStyle(color: Colors.blueGrey),
+                                        titleStyle: const TextStyle(
+                                            color: Colors.green),
+                                        middleTextStyle: const TextStyle(
+                                            color: Colors.blueGrey),
                                         textConfirm: "Ok",
                                         confirmTextColor: Colors.white,
                                         onConfirm: () => Get.offAll(
@@ -89,7 +77,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                                       controller.showLoading.value = false;
                                     }
                                   },
-                                  //!demo loading
                                   child: controller.showLoading.value
                                       ? const CircularProgressIndicator(
                                           color: Colors.white,
@@ -97,13 +84,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                                       : const Text('Send Verification Email')),
                             ),
                           ),
-
-                          //)
-                        ],
+                        ]),
                       ),
-                    ),
-                  ],
-                ),
+                    ]),
               ),
             ),
           )),

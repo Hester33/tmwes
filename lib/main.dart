@@ -22,8 +22,6 @@ void main() async {
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
     Get.put(AuthenticationDb());
-    //   // Get.put(UserDb());
-    //   //init();
   });
   runApp(const MyApp());
 }
@@ -31,7 +29,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

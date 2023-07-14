@@ -6,7 +6,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/controllers/calendar_controller.dart';
 import 'package:tmwes/controllers/home_controller.dart';
-import 'package:tmwes/controllers/record_migraine_controller.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 import 'package:tmwes/screens/record_migraine/record_migraine_screen.dart';
 import 'package:tmwes/services/record_migraine_db.dart';
@@ -139,7 +138,7 @@ class _CalendarScreen extends State<CalendarScreen> {
         ),
         ..._getEventsForTheDay(_selectedDay).map((event) => Column(children: [
               const SizedBox(height: 20),
-              //!Date
+              //Date
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
