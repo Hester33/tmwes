@@ -29,24 +29,11 @@ class HIT6Controller extends GetxController {
 
   answerQuestion(int score, index, List<Map<String, dynamic>> questions,
       answers, Object? answer) {
-    //!assign answer index to question
+    //assign answer index to question
     selectedAnswerIndices[index] = answer as int;
-    print('AnswerInC: $answer');
-
-//!check if the questions have save the answer
-    print('questions Object: $questions');
 
     // ignore: avoid_print
     print('$questionIndex, score: $score');
-    //!maybe should pass it back to the screen
-
-    // for (int i = 0; i < answers.length; i++) {
-    //   if (answers[i]['ansIndex'] == answer) {
-    //     answers[i]['selected'] = answer;
-    //   } else {
-    //     answers[i]['selected'] = -1;
-    //   }
-    // }
   }
 
   Future<void> storeRecord() async {
@@ -61,19 +48,6 @@ class HIT6Controller extends GetxController {
     return await hit6Db.getHIT6Record(recordDate);
   }
 
-  // int calculateScore(List<Map<String, dynamic>> questions, answers) {
-  //   int totalScore = 0;
-  //   int index = 0; //not sure
-
-  //   for (int i = 0; i < questions.length; i++) {
-  //     //int answerIndex = selectedAnswers[i];
-  //     //int score = questions[i]['answers'][answerIndex]['score'];
-  //     totalScore += questions[i]['selectedAnswerScore'] as int;
-  //     print('total score: $totalScore');
-  //   }
-  //   //!checking total score
-  //   return totalScore;
-  // }
   int calculateScore(List<Map<String, dynamic>> answers) {
     int score = 0;
 
@@ -92,9 +66,7 @@ class HIT6Controller extends GetxController {
   }
 
   void resetTest() {
-    //questionIndex.value = 0;
     totalScore.value = 0;
-    print("reset: $questionIndex, total: $totalScore");
   }
 
 //*-----HIT-6 Result-----*//
@@ -106,7 +78,6 @@ class HIT6Controller extends GetxController {
     } else if (score >= 50 && totalScore.value <= 55) {
       return moderateMigraine;
     } else {
-      //if (totalScore.value >= 36 && totalScore.value <= 49)
       return lowLvlMigraine;
     }
   }
@@ -121,20 +92,17 @@ class HIT6Controller extends GetxController {
 
   // Get the result message based on the result score
   void getIndex(score) {
-    String resultText = '';
     for (int i = 0; i < resultMessages.length; i++) {
-      //! check score
+      // check score
       if (score >= (resultMessages[i]['score'] as int)) {
         index.value = i;
         return;
       }
     }
-    //return index;
   }
 
   //*-----HIT-6 Record-----*//
   scoreColour(int value) {
-    // ignore: unnecessary_null_comparison
     if (value > 55) {
       return Colors.redAccent;
     } else if (value >= 50 && value <= 55) {
@@ -148,7 +116,6 @@ class HIT6Controller extends GetxController {
 
   getMigraineImpactMessage(int score) {
     String message = 'No message found';
-
     for (var result in resultMessages) {
       if (score >= result['score']) {
         message = result['message'];

@@ -1,19 +1,27 @@
-#TMWES
-#TREAT MIGRAINE WEWATHER EXPERIENCE SYSTEM 
- 
-This is my Final Year Project at Multimedia University.
+<p align="center">
+  <img src="https://github.com/Hester33/tmwes/blob/master/assets/images/logo.png" width="200" height="200" title="TMWES">
+</p>
+<b>Treat Migraine Weather Experience System (TMWES) is an Android-based application designed to assist individuals in effectively managing their migraine condition, particularly those triggered by weather changes.</b>
+<br/><br/>
 
-##A Mobile Application that can help magraine patients throughout their daily day
-TMWES is an Android-based application designed to assist individuals in effectively managing their migraine condition, particularly those triggered by weather changes.
+## 🗝 &nbsp; Key Features of the TMWES application:
 
-##Key Features of the TMWES application:   
-Account Registration: Create your TMWES account to access personalized features.
-Login: Securely log in to the application using your registered credentials.
-Weather Information: Stay updated with current and forecast weather information.
-Health Recommendations: Provide personalized health recommendations based on weather data.
-Migraine Diary: Maintain a diary that tracks pain events and their correlation with weather conditions.
-Headache Impact Test (HIT-6): Evaluate your migraine impaction through assessments.
-Report Generation: Generate a summary migraine report based on the your input migraine data.
-Update Profile: Update user details through Profile Screen.
-Forgot Password: User are able to reset their password through receiving an email, in case they have forgotten their password.
+- <b>Account Registration:</b> Create your TMWES account to access personalized features.
+- <b>Login:</b> Securely log into the application using your registered credentials.
+- <b>Weather Information:</b> Stay updated with current and forecast weather information.
+- <b>Health Recommendations:</b> Provide personalized health recommendations based on weather data.
+- <b>Migraine Diary:</b> Maintain a diary that tracks pain events and their correlation with weather conditions.
+- <b>Headache Impact Test (HIT-6):</b> Evaluate your migraine impaction through assessments.
+- <b>Report Generation:</b> Generate a summary migraine report based on your input migraine data.
+- <b>Update Profile:</b> Update user details through Profile Screen.
+- <b>Forgot Password:</b> Users are able to reset their password by receiving an email, in case they have forgotten their password.
 
+<br/>
+
+## ⭐ &nbsp; Procedure for using the application: 
+1. Download the .apk file from [here](https://drive.google.com/file/d/1sn_Gjm2dgAMntnWHOAXoChk-llQvxUy4/view?usp=sharing).
+2. Install the .apk file on your device.
+3. Open the TMWES application by tapping on the app icon.
+4. Register for an account using your email.
+5. Fill in all the necessary information. 
+6. Log into the application and explore all the available features!   

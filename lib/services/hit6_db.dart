@@ -78,6 +78,7 @@ class HIT6Db extends GetxController {
     return record;
   }
 
+//get 2 record from firestore for displaying migraine risk
   Future<List<HIT6Model>> getMigraineRisk() async {
     User? currentUser = auth.currentUser;
     final snapshot = await firestore

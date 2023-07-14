@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/screens/report/report_screen.dart';
 import 'package:tmwes/services/authentication_db.dart';
 import 'package:tmwes/services/user_db.dart';
@@ -15,8 +16,6 @@ class ProfileController extends GetxController {
   final _authDb = AuthenticationDb.instance;
   final _userDb = UserDb.instance;
   int timeRange = 0;
-  // final _authDb = Get.put(AuthenticationDb());
-  //final _userDb = Get.put(UserDb());
 
   //Get user's id and pass to userDb for fetch user data
   getUserData() {
@@ -60,8 +59,6 @@ class ProfileController extends GetxController {
       title: "Are you sure want to logout?",
       middleText: "",
       titlePadding: const EdgeInsets.only(top: 20),
-      //titleStyle: const TextStyle(color: Colors.green),
-      //middleTextStyle: const TextStyle(color: Colors.blueGrey),
       textConfirm: "Yes",
       confirmTextColor: Colors.white,
       onConfirm: () => AuthenticationDb.instance.logout(),
@@ -111,7 +108,25 @@ class ProfileController extends GetxController {
         ),
       ]),
       middleTextStyle: const TextStyle(color: Colors.blueGrey),
-      //barrierDismissible: false,
+    );
+  }
+
+  Future<dynamic> termsOfUseDialog() {
+    return Get.defaultDialog(
+      titlePadding: const EdgeInsets.only(top: 10),
+      title: "Terms of Use:",
+      content: const Flexible(
+        child: SingleChildScrollView(
+            child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(termsOfUse),
+        )),
+      ),
+      middleTextStyle: const TextStyle(color: Colors.blueGrey),
+      textConfirm: "Ok",
+      confirmTextColor: Colors.white,
+      onConfirm: () => Get.back(),
+      barrierDismissible: false,
     );
   }
 }

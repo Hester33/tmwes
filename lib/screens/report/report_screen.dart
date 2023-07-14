@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,13 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/constants/shared_functions.dart';
 import 'package:tmwes/controllers/profile_controller.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
 import 'package:tmwes/models/user_model.dart';
-import 'package:tmwes/screens/profile/edit_profile_screen.dart';
-import 'package:tmwes/screens/profile/profile_screen.dart';
 import 'package:tmwes/services/record_migraine_db.dart';
 
 class Report extends StatefulWidget {
@@ -50,8 +46,8 @@ class _ReportState extends State<Report> {
 
   getMigraineRecords() async {
     checkRecord = true;
-    endTime =
-        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    endTime = DateTime(DateTime.now().year, DateTime.now().month,
+        DateTime.now().day, DateTime.now().hour, DateTime.now().minute);
     int day = 0;
     if (timeRange == 1) {
       day = 30;
@@ -63,6 +59,7 @@ class _ReportState extends State<Report> {
     startTime = endTime.subtract(Duration(days: day));
     records = await RecordMigraineDb.instance
         .getMigraineRecordsforReport(startTime, endTime);
+    print("$startTime, $endTime");
     if (records.isEmpty) {
       print("no records.");
       checkRecord = false;
@@ -126,38 +123,117 @@ class _ReportState extends State<Report> {
             bold: font2,
           ),
         ),
+        header: (pw.Context context) {
+          return pw.Header(
+            level: 0,
+            child: pw.Column(children: [
+              pw.Row(mainAxisAlignment: pw.MainAxisAlignment.center, children: [
+                pw.Image(
+                  pw.MemoryImage(logoData),
+                  width: 60,
+                  height: 60,
+                ),
+                pw.Text(
+                  '  Migraine Report',
+                  style: pw.TextStyle(
+                      fontSize: 28, fontWeight: pw.FontWeight.bold),
+                ),
+              ]),
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Text(
+                          ' ${userData.fullName}',
+                          style: pw.TextStyle(
+                              fontSize: 20, fontWeight: pw.FontWeight.bold),
+                        ),
+                        pw.Row(children: [
+                          pw.Text(' Time Period: ',
+                              style: pw.TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: pw.FontWeight.bold)),
+                          pw.Text(
+                              '${formatRecordDate(startTime)} - ${formatRecordDate(endTime)}',
+                              style: pw.TextStyle(
+                                fontSize: 18,
+                                fontWeight: pw.FontWeight.bold,
+                              )),
+                        ]),
+                        pw.Text(
+                          ' Age: $age',
+                          style: pw.TextStyle(
+                              fontSize: 18, fontWeight: pw.FontWeight.bold),
+                        ),
+                      ]),
+                  pw.Table(
+                      border: pw.TableBorder.all(color: PdfColors.blueGrey700),
+                      defaultVerticalAlignment:
+                          pw.TableCellVerticalAlignment.middle,
+                      children: [
+                        pw.TableRow(
+                            decoration: const pw.BoxDecoration(
+                                color: PdfColors.blueGrey300),
+                            children: [
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.symmetric(
+                                    horizontal: 10),
+                                child: pw.Column(children: [
+                                  pw.Text(
+                                    'Number of Attack',
+                                    style: pw.TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: pw.FontWeight.bold),
+                                  )
+                                ]),
+                              )
+                            ]),
+                        pw.TableRow(children: [
+                          pw.Center(
+                            child: pw.Text(
+                              '${records.length}',
+                              style: pw.TextStyle(
+                                  fontSize: 16, fontWeight: pw.FontWeight.bold),
+                            ),
+                          ),
+                        ]),
+                      ]),
+                ],
+              ),
+            ]),
+          );
+        },
         footer: (pw.Context context) {
           return pw.Column(children: [
             pw.Divider(),
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.start,
-              children: [
-                pw.RichText(
-                  text: const pw.TextSpan(
-                    children: [
-                      pw.TextSpan(
-                        text:
-                            'The TMWES app aims to foster improved collaboration between individuals and their \ncare teams while providing clear and user-friendly doctor reports. \nWe value your feedback on how we can enhance this report. \nPlease share your insights with us at ',
-                        style: pw.TextStyle(
-                            fontSize: 13, color: PdfColors.grey900),
-                      ),
-                      pw.TextSpan(
-                        text: 'tmwes1111@gmail.com',
-                        style: pw.TextStyle(
-                            decoration: pw.TextDecoration.underline,
-                            fontSize: 13,
-                            color: PdfColors.blue900),
-                      ),
-                      pw.TextSpan(text: '.'),
-                    ],
-                  ),
+            pw.Row(mainAxisAlignment: pw.MainAxisAlignment.start, children: [
+              pw.RichText(
+                text: const pw.TextSpan(
+                  children: [
+                    pw.TextSpan(
+                      text:
+                          'The TMWES app aims to foster improved collaboration between individuals and their \ncare teams while providing clear and user-friendly doctor reports. \nWe value your feedback on how we can enhance this report. \nPlease share your insights with us at ',
+                      style:
+                          pw.TextStyle(fontSize: 13, color: PdfColors.grey900),
+                    ),
+                    pw.TextSpan(
+                      text: 'tmwes1111@gmail.com',
+                      style: pw.TextStyle(
+                          decoration: pw.TextDecoration.underline,
+                          fontSize: 13,
+                          color: PdfColors.blue900),
+                    ),
+                    pw.TextSpan(text: '.'),
+                  ],
                 ),
-              ],
-            )
+              ),
+            ])
           ]);
         },
         build: (context) {
-          const rowsPerPage = 8;
+          const rowsPerPage = 5;
           final totalRows = records.length;
           final totalPages = (totalRows / rowsPerPage).ceil();
 
@@ -168,166 +244,104 @@ class _ReportState extends State<Report> {
             final endIndex = (startIndex + rowsPerPage).clamp(0, totalRows);
             final pageRows = records.sublist(startIndex, endIndex);
 
-            pages.add(
-              pw.Column(children: [
-                pw.Header(
-                  level: 0,
-                  child: pw.Column(children: [
-                    pw.Row(
-                        mainAxisAlignment: pw.MainAxisAlignment.center,
-                        children: [
-                          pw.Image(
-                            pw.MemoryImage(logoData),
-                            width: 60,
-                            height: 60,
-                          ),
-                          pw.Text(
-                            '  Migraine Report',
-                            style: pw.TextStyle(
-                                fontSize: 28, fontWeight: pw.FontWeight.bold),
-                          ),
-                        ]),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: [
-                              pw.Text(
-                                ' ${userData.fullName}',
-                                style: pw.TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: pw.FontWeight.bold),
-                              ),
-                              pw.Row(children: [
-                                pw.Text(' Time Period: ',
-                                    style: pw.TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: pw.FontWeight.bold)),
-                                pw.Text(
-                                    '${formatRecordDate(startTime)} - ${formatRecordDate(endTime)}',
-                                    style: pw.TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: pw.FontWeight.bold,
-                                    )),
-                              ]),
-                              pw.Text(
-                                ' Age: $age',
-                                style: pw.TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: pw.FontWeight.bold),
-                              ),
-                            ]),
-                        pw.Table(
-                            border: pw.TableBorder.all(
-                                color: PdfColors.blueGrey700),
-                            defaultVerticalAlignment:
-                                pw.TableCellVerticalAlignment.middle,
-                            children: [
-                              pw.TableRow(
-                                  decoration: const pw.BoxDecoration(
-                                      color: PdfColors.blueGrey300),
-                                  children: [
-                                    pw.Padding(
-                                      padding: const pw.EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: pw.Column(children: [
+            pages.add(pw.Column(children: [
+              pw.Center(
+                child: pw.Column(
+                    mainAxisAlignment: pw.MainAxisAlignment.center,
+                    children: [
+                      //!checking the record
+                      checkRecord
+                          ? pw.Table(
+                              border: pw.TableBorder.all(
+                                  color: PdfColors.blueGrey700),
+                              defaultVerticalAlignment:
+                                  pw.TableCellVerticalAlignment.middle,
+                              children: [
+                                  pw.TableRow(
+                                    decoration: const pw.BoxDecoration(
+                                        color: PdfColors.blueGrey300),
+                                    children: [
+                                      pw.Column(children: [
                                         pw.Text(
-                                          'Number of Attack',
+                                          'Time',
                                           style: pw.TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 12,
                                               fontWeight: pw.FontWeight.bold),
                                         )
                                       ]),
-                                    )
-                                  ]),
-                              pw.TableRow(children: [
-                                pw.Center(
-                                  child: pw.Text(
-                                    '${records.length}',
-                                    style: pw.TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: pw.FontWeight.bold),
+                                      pw.Column(children: [
+                                        pw.Text(
+                                          'Pain\nLevel',
+                                          style: pw.TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: pw.FontWeight.bold),
+                                        )
+                                      ]),
+                                      pw.Column(children: [
+                                        pw.Text(
+                                          'Pain Position',
+                                          style: pw.TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: pw.FontWeight.bold),
+                                        )
+                                      ]),
+                                      pw.Padding(
+                                          padding:
+                                              const pw.EdgeInsets.symmetric(
+                                                  horizontal: 2),
+                                          child: pw.Column(children: [
+                                            pw.SizedBox(
+                                                width: 58,
+                                                child: pw.Text(
+                                                  'Weather',
+                                                  style: pw.TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          pw.FontWeight.bold),
+                                                ))
+                                          ])),
+                                      pw.Padding(
+                                          padding:
+                                              const pw.EdgeInsets.symmetric(
+                                                  horizontal: 2),
+                                          child: pw.Column(children: [
+                                            pw.Text(
+                                              'Trigger',
+                                              style: pw.TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight:
+                                                      pw.FontWeight.bold),
+                                            )
+                                          ])),
+                                      pw.Padding(
+                                          padding:
+                                              const pw.EdgeInsets.symmetric(
+                                                  horizontal: 2),
+                                          child: pw.Column(children: [
+                                            pw.SizedBox(
+                                                width: 65,
+                                                child: pw.Text(
+                                                  ' Medicine',
+                                                  style: pw.TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          pw.FontWeight.bold),
+                                                ))
+                                          ])),
+                                    ],
                                   ),
-                                ),
-                              ]),
-                            ]),
-                      ],
-                    ),
-                  ]),
-                ),
-                pw.Center(
-                  child: pw.Column(
-                      mainAxisAlignment: pw.MainAxisAlignment.center,
-                      children: [
-                        //!checking the record
-                        checkRecord
-                            ? pw.Padding(
-                                padding: const pw.EdgeInsets.all(5),
-                                child: pw.Table(
-                                    border: pw.TableBorder.all(
-                                        color: PdfColors.blueGrey700),
-                                    defaultVerticalAlignment:
-                                        pw.TableCellVerticalAlignment.middle,
-                                    children: [
-                                      pw.TableRow(
-                                        decoration: const pw.BoxDecoration(
-                                            color: PdfColors.blueGrey300),
-                                        children: [
-                                          pw.Column(children: [
-                                            pw.Text(
-                                              'Time',
-                                              style: pw.TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            )
-                                          ]),
-                                          pw.Column(children: [
-                                            pw.Text(
-                                              'Pain Level',
-                                              style: pw.TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            )
-                                          ]),
-                                          pw.Column(children: [
-                                            pw.Text(
-                                              'Pain Position',
-                                              style: pw.TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            )
-                                          ]),
-                                          pw.Column(children: [
-                                            pw.Text(
-                                              'Trigger(s)',
-                                              style: pw.TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            )
-                                          ]),
-                                          pw.Column(children: [
-                                            pw.Text(
-                                              'Medicine(s)',
-                                              style: pw.TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight:
-                                                      pw.FontWeight.bold),
-                                            )
-                                          ]),
-                                        ],
-                                      ),
-                                      ...pageRows
-                                          .map((record) =>
-                                              pw.TableRow(children: [
-                                                pw.Column(
-                                                  children: [
+                                  ...pageRows
+                                      .map((record) => pw.TableRow(children: [
+                                            pw.SizedBox(
+                                              width: 95,
+                                              height: 90,
+                                              child: pw.Padding(
+                                                  padding: const pw
+                                                          .EdgeInsets.symmetric(
+                                                      horizontal: 2),
+                                                  child: pw.Column(children: [
                                                     pw.Text(
-                                                      'Start Time: \n${DateFormat('d/M/y H:m').format(record.mRecordDate)}',
+                                                      'Start Time: \n${DateFormat('d/M/y').format(record.mRecordDate)}\n${record.startTime}',
                                                       style: const pw.TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -336,67 +350,85 @@ class _ReportState extends State<Report> {
                                                       style: const pw.TextStyle(
                                                           fontSize: 12),
                                                     )
-                                                  ],
-                                                ),
-                                                pw.Column(
-                                                  children: [
-                                                    pw.Text(
-                                                      record.painLevel != null
-                                                          ? record.painLevel!
-                                                          : 'N/A',
-                                                      style: const pw.TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                                pw.Column(
-                                                  children: [
-                                                    pw.Text(
-                                                      record.painPosition !=
-                                                              null
-                                                          ? record.painPosition!
-                                                              .join(', ')
-                                                          : 'N/A',
-                                                      style: const pw.TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                                pw.Column(
-                                                  children: [
-                                                    pw.Text(
-                                                      record.triggers != null
-                                                          ? record.triggers!
-                                                              .join(', ')
-                                                          : 'N/A',
-                                                      style: const pw.TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ],
-                                                ),
-                                                pw.Column(
-                                                  children: [
-                                                    pw.Text(
-                                                      record.medicine != null
-                                                          ? record.medicine!
-                                                              .join(', ')
-                                                          : 'N/A',
-                                                      style: const pw.TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ],
-                                                ),
-                                              ]))
-                                          .toList(),
-                                    ]))
-                            : pw.Text('No Record.',
-                                style: const pw.TextStyle(fontSize: 14)),
-
-                        pw.SizedBox(height: 10),
-                      ]),
-                ),
-              ]),
-            );
+                                                  ])),
+                                            ),
+                                            pw.Padding(
+                                                padding: const pw
+                                                        .EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: pw.Column(children: [
+                                                  pw.Text(
+                                                    record.painLevel != null
+                                                        ? record.painLevel!
+                                                        : 'N/A',
+                                                    style: const pw.TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                ])),
+                                            pw.Padding(
+                                                padding: const pw
+                                                        .EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: pw.Column(children: [
+                                                  pw.Text(
+                                                    record.painPosition != null
+                                                        ? record.painPosition!
+                                                            .join(', ')
+                                                        : 'N/A',
+                                                    style: const pw.TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                ])),
+                                            pw.Padding(
+                                                padding: const pw
+                                                        .EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: pw.Column(children: [
+                                                  pw.Text(
+                                                    record.weather != null
+                                                        ? record.weather!
+                                                        : 'N/A',
+                                                    style: const pw.TextStyle(
+                                                        fontSize: 12),
+                                                  ),
+                                                ])),
+                                            pw.Padding(
+                                                padding: const pw
+                                                        .EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: pw.Column(children: [
+                                                  pw.Text(
+                                                    record.triggers != null
+                                                        ? record.triggers!
+                                                            .join(', ')
+                                                        : 'N/A',
+                                                    style: const pw.TextStyle(
+                                                        fontSize: 12),
+                                                  )
+                                                ])),
+                                            pw.Padding(
+                                                padding: const pw
+                                                        .EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: pw.Column(children: [
+                                                  pw.Text(
+                                                    record.medicine != null
+                                                        ? record.medicine!
+                                                            .join(', ')
+                                                        : 'N/A',
+                                                    style: const pw.TextStyle(
+                                                        fontSize: 12),
+                                                  )
+                                                ])),
+                                          ]))
+                                      .toList(),
+                                ])
+                          : pw.Text('No Record.',
+                              style: const pw.TextStyle(fontSize: 14)),
+                      pw.SizedBox(height: 10),
+                    ]),
+              ),
+            ]));
           }
           return pages;
         },

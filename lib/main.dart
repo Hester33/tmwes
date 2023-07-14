@@ -10,7 +10,7 @@ import 'package:tmwes/utils/theme/theme.dart';
 
 import 'helpers/init_controller.dart';
 
-//!flutter pub upgrade --major-version
+//!flutter pub upgrade --major-versions
 
 void main() async {
   // Initialize date formatting for the 'ms_MY' locale (Malay language in Malaysia)

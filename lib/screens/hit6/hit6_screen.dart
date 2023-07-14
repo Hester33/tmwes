@@ -11,17 +11,16 @@ class HIT6Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = HIT6Controller.instance;
-    int questionIndex;
-    int ansIndex;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('HIT-6',
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall
-                ?.apply(color: Colors.white)),
+        leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(Icons.arrow_back_ios)),
         centerTitle: true,
+        title: const Text(
+          'HIT-6',
+        ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
@@ -44,7 +43,6 @@ class HIT6Screen extends StatelessWidget {
                         Center(
                           child: Wrap(
                             spacing: 15,
-                            //runSpacing: 10,
                             direction: Axis.vertical,
                             children: answers.map((answer) {
                               final answerText = answer['text'].toString();
@@ -60,16 +58,9 @@ class HIT6Screen extends StatelessWidget {
                                                   .isSelected(
                                                       index, answerIndex)
                                               ? primaryColor.withOpacity(0.8)
-                                              : Colors.blue.shade100,
+                                              : Colors.blue.shade50,
                                         ),
                                         onPressed: () {
-                                          //!test
-                                          questionIndex = questions[index]
-                                              ['questionIndex'] as int;
-                                          print(
-                                              'AnsIndex: ${answer['ansIndex']}');
-                                          // controller.selectedAns.value =
-                                          //     !controller.selectedAns.value;
                                           controller.answerQuestion(
                                               score,
                                               index,
@@ -97,28 +88,24 @@ class HIT6Screen extends StatelessWidget {
                         ),
                         Center(
                           child: index == questions.length - 1
-                              ? Column(
-                                  children: [
-                                    const SizedBox(height: 20),
-                                    SizedBox(
-                                      width: 130,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          int score = controller
-                                              .calculateScore(answers);
-                                          //!check score
-                                          print('Score: $score');
-                                          controller.storeRecord();
-                                          Get.off(() => ResultScreen(
-                                              score, controller.resetTest));
-                                        },
-                                        child: const Text("Submit",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold)),
-                                      ),
+                              ? Column(children: [
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    width: 130,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        int score =
+                                            controller.calculateScore(answers);
+                                        controller.storeRecord();
+                                        Get.off(() => ResultScreen(
+                                            score, controller.resetTest));
+                                      },
+                                      child: const Text("Submit",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                     ),
-                                  ],
-                                )
+                                  )
+                                ])
                               : null,
                         )
                       ]));

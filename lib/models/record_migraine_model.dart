@@ -1,10 +1,10 @@
-//date, score, selectedans, userId
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecordMigraineModel {
   final String? userId;
   final String? weather;
   final DateTime mRecordDate;
+  final String startTime;
   final int? hour;
   final int? minutes;
   final String? painLevel;
@@ -12,11 +12,11 @@ class RecordMigraineModel {
   final List<String>? triggers;
   final List<String>? medicine;
 
-//! Add weather variables
   RecordMigraineModel({
     this.userId,
     required this.weather,
     required this.mRecordDate,
+    required this.startTime,
     required this.hour,
     required this.minutes,
     required this.painLevel,
@@ -29,8 +29,8 @@ class RecordMigraineModel {
     return {
       "uid": userId,
       "weather": weather,
-      //!checking the date
       "record_date": Timestamp.fromDate(mRecordDate),
+      "start_time": startTime,
       "hour": hour,
       "minutes": minutes,
       "pain_level": painLevel,
@@ -45,12 +45,12 @@ class RecordMigraineModel {
     //Map<String,dynamic>
     //String=key_name, dynamic=value
     final data = doc.data();
-    //Timestamp rDate = data!["record_date"] as Timestamp;
+    Timestamp rDate = data!["record_date"] as Timestamp;
     return RecordMigraineModel(
       userId: data!["uid"],
       weather: data["weather"],
-      //!might not working
-      mRecordDate: (data["record_date"]).toDate(),
+      mRecordDate: rDate.toDate(),
+      startTime: data["start_time"],
       hour: data["hour"],
       minutes: data["minutes"],
       painLevel: data['pain_level'],

@@ -41,7 +41,7 @@ class AuthenticationDb extends GetxController {
   Future<String?> createUserWithEmailAndPwd(
       String email, String password, String username) async {
     try {
-      //showLoading();
+      showLoading();
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => userName.value = username);

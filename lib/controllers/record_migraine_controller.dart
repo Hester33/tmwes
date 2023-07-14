@@ -13,9 +13,8 @@ class RecordMigraineController extends GetxController {
       List.generate(painLvl.length, (_) => false.obs);
   //!might change the type to RxBool
   var selectedDate = DateTime.now().obs;
-  var sTime = TimeOfDay.now();
-  var eTime = TimeOfDay.now().replacing(
-      hour: TimeOfDay.now().hour + 1); //minute: TimeOfDay.now().minute
+  var sTime = TimeOfDay.now().replacing(hour: TimeOfDay.now().hour - 1);
+  var eTime = TimeOfDay.now(); //minute: TimeOfDay.now().minute
   var date = TextEditingController().obs;
   var startTime = TextEditingController().obs;
   var endTime = TextEditingController().obs;
@@ -23,12 +22,13 @@ class RecordMigraineController extends GetxController {
   static TimeOfDay? pickedStartTime;
   static TimeOfDay? pickedEndTime;
   var isChecked = false.obs;
+  var checkWeather = false.obs;
   var painLvlIndex = 0.obs;
   String painLevel = "";
 
+  final weatherField = TextEditingController();
   final tOthersField = TextEditingController();
   final mOthersField = TextEditingController();
-  //!testing
   var pCheckBoxIsChecked = <bool>[].obs;
   var tCheckBoxIsChecked = <bool>[].obs;
   var mCheckBoxIsChecked = <bool>[].obs;
@@ -45,13 +45,10 @@ class RecordMigraineController extends GetxController {
         "${sTime.hour.toString().padLeft(2, '0')}:${sTime.minute.toString().padLeft(2, '0')}";
     endTime.value.text =
         "${eTime.hour.toString().padLeft(2, '0')}:${eTime.minute.toString().padLeft(2, '0')}";
-    pickedStartTime = TimeOfDay.now();
-    pickedEndTime = TimeOfDay.now().replacing(hour: TimeOfDay.now().hour + 1);
+    pickedStartTime = TimeOfDay.now().replacing(hour: TimeOfDay.now().hour - 1);
+    pickedEndTime = TimeOfDay.now();
   }
 
-  // bool isCheckboxSelected(int index) {
-  //   return checkBoxIsChecked[index] == index;
-  // }
   final recordMigraineDb = RecordMigraineDb.instance;
 
   Future<void> chooseDate() async {
@@ -68,6 +65,11 @@ class RecordMigraineController extends GetxController {
       date.value.text = formattedDate;
       selectedDate.value = pickedDate!;
     }
+    if (pickedDate?.day != DateTime.now().day) {
+      checkWeather.value = true;
+    } else {
+      checkWeather.value = false;
+    }
   }
 
   Future<void> chooseStartTime() async {
@@ -81,14 +83,7 @@ class RecordMigraineController extends GetxController {
       String formattedTime =
           '${pickedStartTime!.hour.toString().padLeft(2, '0')}:${pickedStartTime!.minute.toString().padLeft(2, '0')}';
       startTime.value.text = formattedTime;
-      //String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
-      //return pickedDate;
-      print("start time controller: $pickedStartTime");
     }
-    // else {
-    //   pickedStartTime = sTime;
-    //   print("s time controller: $pickedStartTime");
-    // }
   }
 
   Future<void> chooseEndTime() async {
@@ -102,18 +97,12 @@ class RecordMigraineController extends GetxController {
       String formattedTime =
           '${pickedEndTime!.hour.toString().padLeft(2, '0')}:${pickedEndTime!.minute.toString().padLeft(2, '0')}';
       endTime.value.text = formattedTime;
-      print("end time controller: $pickedEndTime");
     }
-    // else {
-    //   pickedEndTime = eTime;
-    //   print("e time controller: $pickedEndTime");
-    // }
   }
 
   void onButtonPressed(int index) {
-    //buttonStates[index].value = !buttonStates[index].value;
     painLvlIndex.value = index;
-    painLevel = "${index + 1} ${painLvl[index]['text'].toString()}";
+    painLevel = "${index + 1} (${painLvl[index]['text'].toString()})";
   }
 
   bool isSelected(int index) {
@@ -148,9 +137,6 @@ class RecordMigraineController extends GetxController {
 
   Future<void> storeMigraineRecord(
       CurrentWeatherModel currentWeatherData) async {
-    print("lll start time controller: $pickedStartTime");
-    print("lll end time controller: $pickedEndTime");
-
     //calculate the migraine attack duration
     DateTime selectedStartTime = DateTime(
         DateTime.now().year,
@@ -164,13 +150,7 @@ class RecordMigraineController extends GetxController {
         DateTime.now().day,
         pickedEndTime!.hour,
         pickedEndTime!.minute);
-    // DateTime selectedEndTime = pickedEndTime != null
-    //     ? DateTime(DateTime.now().year, DateTime.now().month,
-    //         DateTime.now().day, pickedEndTime!.hour, pickedEndTime!.minute)
-    //     : DateTime.now().add(Duration(hours: 1));
-    //Duration difference = selectedEndTime.difference(selectedStartTime);
-    // int hours = difference.inHours;
-    // int minutes = difference.inMinutes.remainder(60);
+
     //! Test the mapIndexed function
     List<String> selectedPosition = [];
     pCheckBoxIsChecked.mapIndexed((index, c) {
@@ -181,12 +161,6 @@ class RecordMigraineController extends GetxController {
     }).toList();
     print("selected position: $selectedPosition");
 
-    // for (int i = 0; i < pCheckBoxIsChecked.length; i++) {
-    //   if (pCheckBoxIsChecked[i] == true) {
-    //     //add the pain position name to the list
-    //     selectedPosition.add(painPosition[i]["text"]);
-    //   }
-    // }
     List<String> selectedTriggers = [];
     for (int i = 0; i < tCheckBoxIsChecked.length; i++) {
       if (tCheckBoxIsChecked[i] == true) {
@@ -210,8 +184,16 @@ class RecordMigraineController extends GetxController {
     if (mOthersField.text.isNotEmpty) {
       selectedMedicine.add(mOthersField.text.trim());
     }
+
+    String? weather = '';
+    if (checkWeather.value) {
+      weather = weatherField.text;
+    } else {
+      weather = currentWeatherData.current.weather![0].main;
+    }
     recordMigraineDb.recordMigraine(
-        currentWeatherData,
+        //currentWeatherData,
+        weather!,
         pickedDate ?? DateTime.now(),
         selectedStartTime,
         selectedEndTime,
@@ -232,7 +214,6 @@ class RecordMigraineController extends GetxController {
       textConfirm: "Yes",
       confirmTextColor: Colors.white,
       onConfirm: () {
-        //add function
         Get.back();
       },
       textCancel: "No",

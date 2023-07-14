@@ -3,7 +3,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tmwes/api/fetch_weather.dart';
 import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/models/hit6_model.dart';
@@ -14,7 +13,6 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.find();
   final _hit6Db = HIT6Db.instance;
 
-  //var isHover=false.obs;
   final RxBool _isLoading = true.obs;
   final RxDouble _latitude = 2.9757.obs;
   final RxDouble _longtitude = 101.5821.obs;
@@ -43,11 +41,6 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  // @override
-  // void onReady() {
-  //   getAddress(_latitude.value, _longtitude.value);
-  // }
-
   getLocation() async {
     bool isServiceEnabled;
     LocationPermission locationPermission;
@@ -59,10 +52,6 @@ class HomeController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.2),
           colorText: Colors.red);
-      // Get.showSnackbar(GetSnackBar(
-      //   message: Future.error(.toString()),
-      // ));
-      //return Future.error("Location not enabled");
     }
     //status of permission
     locationPermission = await Geolocator.checkPermission();
@@ -99,11 +88,7 @@ class HomeController extends GetxController {
   getAddress(lat, lon) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, lon);
     Placemark place = placemark[0];
-    //setState(() {
     city.value = place.locality!;
-    print(place);
-    print("$lat, $lon");
-    //});
   }
 
   Future<dynamic> confirmUpdateLocationDialog() {
@@ -116,7 +101,6 @@ class HomeController extends GetxController {
       onConfirm: () {
         getLocation();
         getAddress(_latitude.value, _longtitude.value);
-        //Future.delayed(Duration(seconds: 2));
         Get.back();
       },
       textCancel: "No",
@@ -140,16 +124,7 @@ class HomeController extends GetxController {
   Future<void> migraineRiskData() async {
     try {
       List<HIT6Model> migraineRiskData = await _hit6Db.getMigraineRisk();
-      // Perform logic on the migraineRiskData
-      // Access individual HIT6Model objects and their properties
-      //!reference
-// try {
-//     QuerySnapshot querySnapshot =
-//         await firestore.collection('myCollection').limit(5).get();
-
-//     List<DocumentSnapshot> documents = querySnapshot.docs;
-//!need only 2 records
-      int item = 2;
+      //need only 2 records
       int currentIndex = 0; // Specify the desired index here
       int previousIndex = 1; // Specify the desired index here
       if (migraineRiskData.isEmpty) {
@@ -165,60 +140,9 @@ class HomeController extends GetxController {
 
         HIT6Model current = migraineRiskData[currentIndex];
         cScore.value = current.score;
-
-        //HIT6Model desiredDocument = migraineRiskData[previousIndex];
-        //Map<String, dynamic> data = desiredDocument.data();
-
-        // Perform your logic on the specific document
-        // Example: Print the document ID and a specific field
-        print('pScores: ${pScore.value}');
-        print('cScores: $cScore');
       }
-      for (HIT6Model model in migraineRiskData) {
-        String? uid = model.userId;
-        int score = model.score;
-        DateTime recordDate = model.recordDate;
-        String formattedRecordDate =
-            DateFormat("d MMM yyyy HH:mm:ss").format(recordDate);
-
-        // Perform your desired logic on the data
-        // Example: Print the UID and record date
-        print('UID: $uid');
-        print('Score: $score');
-        print('Record Date: $formattedRecordDate');
-      }
-
-      // Perform additional logic based on the data
     } catch (e) {
       print('Error processing migraine risk data: $e');
     }
   }
-
-  //!calculate migraine risk based on HIT-6 scores
-  // String calcMigraineRisk(int value) {
-  //   if (value >= 60) {
-  //     return "Very High";
-  //   } else if (value > 55 && value < 60) {
-  //     return "High";
-  //   } else if (value >= 50 && value <= 55) {
-  //     return "Medium";
-  //   } else if (value >= 36 && value <= 49) {
-  //     return "Low";
-  //   } else {
-  //     return "Go Take a HIT-6";
-  //   }
-  // }
-
-  // migraineRiskColor(int value) {
-  //   // ignore: unnecessary_null_comparison
-  //   if (value > 55) {
-  //     return Colors.redAccent;
-  //   } else if (value >= 50 && value <= 55) {
-  //     return Colors.orangeAccent;
-  //   } else if (value <= 49) {
-  //     return Colors.greenAccent;
-  //   } else {
-  //     return Colors.grey[200];
-  //   }
-  // }
 }

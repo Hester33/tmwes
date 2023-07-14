@@ -6,11 +6,9 @@ import 'package:tmwes/services/record_migraine_db.dart';
 class CalendarController extends GetxController {
   static CalendarController get instance => Get.find();
 
-  //var today = DateTime.now().obs;
   @override
   void onInit() {
     super.onInit();
-
     selectedDay = focusedDay;
   }
 
@@ -37,9 +35,5 @@ class CalendarController extends GetxController {
       }
       groupEvent[date]!.add(event);
     }
-  }
-
-  List<RecordMigraineModel> getEventsForTheDay(DateTime day) {
-    return groupEvent[day] ?? [];
   }
 }

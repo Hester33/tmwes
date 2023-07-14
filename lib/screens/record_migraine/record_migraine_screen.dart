@@ -4,6 +4,7 @@ import 'package:tmwes/constants/colors.dart';
 import 'package:tmwes/constants/image.dart';
 import 'package:tmwes/constants/text.dart';
 import 'package:tmwes/models/current_weather_model.dart';
+import 'package:tmwes/screens/calendar/calendar_screen.dart';
 import 'package:tmwes/screens/home/home_screen.dart';
 
 import '../../controllers/record_migraine_controller.dart';
@@ -38,7 +39,7 @@ class RecordMigraineScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(30),
           child: Column(children: [
-            //*-----Date-----*//
+            //*-----Date Picker-----*//
             Align(
               alignment: Alignment.topLeft,
               child: Text("Date",
@@ -48,15 +49,14 @@ class RecordMigraineScreen extends StatelessWidget {
                       .apply(color: primaryColor)),
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Icon(Icons.calendar_month_outlined, size: 30),
+              const Icon(Icons.calendar_month_outlined,
+                  color: primaryColor, size: 30),
               const SizedBox(width: 10),
               Obx(
                 () => SizedBox(
                   width: 110,
                   child: TextFormField(
                       controller: controller.date.value,
-                      //initialValue: controller.startTime.value.toString(),
-                      //initialValue:"${controller.startTime.value.hour}:${controller.startTime.value.minute}",
                       decoration: const InputDecoration(
                         label: Text('Date'),
                       ),
@@ -68,7 +68,7 @@ class RecordMigraineScreen extends StatelessWidget {
               )
             ]),
             const SizedBox(height: 10),
-//!time picker
+            //*-----Time Picker-----*//
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -77,10 +77,8 @@ class RecordMigraineScreen extends StatelessWidget {
                     width: 130,
                     child: TextFormField(
                         controller: controller.startTime.value,
-                        //initialValue: controller.startTime.value.toString(),
-                        //initialValue:"${controller.startTime.value.hour}:${controller.startTime.value.minute}",
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.date_range_outlined),
+                          prefixIcon: Icon(Icons.access_time_outlined),
                           label: Text('Start Time'),
                         ),
                         readOnly: true,
@@ -96,7 +94,7 @@ class RecordMigraineScreen extends StatelessWidget {
                     child: TextFormField(
                         controller: controller.endTime.value,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.date_range_outlined),
+                          prefixIcon: Icon(Icons.access_time_outlined),
                           label: Text('End Time'),
                         ),
                         readOnly: true,
@@ -110,7 +108,42 @@ class RecordMigraineScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
             const Divider(thickness: 1),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
+
+            Obx(() => controller.checkWeather.value
+                ? Column(children: [
+                    Row(children: [
+                      Image.asset(
+                        weatherIcon,
+                        width: 25,
+                        height: 25,
+                      ),
+                      Text(" Weather",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .apply(color: primaryColor)),
+                    ]),
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: TextField(
+                        controller: controller.weatherField,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: primaryColor.withOpacity(0.2))),
+                          //labelText: 'Others',
+                          hintText: 'Enter weather description',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Divider(thickness: 1),
+                    const SizedBox(height: 20),
+                  ])
+                : const SizedBox(height: 0)),
             //*-----Pain Level-----*//
             Row(
               children: [
@@ -236,8 +269,8 @@ class RecordMigraineScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   triggerIcon,
-                  width: 30,
-                  height: 30,
+                  width: 35,
+                  height: 35,
                 ),
                 Text(" Triggers",
                     style: Theme.of(context)
@@ -364,7 +397,7 @@ class RecordMigraineScreen extends StatelessWidget {
                   print('${controller.mCheckBoxIsChecked}');
                   controller.storeMigraineRecord(currentWeatherData);
 
-                  Get.off(() => const HomeScreen());
+                  Get.off(() => const CalendarScreen());
                 },
                 style: ElevatedButton.styleFrom(
                   //backgroundColor: Colors.green,

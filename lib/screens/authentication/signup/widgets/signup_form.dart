@@ -1,9 +1,7 @@
-import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tmwes/controllers/signup_controller.dart';
-
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({
@@ -203,10 +201,6 @@ class SignUpForm extends StatelessWidget {
                       ? () {
                           //if (_formKey.currentState!.validate() && isAgree==true) { onPressed: agree ? _doSomething : null,
                           if (formKey.currentState!.validate()) {
-                            final String encryptedPwd = BCrypt.hashpw(
-                              controller.password.text,
-                              BCrypt.gensalt(),
-                            );
                             SignUpController.instance.storeUser(
                               controller.username.text.trim(),
                               controller.fullName.text.trim(),
@@ -223,14 +217,6 @@ class SignUpForm extends StatelessWidget {
                 ),
               ),
             ),
-            // Obx(
-            //   () => controller.isAgree.value
-            //       ? Text("")
-            //       : const Text(
-            //           "Please accept the term and condition.",
-            //           style: TextStyle(color: Colors.red),
-            //         ),
-            // ),
           ])),
     );
   }

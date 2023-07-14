@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tmwes/constants/firebase_const.dart';
 import 'package:tmwes/models/current_weather_model.dart';
 import 'package:tmwes/models/record_migraine_model.dart';
@@ -14,7 +15,8 @@ class RecordMigraineDb extends GetxController {
   //! Add weather in to the model
   //store Migraine record details in FireStore
   Future<void> recordMigraine(
-      CurrentWeatherModel weatherData,
+      //CurrentWeatherModel weatherData,
+      String weather,
       DateTime recordDate,
       DateTime selectedStartTime,
       DateTime selectedEndTime,
@@ -26,12 +28,15 @@ class RecordMigraineDb extends GetxController {
     Duration difference = selectedEndTime.difference(selectedStartTime);
     int hour = difference.inHours;
     int minutes = difference.inMinutes.remainder(60);
+    String sTime = DateFormat('HH:mm').format(selectedStartTime);
 
     final record = RecordMigraineModel(
       //userId: currentUser?.uid,
       //*record the current weather
-      weather: weatherData.current.weather![0].main,
+      //weather: weatherData.current.weather![0].main,
+      weather: weather,
       mRecordDate: recordDate,
+      startTime: sTime,
       hour: hour,
       minutes: minutes,
       painLevel: painLvl,
@@ -92,20 +97,6 @@ class RecordMigraineDb extends GetxController {
         .map((doc) => RecordMigraineModel.fromSnapshot(doc))
         .single;
     return record;
-  }
-
-  Future<List<RecordMigraineModel>> getMigraineRisk() async {
-    User? currentUser = auth.currentUser;
-    final snapshot = await firestore
-        .collection(hit6Collection)
-        .where("uid", isEqualTo: currentUser?.uid)
-        .orderBy("record_date", descending: true)
-        .limit(2)
-        .get();
-    final records = snapshot.docs
-        .map((doc) => RecordMigraineModel.fromSnapshot(doc))
-        .toList();
-    return records;
   }
 
   //Fetch specific Migraine records for report

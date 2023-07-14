@@ -21,6 +21,9 @@ class SignUpWithEmailAndPasswordFailure {
       case 'user-disabled':
         return const SignUpWithEmailAndPasswordFailure(
             'This user has been disbled. Please contact support for help.');
+      case 'session-cookie-expired':
+        return const SignUpWithEmailAndPasswordFailure(
+            'The provided Firebase session cookie is expired.');
       default:
         return const SignUpWithEmailAndPasswordFailure();
     }

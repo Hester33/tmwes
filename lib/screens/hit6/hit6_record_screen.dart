@@ -16,13 +16,15 @@ class HIT6RecordScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Get.back(),
-            icon: const Icon(Icons.arrow_back_ios_new)),
+            icon: const Icon(Icons.arrow_back_ios)),
         centerTitle: true,
-        title: Text('HIT-6 Record',
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall
-                ?.apply(color: Colors.white)),
+        title: Text(
+          'HIT-6 Record',
+          // style: Theme.of(context)
+          //     .textTheme
+          //     .displaySmall
+          //     ?.apply(color: Colors.white)
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 30, right: 30),

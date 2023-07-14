@@ -31,14 +31,6 @@ const List<String> otherWeather = [
   "Keep an eye on temperature and pressure forecast."
 ];
 
-// Get 7 to 8 hours of sleep each night.
-// Drink a minimum of eight glasses of water per day.
-// Exercise most days of the week.
-// Eat a balanced diet and avoid skipping meals.
-// Practice relaxation techniques if you’re experiencing stress.
-//Keep rescue medications handy.
-//Stay away from foods that cause migraines, like those that contain caffeine, monosodium glutamate (MSG) and nitrates
-
 //*----- HIT-6 questions -----*//
 final finalQuestions = [
   'Q1. When you have headaches, how often is the pain severe?',

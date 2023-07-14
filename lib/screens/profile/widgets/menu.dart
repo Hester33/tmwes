@@ -30,7 +30,6 @@ class MenuWidget extends StatelessWidget {
             color: primaryColor.withOpacity(0.1)),
         child: Icon(icon, color: primaryColor),
       ),
-      //!fontWeight
       title: Text(title,
           style: Theme.of(context)
               .textTheme

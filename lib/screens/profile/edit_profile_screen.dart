@@ -11,7 +11,6 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(ProfileController());
     final signUpController = SignUpController.instance;
     final controller = ProfileController.instance;
     final formKey = GlobalKey<FormState>();
@@ -21,8 +20,10 @@ class EditProfileScreen extends StatelessWidget {
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(Icons.arrow_back_ios_new)),
-        title: Text('Edit Profile',
-            style: Theme.of(context).textTheme.displayLarge),
+        title: const Text(
+          'Edit Profile',
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
           child: Container(
@@ -40,24 +41,18 @@ class EditProfileScreen extends StatelessWidget {
                 //Controllers
                 final username = TextEditingController(text: userData.username);
                 final fullName = TextEditingController(text: userData.fullName);
-                // final dob = TextEditingController(
-                //         text: controller.formatDate(userData.dateOfBirth))
-                //     .obs; //!obs??
+
                 signUpController.dob.value.text =
                     controller.formatDate(userData.dateOfBirth);
                 final email = TextEditingController(text: userData.email);
                 final phoneNo =
                     TextEditingController(text: userData.phoneNumber);
 
-                var isPwdHidden = true.obs;
-                var isCPwdHidden = true.obs;
-
                 return Column(
                   children: [
                     SizedBox(
                       width: 100,
                       height: 100,
-                      //child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image(image: AssetImage(profile))),
                       child: Image(image: AssetImage(profile)),
                     ),
                     const SizedBox(height: 30),
@@ -112,8 +107,6 @@ class EditProfileScreen extends StatelessWidget {
                                       }
                                       return null;
                                     },
-                                    //!not sure
-                                    //keyboardType: TextInputType.number,
                                     onTap: () {
                                       signUpController.chooseDate();
                                     }),
