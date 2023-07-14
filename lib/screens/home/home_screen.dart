@@ -80,7 +80,6 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Container(
-            // padding: const EdgeInsets.fromLTRB(30, 15, 30, 30),
             padding: EdgeInsets.fromLTRB(
               screenWidth * 0.07,
               screenHeight * 0.0,
